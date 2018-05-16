@@ -122,7 +122,11 @@ public class SsfAtencionmedicaDAO {
             System.out.println("o_glosa : " + o_glosa);
             System.out.println("o_estado : " + o_estado);
             List<SsfAtencionmedica> atencionmedicas = (List<SsfAtencionmedica>) storedProcedure.getOutputParameterValue("o_data");
-            objAtencionmedica = atencionmedicas.get(0);
+            
+            
+            if (!atencionmedicas.isEmpty()) {
+                objAtencionmedica = atencionmedicas.get(0);
+            }
 
             return objAtencionmedica;
         } catch (Exception ex) {
@@ -169,8 +173,8 @@ public class SsfAtencionmedicaDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
-            storedProcedure.setParameter("p_medico", atencionmedica.getIdMedico());
-            storedProcedure.setParameter("p_usuario", atencionmedica.getIdUsuario());
+            storedProcedure.setParameter("p_medico", atencionmedica.getIdMedico().getId());
+            storedProcedure.setParameter("p_usuario", atencionmedica.getIdUsuario().getId());
             storedProcedure.setParameter("p_diagnostico", atencionmedica.getDiagnostico());
             storedProcedure.setParameter("p_descripcion", atencionmedica.getDescripcion());
             storedProcedure.execute();
@@ -206,8 +210,8 @@ public class SsfAtencionmedicaDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", atencionmedica.getId());
-            storedProcedure.setParameter("p_medico", atencionmedica.getIdMedico());
-            storedProcedure.setParameter("p_usuario", atencionmedica.getIdUsuario());
+            storedProcedure.setParameter("p_medico", atencionmedica.getIdMedico().getId());
+            storedProcedure.setParameter("p_usuario", atencionmedica.getIdUsuario().getId());
             storedProcedure.setParameter("p_diagnostico", atencionmedica.getDiagnostico());
             storedProcedure.setParameter("p_descripcion", atencionmedica.getDescripcion());
             storedProcedure.execute();

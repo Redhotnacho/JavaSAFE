@@ -122,7 +122,10 @@ public class SsfAlumnoDAO {
             System.out.println("o_glosa : " + o_glosa);
             System.out.println("o_estado : " + o_estado);
             List<SsfAlumno> alumnos = (List<SsfAlumno>) storedProcedure.getOutputParameterValue("o_data");
-            objAlumno = alumnos.get(0);
+            
+            if (!alumnos.isEmpty()) {
+                objAlumno = alumnos.get(0);
+            }
 
             return objAlumno;
         } catch (Exception ex) {
@@ -167,8 +170,8 @@ public class SsfAlumnoDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
-            storedProcedure.setParameter("p_persona", alumno.getIdPersona());
-            storedProcedure.setParameter("p_empresa", alumno.getIdEmpresa());
+            storedProcedure.setParameter("p_persona", alumno.getIdPersona().getId());
+            storedProcedure.setParameter("p_empresa", alumno.getIdEmpresa().getId());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");
@@ -201,8 +204,8 @@ public class SsfAlumnoDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", alumno.getId());
-            storedProcedure.setParameter("p_persona", alumno.getIdPersona());
-            storedProcedure.setParameter("p_empresa", alumno.getIdEmpresa());
+            storedProcedure.setParameter("p_persona", alumno.getIdPersona().getId());
+            storedProcedure.setParameter("p_empresa", alumno.getIdEmpresa().getId());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");

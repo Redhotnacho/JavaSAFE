@@ -123,7 +123,10 @@ public class SsfAsistenciaDAO {
             System.out.println("o_glosa : " + o_glosa);
             System.out.println("o_estado : " + o_estado);
             List<SsfAsistencia> asistencias = (List<SsfAsistencia>) storedProcedure.getOutputParameterValue("o_data");
-            objAsistencia = asistencias.get(0);
+            
+            if (!asistencias.isEmpty()) {
+                objAsistencia = asistencias.get(0);
+            }
 
             return objAsistencia;
         } catch (Exception ex) {
@@ -169,7 +172,7 @@ public class SsfAsistenciaDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
-            storedProcedure.setParameter("p_capadia", asistencia.getIdCapacitaciondia());
+            storedProcedure.setParameter("p_capadia", asistencia.getIdCapacitaciondia().getId());
             storedProcedure.setParameter("p_alumcapaempresa", asistencia.getIdAlumcapaempresa());
             storedProcedure.setParameter("p_asiste", asistencia.getAsiste());
             storedProcedure.execute();
@@ -205,7 +208,7 @@ public class SsfAsistenciaDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", asistencia.getId());
-            storedProcedure.setParameter("p_capadia", asistencia.getIdCapacitaciondia());
+            storedProcedure.setParameter("p_capadia", asistencia.getIdCapacitaciondia().getId());
             storedProcedure.setParameter("p_alumcapaempresa", asistencia.getIdAlumcapaempresa());
             storedProcedure.setParameter("p_asiste", asistencia.getAsiste());
             storedProcedure.execute();

@@ -122,7 +122,10 @@ public class SsfAdjuntoDAO {
             System.out.println("o_glosa : " + o_glosa);
             System.out.println("o_estado : " + o_estado);
             List<SsfAdjunto> adjuntos = (List<SsfAdjunto>) storedProcedure.getOutputParameterValue("o_data");
-            objAdjunto = adjuntos.get(0);
+            
+            if (!adjuntos.isEmpty()) {
+                objAdjunto = adjuntos.get(0);
+            }
 
             return objAdjunto;
         } catch (Exception ex) {
@@ -168,7 +171,7 @@ public class SsfAdjuntoDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
-            storedProcedure.setParameter("p_id_atencionmedica", adjunto.getIdAtencionmedica());
+            storedProcedure.setParameter("p_id_atencionmedica", adjunto.getIdAtencionmedica().getId());
             storedProcedure.setParameter("p_adjunto", adjunto.getAdjunto());
             storedProcedure.setParameter("p_url", adjunto.getUrl());
             storedProcedure.execute();
@@ -203,7 +206,7 @@ public class SsfAdjuntoDAO {
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", adjunto.getId());
-            storedProcedure.setParameter("p_id_atencionmedica", adjunto.getIdAtencionmedica());
+            storedProcedure.setParameter("p_id_atencionmedica", adjunto.getIdAtencionmedica().getId());
             storedProcedure.setParameter("p_adjunto", adjunto.getAdjunto());
             storedProcedure.setParameter("p_url", adjunto.getUrl());
             storedProcedure.execute();

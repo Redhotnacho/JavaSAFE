@@ -123,7 +123,11 @@ public class SsfCapacitacionDAO {
             System.out.println("o_glosa : " + o_glosa);
             System.out.println("o_estado : " + o_estado);
             List<SsfCapacitacion> capacitaciones = (List<SsfCapacitacion>) storedProcedure.getOutputParameterValue("o_data");
-            objCapacitacion = capacitaciones.get(0);
+            
+            if (!capacitaciones.isEmpty()) {
+                objCapacitacion = capacitaciones.get(0);
+            }
+            
 
             return objCapacitacion;
         } catch (Exception ex) {
@@ -181,7 +185,7 @@ public class SsfCapacitacionDAO {
             storedProcedure.setParameter("p_id", capacitacion.getId());
             storedProcedure.setParameter("p_nombre", capacitacion.getNombre());
             storedProcedure.setParameter("p_horas", capacitacion.getHoras());
-            storedProcedure.setParameter("p_capatipo", capacitacion.getIdCapacitaciontipo());
+            storedProcedure.setParameter("p_capatipo", capacitacion.getIdCapacitaciontipo().getId());
             storedProcedure.setParameter("p_fechainicio", capacitacion.getFechaInicio());
             storedProcedure.setParameter("p_fechatermino", capacitacion.getFechaTermino());
             storedProcedure.execute();
@@ -220,7 +224,7 @@ public class SsfCapacitacionDAO {
             storedProcedure.setParameter("p_id", capacitacion.getId());
             storedProcedure.setParameter("p_nombre", capacitacion.getNombre());
             storedProcedure.setParameter("p_horas", capacitacion.getHoras());
-            storedProcedure.setParameter("p_capatipo", capacitacion.getIdCapacitaciontipo());
+            storedProcedure.setParameter("p_capatipo", capacitacion.getIdCapacitaciontipo().getId());
             storedProcedure.setParameter("p_fechainicio", capacitacion.getFechaInicio());
             storedProcedure.setParameter("p_fechatermino", capacitacion.getFechaTermino());
             storedProcedure.execute();
