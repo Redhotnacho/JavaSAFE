@@ -6,16 +6,18 @@
 package duoc.cl.safe.forms;
 
 import duoc.cl.safe.entity.SsfPersona;
+import duoc.cl.safe.entity.SsfUsuario;
 import duoc.cl.safe.negocio.SsfPersonaBO;
-import java.awt.Color;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,7 +31,6 @@ public class MantenedorPersona extends javax.swing.JFrame {
      */
     public MantenedorPersona() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -41,37 +42,59 @@ public class MantenedorPersona extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lError = new javax.swing.JLabel();
+        pMantenedorPersona = new javax.swing.JPanel();
+        lExito = new javax.swing.JLabel();
+        tfBuscar = new javax.swing.JTextField();
+        tfRut = new javax.swing.JTextField();
+        tfAp1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        bModificar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tfTelefono = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersona = new javax.swing.JTable();
-        bAgregar = new javax.swing.JButton();
-        bModificar = new javax.swing.JButton();
-        tbEstado = new javax.swing.JToggleButton();
-        tfTelefono = new javax.swing.JTextField();
-        tfCorreo = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        tfAp1 = new javax.swing.JTextField();
-        tfAp2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        tfRut = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        tfNombre = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        bAgregar = new javax.swing.JButton();
         tfFechaNac = new javax.swing.JTextField();
+        tfAp2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        tbEstado = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
+        lError = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         bLimpiar = new javax.swing.JButton();
-        lExito = new javax.swing.JLabel();
+        tfNombre = new javax.swing.JTextField();
+        tfCorreo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        bBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(new java.awt.Dimension(800, 100));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        lError.setForeground(new java.awt.Color(204, 0, 0));
+        pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(204, 0, 153))); // NOI18N
+
+        lExito.setForeground(new java.awt.Color(0, 204, 51));
+
+        jLabel6.setText("Teléfono:");
+
+        bModificar.setText("Modificar");
+        bModificar.setEnabled(false);
+        bModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bModificarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("RUT:");
+
+        jLabel3.setText("Apellido 1:");
 
         tblPersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,6 +126,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPersona);
 
+        jLabel7.setText("Fecha Nacimiento:");
+
         bAgregar.setText("Agregar");
         bAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,15 +135,11 @@ public class MantenedorPersona extends javax.swing.JFrame {
             }
         });
 
-        bModificar.setText("Modificar");
-        bModificar.setEnabled(false);
-        bModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bModificarActionPerformed(evt);
-            }
-        });
+        tfFechaNac.setText("DD-MM-AAAA");
 
-        tbEstado.setBackground(new java.awt.Color(102, 204, 0));
+        jLabel5.setText("Correo:");
+
+        tbEstado.setBackground(new java.awt.Color(0, 204, 102));
         tbEstado.setText("Activo");
         tbEstado.setEnabled(false);
         tbEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -127,21 +148,16 @@ public class MantenedorPersona extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Correo:");
+        jButton1.setText("Refrescar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("Teléfono:");
-
-        jLabel3.setText("Apellido 1:");
+        lError.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel4.setText("Apellido 2:");
-
-        jLabel1.setText("RUT:");
-
-        jLabel2.setText("Nombre:");
-
-        jLabel7.setText("Fecha Nacimiento:");
-
-        tfFechaNac.setText("DD-MM-AAAA");
 
         bLimpiar.setText("Limpiar");
         bLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -150,123 +166,145 @@ public class MantenedorPersona extends javax.swing.JFrame {
             }
         });
 
-        lExito.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel2.setText("Nombre:");
+
+        bBuscar.setText("Buscar Persona");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pMantenedorPersonaLayout = new javax.swing.GroupLayout(pMantenedorPersona);
+        pMantenedorPersona.setLayout(pMantenedorPersonaLayout);
+        pMantenedorPersonaLayout.setHorizontalGroup(
+            pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addGap(4, 4, 4)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfRut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
+                    .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel3))
+                                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                        .addComponent(jLabel4)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfAp1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfAp2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfCorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMantenedorPersonaLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(106, 106, 106))))
+            .addComponent(jScrollPane1)
+        );
+        pMantenedorPersonaLayout.setVerticalGroup(
+            pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bBuscar)
+                    .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(19, 19, 19)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bAgregar)
+                            .addComponent(bModificar)
+                            .addComponent(tbEstado)
+                            .addComponent(bLimpiar)))
+                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(tfRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(tfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(6, 6, 6)
+                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel7))
-                                .addGap(4, 4, 4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfRut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(tfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addGap(4, 4, 4)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfAp1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tfAp2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(36, 36, 36)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                            .addComponent(tfTelefono)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bLimpiar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bModificar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 130, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(pMantenedorPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfAp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfAp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))))
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bAgregar)
-                            .addComponent(bModificar)
-                            .addComponent(tbEstado)
-                            .addComponent(bLimpiar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(tfRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(tfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-                    .addComponent(lExito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 27, Short.MAX_VALUE)
+                .addComponent(pMantenedorPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setLocationRelativeTo(null);
         cargaTabla();
     }//GEN-LAST:event_formWindowOpened
 
@@ -323,8 +361,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
     private void tbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbEstadoActionPerformed
         limpiarMsgs();
         DefaultTableModel model = (DefaultTableModel) tblPersona.getModel();
-        SsfPersonaBO pbo = new SsfPersonaBO();
-        int id = Short.parseShort(model.getValueAt(tblPersona.getSelectedRow(), 0).toString());
+        pbo = new SsfPersonaBO();
 
         if (tblPersona.getSelectedRow() == -1) {
             tbEstado.setEnabled(false);
@@ -334,7 +371,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 lError.setText("No hay fila seleccionada");
             }
         } else {
-
+            int id = Short.parseShort(model.getValueAt(tblPersona.getSelectedRow(), 0).toString());
             if (!tbEstado.isSelected()) {
                 activarEstado();
                 model.setValueAt("1", tblPersona.getSelectedRow(), 9);
@@ -350,6 +387,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_tbEstadoActionPerformed
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
+        tfFechaNac.setText("DD-MM-AAAA");
         tbEstado.setEnabled(false);
         bModificar.setEnabled(false);
         limpiarMsgs();
@@ -360,11 +398,11 @@ public class MantenedorPersona extends javax.swing.JFrame {
         tfAp2.setText("");
         tfCorreo.setText("");
         tfTelefono.setText("");
-        tfFechaNac.setText("");
+        tfBuscar.setText("");
     }//GEN-LAST:event_bLimpiarActionPerformed
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
-        SsfPersonaBO pbo = new SsfPersonaBO();
+        pbo = new SsfPersonaBO();
         limpiarMsgs();
         if (tfNombre.getText().trim().equals("")) {
             lError.setText("Ingrese un nombre");
@@ -386,7 +424,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                     p.setFechaNac(fecha);
                 }
             } catch (ParseException ex) {
-                Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, ex);
                 log.log(Level.SEVERE, "Error en formato de fecha", ex);
                 sfech = "error";
                 lError.setText("Error en formato de fecha");
@@ -421,7 +459,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         DefaultTableModel model = (DefaultTableModel) tblPersona.getModel();
-        SsfPersonaBO pbo = new SsfPersonaBO();
+        pbo = new SsfPersonaBO();
         limpiarMsgs();
         if (tblPersona.getSelectedRow() == -1) {
             tbEstado.setEnabled(false);
@@ -466,7 +504,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                     Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, e);
                     log.log(Level.SEVERE, "Error en valor de telefono", e);
                     lError.setText("Error en valor de telefono");
-                    tel="error";
+                    tel = "error";
                 }
                 if (!sfech.equals("error")) {
                     p.setId(BigDecimal.valueOf(Long.valueOf(id)));
@@ -477,6 +515,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                     p.setCorreo(correo);
                     if (pbo.updateSP(p)) {
                         lExito.setText("Persona modificada exitosamente.");
+                        // método cargaTabla() no actualiza la tabla por motivos desconocidos
                         model.setValueAt(rut, tblPersona.getSelectedRow(), 1);
                         model.setValueAt(nom, tblPersona.getSelectedRow(), 2);
                         model.setValueAt(ap1, tblPersona.getSelectedRow(), 3);
@@ -486,6 +525,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                             model.setValueAt(tel, tblPersona.getSelectedRow(), 6);
                         }
                         model.setValueAt(sfech, tblPersona.getSelectedRow(), 7);
+ 
                     } else {
                         lError.setText("No se pudo modificar");
                     }
@@ -494,8 +534,111 @@ public class MantenedorPersona extends javax.swing.JFrame {
 
             }
         }
-
+        //cargaTabla();
     }//GEN-LAST:event_bModificarActionPerformed
+
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
+        
+        String busqueda = tfBuscar.getText().trim();
+        //split(Pattern.quote(".")) - str.split("\\s+");
+        if (busqueda.equals("")) {
+            tfBuscar.setText("Búsqueda no puede ser vacío");
+        } else {
+            String[] palabras = busqueda.split("\\s+");
+            String[] palabras2 = busqueda.split(Pattern.quote("."));
+            List<SsfPersona> pp = new LinkedList<>();
+            pbo = new SsfPersonaBO();
+            List<SsfPersona> ppall = pbo.getAllSP();
+            for (String s : palabras) {
+                for (SsfPersona pers : ppall) {
+                    if (pers.getRut() != null) {
+                        if (!pp.isEmpty()) {
+                            if (!existeIdPers(pp, pers) && pers.getRut().contains(s)) {
+                                pp.add(pers);
+                            }
+                        } else {
+                            if (pers.getRut().contains(s)) {
+                                pp.add(pers);
+                            }
+                        }
+                    }
+                    if (pers.getNombre() != null) {
+                        if (!pp.isEmpty()) {
+                            if (!existeIdPers(pp, pers) && pers.getNombre().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        } else {
+                            if (pers.getNombre().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        }
+                    }
+                    if (pers.getApPaterno() != null) {
+                        if (!pp.isEmpty()) {
+                            if (!existeIdPers(pp, pers) && pers.getApPaterno().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        } else {
+                            if (pers.getApPaterno().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        }
+                    }
+                    if (pers.getApMaterno() != null) {
+                        if (!pp.isEmpty()) {
+                            if (!existeIdPers(pp, pers) && pers.getApMaterno().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        } else {
+                            if (pers.getApMaterno().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        }
+                    }
+                    if (pers.getCorreo()!= null) {
+                        if (!pp.isEmpty()) {
+                            if (!existeIdPers(pp, pers) && pers.getCorreo().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        } else {
+                            if (pers.getCorreo().toLowerCase().contains(s.toLowerCase())) {
+                                pp.add(pers);
+                            }
+                        }
+                    }
+                }
+            }
+            for (String s : palabras2) {
+                for (SsfPersona pers : ppall) {
+                    if (pers.getRut() != null) {
+                        if (!pp.isEmpty()) {
+                            if (!existeIdPers(pp, pers) && pers.getRut().contains(s)) {
+                                pp.add(pers);
+                            }
+                        } else {
+                            if (pers.getRut().contains(s)) {
+                                pp.add(pers);
+                            }
+                        }
+                    }
+                }
+            }
+            if (!pp.isEmpty()) {
+                tblPersona.removeAll();
+                cargaPersonas(pp);
+            } else {
+                tfBuscar.setText("Búsqueda sin resultados");
+                tblPersona.removeAll();
+            }
+
+        }
+        
+        
+    }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cargaTabla();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -535,8 +678,10 @@ public class MantenedorPersona extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAgregar;
+    private javax.swing.JButton bBuscar;
     private javax.swing.JButton bLimpiar;
     private javax.swing.JButton bModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -547,36 +692,36 @@ public class MantenedorPersona extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
+    private javax.swing.JPanel pMantenedorPersona;
     private javax.swing.JToggleButton tbEstado;
     private javax.swing.JTable tblPersona;
     private javax.swing.JTextField tfAp1;
     private javax.swing.JTextField tfAp2;
+    private javax.swing.JTextField tfBuscar;
     private javax.swing.JTextField tfCorreo;
     private javax.swing.JTextField tfFechaNac;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfRut;
     private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
-
+    private SsfUsuario usuarioSesion;
+    private static Logger log = Logger.getLogger(MantenedorPersona.class.getName());
+    private DefaultTableModel model;
+    private SsfPersonaBO pbo;
+    
+    
     private void cargaTabla() {
-        
-        tblPersona.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblPersona.getModel();
-        model.fireTableDataChanged();
-        tblPersona.repaint();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        model.setRowCount(0);
-        
-        SsfPersonaBO pbo = new SsfPersonaBO();
+        borrarTabla();
+        pbo = new SsfPersonaBO();
         List<SsfPersona> lp = pbo.getAllSP();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String sfecha = null;
         for (SsfPersona p : lp) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            String sfecha = null;
+            
             if (p.getFechaNac() != null) {
                 sfecha = sdf.format(p.getFechaNac());
+            }else{
+                sfecha = "";
             }
             model.addRow(new Object[]{p.getId(), p.getRut(), p.getNombre(), p.getApPaterno(), p.getApMaterno(), p.getCorreo(), p.getTelefono(), sfecha, sdf.format(p.getFechCreacion()), p.getEstado()});
         }
@@ -584,21 +729,77 @@ public class MantenedorPersona extends javax.swing.JFrame {
 
     }
 
-    private static Logger log = Logger.getLogger(MantenedorPersona.class.getName());
+    
 
     private void desactivarEstado() {
         tbEstado.setText("Desactivado");
-        tbEstado.setBackground(Color.RED);
+        tbEstado.setBackground(new java.awt.Color(255, 51, 51));
     }
 
     private void activarEstado() {
         tbEstado.setText("Activo");
-        tbEstado.setBackground(Color.GREEN);
+        tbEstado.setBackground(new java.awt.Color(0, 204, 102));
     }
 
     private void limpiarMsgs() {
         lExito.setText("");
         lError.setText("");
+    }
+    
+    private boolean existeIdPers(List<SsfPersona> pp, SsfPersona pers) {
+        for (SsfPersona p : pp) {
+            if (p.getId() == pers.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void cargaPersonas(List<SsfPersona> pp) {
+        borrarTabla();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String sfecha = null;
+        for (SsfPersona p : pp) {
+            
+            if (p.getFechaNac() != null) {
+                sfecha = sdf.format(p.getFechaNac());
+            }else{
+                sfecha = "";
+            }
+            model.addRow(new Object[]{p.getId(), p.getRut(), p.getNombre(),
+                p.getApPaterno(), p.getApMaterno(), p.getCorreo(), p.getTelefono(),
+                sfecha, sdf.format(p.getFechCreacion()), p.getEstado()});
+        }
+        tblPersona.setModel(model);
+    }
+
+    private void borrarTabla() {
+        tblPersona.removeAll();
+        tblPersona.repaint();
+        model = (DefaultTableModel) tblPersona.getModel();
+        model.fireTableDataChanged();
+        tblPersona.repaint();
+        tblPersona.removeAll();
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        
+        tblPersona.removeAll();
+        model.setRowCount(0);
+        model.fireTableDataChanged();
+        tblPersona.repaint();
+        tblPersona.setModel(model);
+        tblPersona.repaint();
+        tblPersona.removeAll();
+    }
+    
+    public SsfUsuario getUsuarioSesion() {
+        return usuarioSesion;
+    }
+
+    public void setUsuarioSesion(SsfUsuario usuarioSesion) {
+        this.usuarioSesion = usuarioSesion;
     }
 
 }
