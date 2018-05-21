@@ -5,6 +5,8 @@
  */
 package duoc.cl.safe.entity;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SsfMenu.findByEstado", query = "SELECT s FROM SsfMenu s WHERE s.estado = :estado")
     , @NamedQuery(name = "SsfMenu.findByNombre", query = "SELECT s FROM SsfMenu s WHERE s.nombre = :nombre")})
 public class SsfMenu implements Serializable {
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -65,7 +71,9 @@ public class SsfMenu implements Serializable {
     }
 
     public void setId(BigDecimal id) {
+        BigDecimal oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public Date getFechCreacion() {
@@ -73,7 +81,9 @@ public class SsfMenu implements Serializable {
     }
 
     public void setFechCreacion(Date fechCreacion) {
+        Date oldFechCreacion = this.fechCreacion;
         this.fechCreacion = fechCreacion;
+        changeSupport.firePropertyChange("fechCreacion", oldFechCreacion, fechCreacion);
     }
 
     public Short getEstado() {
@@ -81,7 +91,9 @@ public class SsfMenu implements Serializable {
     }
 
     public void setEstado(Short estado) {
+        Short oldEstado = this.estado;
         this.estado = estado;
+        changeSupport.firePropertyChange("estado", oldEstado, estado);
     }
 
     public String getNombre() {
@@ -89,7 +101,9 @@ public class SsfMenu implements Serializable {
     }
 
     public void setNombre(String nombre) {
+        String oldNombre = this.nombre;
         this.nombre = nombre;
+        changeSupport.firePropertyChange("nombre", oldNombre, nombre);
     }
 
     @XmlTransient
@@ -124,6 +138,14 @@ public class SsfMenu implements Serializable {
     @Override
     public String toString() {
         return "duoc.cl.safe.entity.SsfMenu[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
