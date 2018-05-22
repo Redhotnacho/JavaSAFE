@@ -5,23 +5,21 @@
  */
 package duoc.cl.safe.forms;
 
-import duoc.cl.safe.presentacion.Menu;
+import duoc.cl.safe.entity.SsfPersona;
+import duoc.cl.safe.negocio.SsfPersonaBO;
+import java.util.List;
 
 /**
  *
  * @author Nacho
  */
 public class Prueba extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Prueba
      */
     public Prueba() {
         initComponents();
-        
-        Menu menuBar = new Menu();
-        this.setJMenuBar(menuBar.menu(1));
-        
     }
 
     /**
@@ -85,47 +83,47 @@ public class Prueba extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-//        SsfPersonaBO personaBO = new SsfPersonaBO();
-//        
-//        
-//        
-//        List<SsfPersona> listaP = personaBO.getAll();
-//        SsfPersona objP = null;
-//        for (SsfPersona p : listaP) {
-//            objP = p;
-//            break;
-//        }
-//        if (objP != null) {
-//            lGetAll.setText("Nombre: "+objP.getNombre()+", obtenido por método getAll()");
-//        } else {
-//            lGetAll.setText("nope");
-//        }
-//        
-//        SsfPersona objP2 = personaBO.find(22);
-//        if (objP2 != null) {
-//            lFind.setText("Nombre: "+objP2.getNombre()+", obtenido por método find()");
-//        } else {
-//            lFind.setText("nope");
-//        }
-//        
-//        SsfPersona objAdd = new SsfPersona();
-//        objAdd.setNombre("Nuevo");
-//        personaBO.add(objAdd);
-//        listaP = personaBO.getAll();
-//        int id = 0;
-//        for (SsfPersona p : listaP) {
-//            if (p.getNombre().equals("Nuevo")) {
-//                lAdd.setText("Nombre: "+p.getNombre()+", obtenido por método add()");
-//                id=p.getId().intValue();
-//                break;
-//            }
-//        }
-//        
-//        if (personaBO.remove(id)) {
-//            lRemove.setText("Nuevo borrado");
-//        }else{
-//            lRemove.setText("borrado error");
-//        }
+        SsfPersonaBO personaBO = new SsfPersonaBO();
+        
+        
+        
+        List<SsfPersona> listaP = personaBO.getAll();
+        SsfPersona objP = null;
+        for (SsfPersona p : listaP) {
+            objP = p;
+            break;
+        }
+        if (objP != null) {
+            lGetAll.setText("Nombre: "+objP.getNombre()+", obtenido por método getAll()");
+        } else {
+            lGetAll.setText("nope");
+        }
+        
+        SsfPersona objP2 = personaBO.find(22);
+        if (objP2 != null) {
+            lFind.setText("Nombre: "+objP2.getNombre()+", obtenido por método find()");
+        } else {
+            lFind.setText("nope");
+        }
+        
+        SsfPersona objAdd = new SsfPersona();
+        objAdd.setNombre("Nuevo");
+        personaBO.add(objAdd);
+        listaP = personaBO.getAll();
+        int id = 0;
+        for (SsfPersona p : listaP) {
+            if (p.getNombre().equals("Nuevo")) {
+                lAdd.setText("Nombre: "+p.getNombre()+", obtenido por método add()");
+                id=p.getId().intValue();
+                break;
+            }
+        }
+        
+        if (personaBO.remove(id)) {
+            lRemove.setText("Nuevo borrado");
+        }else{
+            lRemove.setText("borrado error");
+        }
         
         
         
