@@ -56,38 +56,54 @@ public class Menu {
         List<SsfPerfilvista> perfilVistaList = perfilVista.getVistasXPerfilSP(Integer.parseInt(usuarioSesion.getIdPerfil().getId().toString()));
         HashMap<BigDecimal, Boolean> perfilVistaHash = new HashMap<>();
         
-        perfilVistaList.forEach((perfilVistaObject) -> {
-            System.out.println(perfilVistaObject.getIdPerfil());
-            BigDecimal idVista = perfilVistaObject.getId();
-            perfilVistaHash.put(idVista, true);
+        perfilVistaList.forEach((perfilVistaObject) -> {            
+            if(perfilVistaObject.getEstado() == 1){
+                //System.out.println(perfilVistaObject.getIdVista().getEstado() + " - " +perfilVistaObject.getIdVista().getNombre());
+                BigDecimal idVista = perfilVistaObject.getIdVista().getId();
+                perfilVistaHash.put(idVista, true);
+            }
         });        
-        
+        System.out.println("**************************");
         menuBar = new JMenuBar();
         
         for (SsfMenu ssfmenu : menuList) {
             menu = new JMenu(ssfmenu.getNombre());
             int contador = 0;
+//            System.out.println(ssfmenu.getNombre()+"********");
             for (SsfVista ssfvista : ssfmenu.getSsfVistaList()) {
-                Boolean value = perfilVistaHash.get(ssfvista.getId());
+                Boolean value = perfilVistaHash.get(ssfvista.getId());                
                 if(value != null){
-                    contador++;
-                    menuItem = new JMenuItem(new AbstractAction(ssfvista.getNombre()){
-                        public void actionPerformed(ActionEvent e){
-                            int idVista = Integer.parseInt(ssfvista.getId().toString());
-                            //formsController.setIdVista(idVista);
-                            //formsController.abrirJframe();
-                            FormsController form = new FormsController(idVista,Menu.this);
-                            form.abrirJframe();
-                            jFrame.dispose();
-                        }
-                    });
-                    menu.add(menuItem);
+//                    System.out.println(ssfvista.getId());
+                    if(ssfvista.getEstado() == 1){
+                        System.out.println(ssfvista.getEstado());
+                        contador++;
+                        menuItem = new JMenuItem(new AbstractAction(ssfvista.getNombre()){
+                            public void actionPerformed(ActionEvent e){
+                                int idVista = Integer.parseInt(ssfvista.getId().toString());
+
+                                FormsController form = new FormsController(idVista,Menu.this);
+                                form.abrirJframe();
+                                jFrame.dispose();
+                            }
+                        });
+                        menu.add(menuItem);
+                    }
                 }                
             }
             if(contador > 0){
                 menuBar.add(menu);
             }            
         } 
+        menu = new JMenu("Usuario");
+        menuItem = new JMenuItem(new AbstractAction("Cerrar Sesión"){
+            public void actionPerformed(ActionEvent e){
+                FormsController form = new FormsController(45,Menu.this);
+                form.abrirJframe();
+                jFrame.dispose();
+            }
+        });
+        menu.add(menuItem);
+        menuBar.add(menu);
         
 
         //Build the first menu.

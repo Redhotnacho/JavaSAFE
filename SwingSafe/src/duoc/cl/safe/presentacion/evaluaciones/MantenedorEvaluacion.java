@@ -9,6 +9,7 @@ import duoc.cl.safe.entity.SsfEmpresa;
 import duoc.cl.safe.entity.SsfEvaluaciontipo;
 import duoc.cl.safe.entity.SsfEvaluacion;
 import duoc.cl.safe.entity.SsfEvaluacionestado;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfEvaluaciontipoBO;
 import duoc.cl.safe.negocio.SsfEvaluacionBO;
@@ -64,6 +65,8 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         cbEmpresa = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -153,6 +156,11 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         jLabel4.setText("Estado Evaluación:");
 
         jLabel5.setText("Empresa:");
+
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -244,6 +252,9 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+        this.setLocationRelativeTo(null);
         cargaTabla();
         cargaEvaluacionTipo();
         cargaEmpresa();
@@ -497,6 +508,8 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -511,6 +524,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private HashMap<String, Integer> mape = new HashMap<>();
     private HashMap<String, Integer> mapee = new HashMap<>();
     private static Logger log = Logger.getLogger(MantenedorEvaluacion.class.getName());
+    private FormsController formsController;
 
     public void cargaEvaluacionTipo() {
         SsfEvaluaciontipoBO etbo = new SsfEvaluaciontipoBO();
@@ -597,6 +611,14 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private void limpiarMsgs() {
         lExito.setText("");
         lError.setText("");
+    }
+    
+    public FormsController getFormsController() {
+        return formsController;
+    }
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
     }
 
 }

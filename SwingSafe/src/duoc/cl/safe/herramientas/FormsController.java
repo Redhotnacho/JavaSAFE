@@ -5,7 +5,12 @@
  */
 package duoc.cl.safe.herramientas;
 
+import duoc.cl.safe.presentacion.evaluaciones.MantenedorEvaluacion;
+import duoc.cl.safe.presentacion.perfiles.MantenedorMenu;
 import duoc.cl.safe.presentacion.perfiles.MantenedorPerfil;
+import duoc.cl.safe.presentacion.perfiles.MantenedorPerfilVistas;
+import duoc.cl.safe.presentacion.perfiles.MantenedorVistas;
+import duoc.cl.safe.presentacion.usuarios.Login;
 import duoc.cl.safe.presentacion.usuarios.MantenedorEmpresa;
 import duoc.cl.safe.presentacion.usuarios.MantenedorUsuario;
 
@@ -40,7 +45,6 @@ public class FormsController {
     
     
     public void abrirJframe(){
-        System.out.println(idVista);
         if(idVista == 2){
             MantenedorUsuario mpf = new MantenedorUsuario();
             mpf.setFormsController(this);
@@ -55,6 +59,30 @@ public class FormsController {
             MantenedorPerfil mpp = new MantenedorPerfil();
             mpp.setFormsController(this);
             mpp.setVisible(true);
+        }
+        if(idVista == 41){
+            MantenedorEvaluacion mantendorEvualcion = new MantenedorEvaluacion();
+            mantendorEvualcion.setFormsController(this);
+            mantendorEvualcion.setVisible(true);
+        }
+        if(idVista == 42){
+            MantenedorMenu mantendorMenu = new MantenedorMenu();
+            mantendorMenu.setFormsController(this);
+            mantendorMenu.setVisible(true);
+        }
+        if(idVista == 43){
+            MantenedorVistas mantendoVistas = new MantenedorVistas();
+            mantendoVistas.setFormsController(this);
+            mantendoVistas.setVisible(true);
+        }
+        if(idVista == 44){
+            MantenedorPerfilVistas mantendoPerfilesVistas = new MantenedorPerfilVistas();
+            mantendoPerfilesVistas.setFormsController(this);
+            mantendoPerfilesVistas.setVisible(true);
+        }
+        if(idVista == 45){
+            Login login = new Login();
+            login.setVisible(true);
         }
     }
 }

@@ -80,7 +80,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             }
         });
 
-        pMantenedorUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(204, 0, 153))); // NOI18N
+        pMantenedorUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(204, 0, 153))); // NOI18N
         pMantenedorUsuario.setName(""); // NOI18N
 
         bModificar.setText("Modificar");
@@ -283,7 +283,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                         .addComponent(bModificar)
                         .addComponent(tbEstado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
