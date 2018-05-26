@@ -62,6 +62,11 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
         rbNo = new javax.swing.JRadioButton();
         rbPendiente = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
+<<<<<<< HEAD
+=======
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+>>>>>>> YerkoBanda
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -163,6 +168,14 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
 
         jLabel4.setText("Aprobado:");
 
+<<<<<<< HEAD
+=======
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
+>>>>>>> YerkoBanda
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -486,6 +499,11 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+<<<<<<< HEAD
+=======
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+>>>>>>> YerkoBanda
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;

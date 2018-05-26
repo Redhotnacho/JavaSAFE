@@ -47,6 +47,11 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
         bModificar = new javax.swing.JButton();
         bAgregar = new javax.swing.JButton();
         bLimpiar = new javax.swing.JButton();
+<<<<<<< HEAD
+=======
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+>>>>>>> YerkoBanda
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -130,6 +135,14 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
+=======
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
+>>>>>>> YerkoBanda
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -365,6 +378,11 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
     private javax.swing.JButton bModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+<<<<<<< HEAD
+=======
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+>>>>>>> YerkoBanda
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;

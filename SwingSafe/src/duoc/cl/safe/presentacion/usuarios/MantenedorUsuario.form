@@ -48,7 +48,11 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Mantenedor Usuario">
+<<<<<<< HEAD
               <Font PropertyName="font" name="Tahoma" size="18" style="0"/>
+=======
+              <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+>>>>>>> YerkoBanda
               <Color PropertyName="color" blue="99" green="0" red="cc" type="rgb"/>
             </TitledBorder>
           </Border>
@@ -176,7 +180,11 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="jScrollPane1" pref="223" max="32767" attributes="0"/>
+=======
+                  <Component id="jScrollPane1" pref="228" max="32767" attributes="0"/>
+>>>>>>> YerkoBanda
               </Group>
           </Group>
         </DimensionLayout>
