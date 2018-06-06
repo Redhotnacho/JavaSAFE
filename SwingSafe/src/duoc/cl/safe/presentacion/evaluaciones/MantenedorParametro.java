@@ -52,6 +52,8 @@ public class MantenedorParametro extends javax.swing.JFrame {
         bLimpiar = new javax.swing.JButton();
         cbTipoEval = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -138,6 +140,11 @@ public class MantenedorParametro extends javax.swing.JFrame {
         cbTipoEval.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccione Tipo Evaluación -" }));
 
         jLabel3.setText("Tipo Evaluación:");
+
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -401,6 +408,8 @@ public class MantenedorParametro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;

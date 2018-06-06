@@ -48,6 +48,10 @@ public class SsfPerfilvistaBO {
         return this.perfilvistaDAO.getAllSP();
     }
     
+    public List<SsfPerfilvista> getVistasXPerfilSP(int idPerfil){
+        return this.perfilvistaDAO.getVistasXPerfilSP(idPerfil);
+    }
+    
     public boolean addSP(SsfPerfilvista perfilvista){
         return this.perfilvistaDAO.addSP(perfilvista);
     }

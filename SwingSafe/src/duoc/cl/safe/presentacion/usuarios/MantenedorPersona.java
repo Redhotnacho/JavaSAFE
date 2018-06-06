@@ -5,6 +5,7 @@
  */
 package duoc.cl.safe.presentacion.usuarios;
 
+import duoc.cl.safe.forms.*;
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.entity.SsfUsuario;
 import duoc.cl.safe.negocio.SsfPersonaBO;
@@ -78,7 +79,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             }
         });
 
-        pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(204, 0, 153))); // NOI18N
+        pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(204, 0, 153))); // NOI18N
 
         lExito.setForeground(new java.awt.Color(0, 204, 51));
 
@@ -420,11 +421,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             SsfPersona p = new SsfPersona();
             try {
-                if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
-                    if (sfech.length() < 10) {
-                        sdf = new SimpleDateFormat("dd-MM-yy");
-                        fecha = sdf.parse(sfech);
-                    }
+                if (!sfech.equals("")) {
                     fecha = sdf.parse(sfech);
                     p.setFechaNac(fecha);
                 }
@@ -490,11 +487,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 SsfPersona p = new SsfPersona();
                 try {
-                    if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
-                        if (sfech.length() < 10) {
-                            sdf = new SimpleDateFormat("dd-MM-yy");
-                            fecha = sdf.parse(sfech);
-                        }
+                    if (!sfech.equals("")) {
                         fecha = sdf.parse(sfech);
                         p.setFechaNac(fecha);
                     }
@@ -533,10 +526,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                         if (!tel.equals("error")) {
                             model.setValueAt(tel, tblPersona.getSelectedRow(), 6);
                         }
-                        if (!sfech.equals("error")) {
-                            sdf = new SimpleDateFormat("dd-MM-yyyy");
-                            model.setValueAt(sdf.format(fecha), tblPersona.getSelectedRow(), 7);
-                        }
+                        model.setValueAt(sfech, tblPersona.getSelectedRow(), 7);
 
                     } else {
                         lError.setText("No se pudo modificar");
@@ -677,6 +667,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MantenedorPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

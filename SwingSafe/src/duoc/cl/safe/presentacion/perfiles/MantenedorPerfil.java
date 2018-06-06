@@ -6,6 +6,7 @@
 package duoc.cl.safe.presentacion.perfiles;
 
 import duoc.cl.safe.entity.SsfPerfil;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,7 @@ public class MantenedorPerfil extends javax.swing.JFrame {
      */
     public MantenedorPerfil() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -47,6 +49,8 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         bModificar = new javax.swing.JButton();
         bAgregar = new javax.swing.JButton();
         bLimpiar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -130,6 +134,11 @@ public class MantenedorPerfil extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,6 +209,10 @@ public class MantenedorPerfil extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargaTabla();
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+        
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void tblPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPerfilMouseClicked
@@ -276,7 +289,7 @@ public class MantenedorPerfil extends javax.swing.JFrame {
             perf.setPerfil(nom);
             perf.setDescripcion(desc);
             if (pbo.addSP(perf)) {
-                lExito.setText("Perfil agregado exitosamente.");
+                lExito.setText("Menú agregado exitosamente.");
                 cargaTabla();
             } else {
                 lError.setText("No se pudo agregar");
@@ -303,11 +316,11 @@ public class MantenedorPerfil extends javax.swing.JFrame {
                 id = model.getValueAt(tblPerfil.getSelectedRow(), 0).toString();
                 nom = tfPerfil.getText().trim();
                 desc = taDescripcion.getText().trim();
-                SsfPerfil perf = new SsfPerfil();
-                perf.setId(BigDecimal.valueOf(Long.valueOf(id)));
-                perf.setPerfil(nom);
-                perf.setDescripcion(desc);
-                if (pbo.updateSP(perf)) {
+                SsfPerfil menu = new SsfPerfil();
+                menu.setId(BigDecimal.valueOf(Long.valueOf(id)));
+                menu.setPerfil(nom);
+                menu.setDescripcion(desc);
+                if (pbo.updateSP(menu)) {
                     lExito.setText("Perfil modificado exitosamente.");
                     // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblPerfil.getSelectedRow(), 1);
@@ -360,6 +373,8 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     private javax.swing.JButton bModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;
@@ -371,6 +386,7 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private SsfPerfilBO pbo;
+    private FormsController formsController;
 
     private void cargaTabla() {
         borrarTabla();
@@ -419,6 +435,14 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     private void limpiarMsgs() {
         lExito.setText("");
         lError.setText("");
+    }
+    
+    public FormsController getFormsController() {
+        return formsController;
+    }
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
     }
 
 }

@@ -9,6 +9,7 @@ import duoc.cl.safe.entity.SsfPerfil;
 import duoc.cl.safe.entity.SsfPerfilvista;
 import duoc.cl.safe.entity.SsfUsuario;
 import duoc.cl.safe.entity.SsfVista;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import duoc.cl.safe.negocio.SsfPerfilvistaBO;
 import duoc.cl.safe.negocio.SsfVistaBO;
@@ -62,6 +63,8 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
         tfBuscarVistaPerfil = new javax.swing.JTextField();
         bBuscarVistaPerfil = new javax.swing.JButton();
         bRefrescar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -169,6 +172,11 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
                 bRefrescarActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,6 +296,9 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     }//GEN-LAST:event_bAgregarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+        this.setLocationRelativeTo(null);
         cargaVista();
         cargaPerfil();
         cargaTabla();
@@ -537,6 +548,8 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lErrorBuscarVista;
@@ -553,6 +566,7 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     private SsfUsuario usuarioSesion;
     private List<SsfVista> vlist;
     private DefaultTableModel model;
+    private FormsController formsController;
 
     public void cargaVista() {
         mapv = new HashMap<>();
@@ -694,4 +708,11 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
         return v;
     }
      */
+    public FormsController getFormsController() {
+        return formsController;
+    }
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
+    }
 }

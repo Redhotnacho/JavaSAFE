@@ -5,7 +5,9 @@
  */
 package duoc.cl.safe.presentacion.usuarios;
 
+import duoc.cl.safe.forms.*;
 import duoc.cl.safe.entity.SsfEmpresa;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -26,6 +28,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
      */
     public MantenedorEmpresa() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -54,6 +57,8 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpresa = new javax.swing.JTable();
         bRefrescar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -142,6 +147,11 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,7 +224,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -222,6 +232,8 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
         cargaTabla();
     }//GEN-LAST:event_formWindowOpened
 
@@ -465,6 +477,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MantenedorEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -483,6 +496,8 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -495,6 +510,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private SsfEmpresaBO ebo;
     private static Logger log = Logger.getLogger(MantenedorEmpresa.class.getName());
+     private FormsController formsController;
 
     private void cargaTabla() {
         borrarTabla();
@@ -566,4 +582,13 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         tblEmpresa.setModel(model);
     }
 
+    public FormsController getFormsController() {
+        return formsController;
+    }
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
+    }
+
+    
 }

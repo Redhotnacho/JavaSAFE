@@ -158,6 +158,31 @@ public class SsfPerfilvistaDAO {
             return null;
         }
     }
+    
+    public List<SsfPerfilvista> getVistasXPerfilSP(int idPerfil) {
+        List<SsfPerfilvista> perfilvistas = null;
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("SwingSafePU");
+            EntityManager em = emf.createEntityManager();
+            
+            StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("pkg_ssfPerfilvista.sp_getVistasXPerfil", SsfPerfilvista.class);
+            storedProcedure.registerStoredProcedureParameter("p_perfil", BigDecimal.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
+            storedProcedure.registerStoredProcedureParameter("o_data", void.class, ParameterMode.REF_CURSOR);
+            storedProcedure.setParameter("p_perfil", idPerfil);
+            storedProcedure.execute();
+            String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
+            System.out.println("o_glosa : " + o_glosa);
+            perfilvistas = (List<SsfPerfilvista>) storedProcedure.getOutputParameterValue("o_data");
+
+            return perfilvistas;
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+            Logger.getLogger(SsfPerfilvistaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, "Error al buscar elementos", ex);
+            return null;
+        }
+    }
 
     public boolean addSP(SsfPerfilvista perfilvista) {
         try {

@@ -5,10 +5,12 @@
  */
 package duoc.cl.safe.presentacion.usuarios;
 
+import duoc.cl.safe.forms.*;
 import duoc.cl.safe.entity.SsfEmpresa;
 import duoc.cl.safe.entity.SsfPerfil;
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.entity.SsfUsuario;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import duoc.cl.safe.negocio.SsfPersonaBO;
@@ -78,7 +80,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             }
         });
 
-        pMantenedorUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(204, 0, 153))); // NOI18N
+        pMantenedorUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(204, 0, 153))); // NOI18N
         pMantenedorUsuario.setName(""); // NOI18N
 
         bModificar.setText("Modificar");
@@ -281,7 +283,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                         .addComponent(bModificar)
                         .addComponent(tbEstado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -301,6 +303,8 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
         cargaEmpresa();
         cargaPerfil();
@@ -711,6 +715,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MantenedorUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -750,11 +755,11 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     private HashMap<String, Integer> mape = new HashMap<>();
     private HashMap<String, Integer> mapp = new HashMap<>();
     private HashMap<String, Integer> mappers = new HashMap<>();
-    private SsfUsuario usuarioSesion;
+    private FormsController formsController;
 
     private DefaultTableModel model;
     private List<SsfUsuario> lu;
-    private SsfUsuarioBO ubo;
+    private SsfUsuarioBO ubo;    
 
     public void cargaEmpresa() {
         SsfEmpresaBO ebo = new SsfEmpresaBO();
@@ -900,12 +905,12 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         tblUsuario.setModel(model);
     }
 
-    public SsfUsuario getUsuarioSesion() {
-        return usuarioSesion;
+    public FormsController getFormsController() {
+        return formsController;
     }
 
-    public void setUsuarioSesion(SsfUsuario usuarioSesion) {
-        this.usuarioSesion = usuarioSesion;
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
     }
-
+    
 }
