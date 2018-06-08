@@ -7,11 +7,15 @@ package duoc.cl.safe.presentacion.usuarios;
 
 <<<<<<< HEAD
 import duoc.cl.safe.entity.SsfEmpresa;
+<<<<<<< HEAD
 =======
 import duoc.cl.safe.forms.*;
 import duoc.cl.safe.entity.SsfEmpresa;
 import duoc.cl.safe.herramientas.FormsController;
 >>>>>>> YerkoBanda
+=======
+import duoc.cl.safe.herramientas.FormsController;
+>>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -65,10 +69,16 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         tblEmpresa = new javax.swing.JTable();
         bRefrescar = new javax.swing.JButton();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 >>>>>>> YerkoBanda
+=======
+        jLabel8 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+>>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -158,13 +168,24 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         jMenu1.setText("File");
+=======
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel8.setText("Mantenedor Empresa");
+
+        jMenu1.setText("Cargando...");
+>>>>>>> Ignacio
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,42 +197,47 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                 .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(167, 167, 167))
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                            .addComponent(tfDireccion))
-                        .addGap(18, 18, 18)
-                        .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                        .addComponent(bAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bLimpiar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                                    .addComponent(tfDireccion))
+                                .addGap(18, 18, 18)
+                                .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                                .addComponent(bAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bLimpiar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,10 +264,14 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                         .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
 =======
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
 >>>>>>> YerkoBanda
+=======
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+>>>>>>> Ignacio
                 .addContainerGap())
         );
 
@@ -250,10 +280,16 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
 >>>>>>> YerkoBanda
+=======
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+        this.setLocationRelativeTo(null);
+>>>>>>> Ignacio
         cargaTabla();
     }//GEN-LAST:event_formWindowOpened
 
@@ -498,9 +534,13 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         }
         //</editor-fold>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         //</editor-fold>
 >>>>>>> YerkoBanda
+=======
+        //</editor-fold>
+>>>>>>> Ignacio
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -520,10 +560,16 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
 >>>>>>> YerkoBanda
+=======
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+>>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -537,9 +583,13 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     private SsfEmpresaBO ebo;
     private static Logger log = Logger.getLogger(MantenedorEmpresa.class.getName());
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      private FormsController formsController;
 >>>>>>> YerkoBanda
+=======
+    private FormsController formsController;
+>>>>>>> Ignacio
 
     private void cargaTabla() {
         borrarTabla();
@@ -612,15 +662,21 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     public FormsController getFormsController() {
         return formsController;
     }
 
+=======
+>>>>>>> Ignacio
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
 
     
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
 }

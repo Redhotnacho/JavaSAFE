@@ -6,12 +6,10 @@
 package duoc.cl.safe.presentacion.evaluaciones;
 
 import duoc.cl.safe.entity.SsfEvaluacion;
-import duoc.cl.safe.entity.SsfEvaluaciontipo;
 import duoc.cl.safe.entity.SsfEvaluacionparametro;
 import duoc.cl.safe.entity.SsfParametro;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfEvaluacionBO;
-import duoc.cl.safe.negocio.SsfEvaluacionparametroBO;
-import duoc.cl.safe.negocio.SsfEvaluaciontipoBO;
 import duoc.cl.safe.negocio.SsfEvaluacionparametroBO;
 import duoc.cl.safe.negocio.SsfParametroBO;
 import java.math.BigDecimal;
@@ -63,10 +61,16 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
         rbPendiente = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 >>>>>>> YerkoBanda
+=======
+        jLabel8 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+>>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -169,13 +173,23 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
         jLabel4.setText("Aprobado:");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel8.setText("Asignar Parámetro");
+
+>>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,10 +223,12 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
                                                     .addGap(18, 18, 18)
                                                     .addComponent(rbPendiente))
                                                 .addComponent(cbParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(39, 39, 39)
                                 .addComponent(bAgregar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,7 +246,9 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,6 +291,8 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
         cargaTabla();
         cargaEvaluacion();
@@ -500,10 +520,16 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
 >>>>>>> YerkoBanda
+=======
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+>>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;
@@ -519,6 +545,11 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
     private SsfEvaluacionparametroBO epbo;
     private HashMap<String, Integer> mape = new HashMap<>();
     private HashMap<String, Integer> mappm = new HashMap<>();
+    private FormsController formsController;
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
+    }
 
     public void cargaEvaluacion() {
         SsfEvaluacionBO ebo = new SsfEvaluacionBO();

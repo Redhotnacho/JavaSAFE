@@ -6,6 +6,7 @@
 package duoc.cl.safe.forms;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.negocio.SsfPersonaBO;
 import java.util.List;
@@ -14,22 +15,31 @@ import duoc.cl.safe.entity.SsfUsuario;
 import duoc.cl.safe.herramientas.Menu;
 import javax.swing.JMenuBar;
 >>>>>>> YerkoBanda
+=======
+import duoc.cl.safe.entity.SsfUsuario;
+import duoc.cl.safe.herramientas.Menu;
+import javax.swing.JMenuBar;
+>>>>>>> Ignacio
 
 /**
  *
  * @author Nacho
  */
 public class Prueba extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Prueba
      */
     public Prueba() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         initComponents();
 =======
         initComponents();    
 >>>>>>> YerkoBanda
+=======
+        initComponents();    
+>>>>>>> Ignacio
     }
 
     /**
@@ -93,6 +103,7 @@ public class Prueba extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         SsfPersonaBO personaBO = new SsfPersonaBO();
         
@@ -136,6 +147,8 @@ public class Prueba extends javax.swing.JFrame {
             lRemove.setText("borrado error");
         }
 =======
+=======
+>>>>>>> Ignacio
         this.setJMenuBar(menuBar);
 //        SsfPersonaBO personaBO = new SsfPersonaBO();
 //        
@@ -178,7 +191,10 @@ public class Prueba extends javax.swing.JFrame {
 //        }else{
 //            lRemove.setText("borrado error");
 //        }
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
         
         
         

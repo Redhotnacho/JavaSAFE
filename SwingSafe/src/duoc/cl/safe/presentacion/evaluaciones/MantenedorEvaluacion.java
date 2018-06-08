@@ -10,14 +10,17 @@ import duoc.cl.safe.entity.SsfEvaluaciontipo;
 import duoc.cl.safe.entity.SsfEvaluacion;
 import duoc.cl.safe.entity.SsfEvaluacionestado;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import duoc.cl.safe.herramientas.FormsController;
 >>>>>>> YerkoBanda
+=======
+import duoc.cl.safe.herramientas.FormsController;
+>>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfEvaluaciontipoBO;
 import duoc.cl.safe.negocio.SsfEvaluacionBO;
 import duoc.cl.safe.negocio.SsfEvaluacionestadoBO;
-import duoc.cl.safe.presentacion.usuarios.MantenedorPersona;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -69,10 +72,16 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 >>>>>>> YerkoBanda
+=======
+        jLabel8 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+>>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -164,13 +173,23 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         jLabel5.setText("Empresa:");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel8.setText("Mantenedor Evaluación");
+
+>>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,7 +222,10 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(cbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(cbEstadoEval, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cbTipoEval, 0, 208, Short.MAX_VALUE))))
+                                            .addComponent(cbTipoEval, 0, 208, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addComponent(jLabel8)))
                                 .addGap(39, 39, 39)
                                 .addComponent(bAgregar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,7 +241,9 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbTipoEval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -262,11 +286,17 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
 >>>>>>> YerkoBanda
+=======
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+        this.setLocationRelativeTo(null);
+>>>>>>> Ignacio
         cargaTabla();
         cargaEvaluacionTipo();
         cargaEmpresa();
@@ -521,10 +551,16 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
 >>>>>>> YerkoBanda
+=======
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+>>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -540,18 +576,22 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private HashMap<String, Integer> mapee = new HashMap<>();
     private static Logger log = Logger.getLogger(MantenedorEvaluacion.class.getName());
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private FormsController formsController;
 >>>>>>> YerkoBanda
+=======
+    private FormsController formsController;
+>>>>>>> Ignacio
 
     public void cargaEvaluacionTipo() {
         SsfEvaluaciontipoBO etbo = new SsfEvaluaciontipoBO();
         List<SsfEvaluaciontipo> etlist = etbo.getAllSP();
         etlist.forEach((et) -> {
-            mapte.put(et.getTopo(), et.getId().intValue());
+            mapte.put(et.getTipo(), et.getId().intValue());
         });
         etlist.forEach((et) -> {
-            cbTipoEval.addItem(et.getTopo());
+            cbTipoEval.addItem(et.getTipo());
         });
     }
 
@@ -590,7 +630,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
             } else {
                 sfecha = "";
             }
-            model.addRow(new Object[]{e.getId(), e.getNombre(), sfecha, e.getIdEmpresa().getNombre(), e.getIdEvaluacionestado().getEstadoeval(), e.getIdEvaluaciontipo().getTopo(), sdf.format(e.getFechCreacion()), e.getEstado()});
+            model.addRow(new Object[]{e.getId(), e.getNombre(), sfecha, e.getIdEmpresa().getNombre(), e.getIdEvaluacionestado().getEstadoeval(), e.getIdEvaluaciontipo().getTipo(), sdf.format(e.getFechCreacion()), e.getEstado()});
         }
         tblEvaluacion.setModel(model);
     }
@@ -641,5 +681,9 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         this.formsController = formsController;
     }
 >>>>>>> YerkoBanda
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
+    }
 
 }

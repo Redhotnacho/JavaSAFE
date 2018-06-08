@@ -10,7 +10,7 @@ import duoc.cl.safe.entity.SsfEvaluaciontipo;
 import duoc.cl.safe.entity.SsfEvaluacion;
 import duoc.cl.safe.entity.SsfEvaluacionestado;
 import duoc.cl.safe.entity.SsfEvaluacionparametro;
-import duoc.cl.safe.entity.SsfParametro;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfEvaluaciontipoBO;
 import duoc.cl.safe.negocio.SsfEvaluacionBO;
@@ -33,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Nacho
  */
 public class FormularioEvaluacion extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form MantenedorEvaluación
      */
@@ -86,6 +86,9 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         lExitoParametro = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblParametro = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -270,6 +273,15 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblParametro);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel8.setText("Formulario Evaluación");
+
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -338,7 +350,10 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(tfEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(30, 30, 30)
@@ -348,7 +363,9 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbTipoEval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -408,6 +425,9 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+        this.setLocationRelativeTo(null);
         cargaTabla();
         cargaEvaluacionTipo();
         cargaEmpresa();
@@ -746,6 +766,9 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -776,15 +799,20 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     private HashMap<String, Integer> mapee = new HashMap<>();
     private HashMap<String, SsfEvaluacionparametro> mapep;
     private static Logger log = Logger.getLogger(FormularioEvaluacion.class.getName());
+    private FormsController formsController;
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
+    }
 
     public void cargaEvaluacionTipo() {
         SsfEvaluaciontipoBO etbo = new SsfEvaluaciontipoBO();
         List<SsfEvaluaciontipo> etlist = etbo.getAllSP();
         etlist.forEach((et) -> {
-            mapte.put(et.getTopo(), et.getId().intValue());
+            mapte.put(et.getTipo(), et.getId().intValue());
         });
         etlist.forEach((et) -> {
-            cbTipoEval.addItem(et.getTopo());
+            cbTipoEval.addItem(et.getTipo());
         });
     }
 
@@ -823,7 +851,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             } else {
                 sfecha = "";
             }
-            model.addRow(new Object[]{e.getId(), e.getNombre(), sfecha, e.getIdEmpresa().getNombre(), e.getIdEvaluacionestado().getEstadoeval(), e.getIdEvaluaciontipo().getTopo(), sdf.format(e.getFechCreacion()), e.getEstado()});
+            model.addRow(new Object[]{e.getId(), e.getNombre(), sfecha, e.getIdEmpresa().getNombre(), e.getIdEvaluacionestado().getEstadoeval(), e.getIdEvaluaciontipo().getTipo(), sdf.format(e.getFechCreacion()), e.getEstado()});
         }
         tblEvaluacion.setModel(model);
     }
@@ -866,6 +894,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         lErrorParametro.setText("");
     }
 
+    /* alternativa a Lista parametros
     private void cargaParametroTabla(String tipoeval) {
         borrarTablaParametro();
         DefaultTableModel model = (DefaultTableModel) tblEvaluacion.getModel();
@@ -885,13 +914,13 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         }
 
         for (Map.Entry<String, SsfEvaluacionparametro> entry : mapep.entrySet()) {
-            if (entry.getValue().getIdParametro().getIdEvaluaciontipo().getTopo().equalsIgnoreCase(tipoeval)
-                    && entry.getValue().getIdEvaluacion().getIdEvaluaciontipo().getTopo().equalsIgnoreCase(entry.getValue().getIdParametro().getIdEvaluaciontipo().getTopo())) {
+            if (entry.getValue().getIdParametro().getIdEvaluaciontipo().getTipo().equalsIgnoreCase(tipoeval)
+                    && entry.getValue().getIdEvaluacion().getIdEvaluaciontipo().getTipo().equalsIgnoreCase(entry.getValue().getIdParametro().getIdEvaluaciontipo().getTipo())) {
                 model2.addRow(new Object[]{entry.getValue().getIdParametro().getParametro()});
             }
         }
         tblParametro.setModel(model2);
-    }
+    }*/
 
     private void cargaParametroList(String tipoeval) {
         if (tblEvaluacion.getSelectedRow() == -1) {
@@ -918,8 +947,8 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             }
 
             for (Map.Entry<String, SsfEvaluacionparametro> entry : mapep.entrySet()) {
-                if (entry.getValue().getIdParametro().getIdEvaluaciontipo().getTopo().equalsIgnoreCase(tipoeval)
-                        && entry.getValue().getIdEvaluacion().getIdEvaluaciontipo().getTopo().equalsIgnoreCase(entry.getValue().getIdParametro().getIdEvaluaciontipo().getTopo())) {
+                if (entry.getValue().getIdParametro().getIdEvaluaciontipo().getTipo().equalsIgnoreCase(tipoeval)
+                        && entry.getValue().getIdEvaluacion().getIdEvaluaciontipo().getTipo().equalsIgnoreCase(entry.getValue().getIdParametro().getIdEvaluaciontipo().getTipo())) {
                     lmodel.addElement(entry.getValue().getIdParametro().getParametro());
                 }
             }
@@ -970,6 +999,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         }
     }
 
+    /*
     private void borrarTablaParametro() {
         tblParametro.removeAll();
         tblParametro.repaint();
@@ -989,15 +1019,16 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         tblParametro.setModel(model);
         tblParametro.repaint();
         tblParametro.removeAll();
-    }
+    }*/
 
     private void limpiarParametro() {
         taObservacion.setText("");
         rPendiente.setSelected(true);
-        lParametro.setText("[Parámetro]");
+        lParametro.setText("[ Parámetro ]");
         lstParametro.clearSelection();
         tblParametro.clearSelection();
         bModificarParametro.setEnabled(false);
     }
 
+    
 }

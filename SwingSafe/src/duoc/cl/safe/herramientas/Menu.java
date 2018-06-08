@@ -12,7 +12,10 @@ import duoc.cl.safe.entity.SsfVista;
 import duoc.cl.safe.negocio.SsfMenuBO;
 import duoc.cl.safe.negocio.SsfPerfilvistaBO;
 import java.awt.event.ActionEvent;
+<<<<<<< HEAD
 import java.awt.event.KeyEvent;
+=======
+>>>>>>> Ignacio
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -23,14 +26,21 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
+<<<<<<< HEAD
 import javax.swing.KeyStroke;
+=======
+>>>>>>> Ignacio
 
 /**
  *
  * @author yerko
  */
 public class Menu {
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> Ignacio
     private JMenuBar menuBar;
     private JMenu menu, submenu;
     private JMenuItem menuItem;
@@ -39,6 +49,7 @@ public class Menu {
     private javax.swing.JFrame jFrame;
     private FormsController formsController;
     private SsfUsuario usuarioSesion;
+<<<<<<< HEAD
 
     public Menu() {
     }
@@ -58,19 +69,50 @@ public class Menu {
         
         perfilVistaList.forEach((perfilVistaObject) -> {            
             if(perfilVistaObject.getEstado() == 1){
+=======
+    List<SsfMenu> menuList;
+
+    public Menu() {
+    }
+
+    public Menu(SsfUsuario usuarioSesion) {
+        this.usuarioSesion = usuarioSesion;
+    }
+
+    public void menu() {
+        SsfMenuBO menubo = new SsfMenuBO();
+        if (menuList == null) {
+            menuList = menubo.getAllSP();
+        }
+
+        SsfPerfilvistaBO perfilVista = new SsfPerfilvistaBO();
+        List<SsfPerfilvista> perfilVistaList = perfilVista.getVistasXPerfilSP(Integer.parseInt(usuarioSesion.getIdPerfil().getId().toString()));
+        HashMap<BigDecimal, Boolean> perfilVistaHash = new HashMap<>();
+
+        perfilVistaList.forEach((perfilVistaObject) -> {
+            if (perfilVistaObject.getEstado() == 1) {
+>>>>>>> Ignacio
                 //System.out.println(perfilVistaObject.getIdVista().getEstado() + " - " +perfilVistaObject.getIdVista().getNombre());
                 BigDecimal idVista = perfilVistaObject.getIdVista().getId();
                 perfilVistaHash.put(idVista, true);
             }
+<<<<<<< HEAD
         });        
         System.out.println("**************************");
         menuBar = new JMenuBar();
         
+=======
+        });
+        System.out.println("**************************");
+        menuBar = new JMenuBar();
+
+>>>>>>> Ignacio
         for (SsfMenu ssfmenu : menuList) {
             menu = new JMenu(ssfmenu.getNombre());
             int contador = 0;
 //            System.out.println(ssfmenu.getNombre()+"********");
             for (SsfVista ssfvista : ssfmenu.getSsfVistaList()) {
+<<<<<<< HEAD
                 Boolean value = perfilVistaHash.get(ssfvista.getId());                
                 if(value != null){
 //                    System.out.println(ssfvista.getId());
@@ -82,12 +124,25 @@ public class Menu {
                                 int idVista = Integer.parseInt(ssfvista.getId().toString());
 
                                 FormsController form = new FormsController(idVista,Menu.this);
+=======
+                Boolean value = perfilVistaHash.get(ssfvista.getId());
+                if (value != null) {
+//                    System.out.println(ssfvista.getId());
+                    if (ssfvista.getEstado() == 1) {
+                        System.out.println(ssfvista.getEstado());
+                        contador++;
+                        menuItem = new JMenuItem(new AbstractAction(ssfvista.getNombre()) {
+                            public void actionPerformed(ActionEvent e) {
+                                int idVista = Integer.parseInt(ssfvista.getId().toString());
+                                FormsController form = new FormsController(idVista, Menu.this);
+>>>>>>> Ignacio
                                 form.abrirJframe();
                                 jFrame.dispose();
                             }
                         });
                         menu.add(menuItem);
                     }
+<<<<<<< HEAD
                 }                
             }
             if(contador > 0){
@@ -113,6 +168,31 @@ public class Menu {
 //                "The only menu in this program that has menu items");
        
         
+=======
+                }
+            }
+            if (contador > 0) {
+                menuBar.add(menu);
+            }
+        }
+        if (usuarioSesion.getId().intValue() != 102) {
+            menu = new JMenu("Usuario");
+            menuItem = new JMenuItem(new AbstractAction("Cerrar Sesión") {
+                public void actionPerformed(ActionEvent e) {
+                    FormsController form = new FormsController(45, Menu.this);
+                    form.abrirJframe();
+                    jFrame.dispose();
+                }
+            });
+            menu.add(menuItem);
+            menuBar.add(menu);
+        }
+
+        //Build the first menu.
+        //menu.setMnemonic(KeyEvent.VK_A);
+//        menu.getAccessibleContext().setAccessibleDescription(
+//                "The only menu in this program that has menu items");
+>>>>>>> Ignacio
         //a group of JMenuItems
 //        menuItem = new JMenuItem(new AbstractAction("Menu Item Clickeable"){
 //            public void actionPerformed(ActionEvent e){
@@ -147,8 +227,11 @@ public class Menu {
 //        menuItem = new JMenuItem("Another item");
 //        submenu.add(menuItem);
 //        menu.add(submenu);
+<<<<<<< HEAD
         
         
+=======
+>>>>>>> Ignacio
     }
 
     public JMenuBar getMenuBar() {
@@ -166,6 +249,10 @@ public class Menu {
     public void setjFrame(JFrame jFrame) {
         this.jFrame = jFrame;
     }
+<<<<<<< HEAD
     
     
+=======
+
+>>>>>>> Ignacio
 }

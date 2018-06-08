@@ -14,9 +14,13 @@ import duoc.cl.safe.entity.SsfPerfil;
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.entity.SsfUsuario;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import duoc.cl.safe.herramientas.FormsController;
 >>>>>>> YerkoBanda
+=======
+import duoc.cl.safe.herramientas.FormsController;
+>>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import duoc.cl.safe.negocio.SsfPersonaBO;
@@ -76,6 +80,8 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         bBuscarUsuario = new javax.swing.JButton();
         cbEmpresa = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,10 +93,14 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         pMantenedorUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(204, 0, 153))); // NOI18N
 =======
         pMantenedorUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(204, 0, 153))); // NOI18N
 >>>>>>> YerkoBanda
+=======
+        pMantenedorUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(204, 0, 153))); // NOI18N
+>>>>>>> Ignacio
         pMantenedorUsuario.setName(""); // NOI18N
 
         bModificar.setText("Modificar");
@@ -294,11 +304,20 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                         .addComponent(tbEstado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
 =======
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
 >>>>>>> YerkoBanda
+=======
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+>>>>>>> Ignacio
         );
+
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,7 +328,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 27, Short.MAX_VALUE)
+                .addGap(0, 18, Short.MAX_VALUE)
                 .addComponent(pMantenedorUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -318,10 +337,15 @@ public class MantenedorUsuario extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
 >>>>>>> YerkoBanda
+=======
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+>>>>>>> Ignacio
         this.setLocationRelativeTo(null);
         cargaEmpresa();
         cargaPerfil();
@@ -733,9 +757,13 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         }
         //</editor-fold>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         //</editor-fold>
 >>>>>>> YerkoBanda
+=======
+        //</editor-fold>
+>>>>>>> Ignacio
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -760,6 +788,8 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -776,6 +806,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     private HashMap<String, Integer> mapp = new HashMap<>();
     private HashMap<String, Integer> mappers = new HashMap<>();
 <<<<<<< HEAD
+<<<<<<< HEAD
     private SsfUsuario usuarioSesion;
 
     private DefaultTableModel model;
@@ -788,6 +819,13 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     private List<SsfUsuario> lu;
     private SsfUsuarioBO ubo;    
 >>>>>>> YerkoBanda
+=======
+    private FormsController formsController;
+
+    private DefaultTableModel model;
+    private List<SsfUsuario> lu;
+    private SsfUsuarioBO ubo;    
+>>>>>>> Ignacio
 
     public void cargaEmpresa() {
         SsfEmpresaBO ebo = new SsfEmpresaBO();
@@ -934,6 +972,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public SsfUsuario getUsuarioSesion() {
         return usuarioSesion;
     }
@@ -952,4 +991,10 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     }
     
 >>>>>>> YerkoBanda
+=======
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
+    }
+    
+>>>>>>> Ignacio
 }

@@ -7,9 +7,13 @@ package duoc.cl.safe.presentacion.perfiles;
 
 import duoc.cl.safe.entity.SsfPerfil;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import duoc.cl.safe.herramientas.FormsController;
 >>>>>>> YerkoBanda
+=======
+import duoc.cl.safe.herramientas.FormsController;
+>>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -28,9 +32,13 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     public MantenedorPerfil() {
         initComponents();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         this.setLocationRelativeTo(null);
 >>>>>>> YerkoBanda
+=======
+        
+>>>>>>> Ignacio
     }
 
     /**
@@ -56,10 +64,16 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         bAgregar = new javax.swing.JButton();
         bLimpiar = new javax.swing.JButton();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 >>>>>>> YerkoBanda
+=======
+        jLabel8 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+>>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -144,13 +158,23 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel8.setText("Mantenedor Perfil");
+
+>>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,7 +198,8 @@ public class MantenedorPerfil extends javax.swing.JFrame {
                                             .addComponent(jLabel2))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfPerfil))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
                                 .addGap(39, 39, 39)
                                 .addComponent(bAgregar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -189,7 +214,9 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel8)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,7 +247,12 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
+        this.setLocationRelativeTo(null);
         cargaTabla();
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
@@ -228,6 +260,9 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         
         
 >>>>>>> YerkoBanda
+=======
+        
+>>>>>>> Ignacio
     }//GEN-LAST:event_formWindowOpened
 
     private void tblPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPerfilMouseClicked
@@ -305,10 +340,14 @@ public class MantenedorPerfil extends javax.swing.JFrame {
             perf.setDescripcion(desc);
             if (pbo.addSP(perf)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 lExito.setText("Perfil agregado exitosamente.");
 =======
                 lExito.setText("Menú agregado exitosamente.");
 >>>>>>> YerkoBanda
+=======
+                lExito.setText("Menú agregado exitosamente.");
+>>>>>>> Ignacio
                 cargaTabla();
             } else {
                 lError.setText("No se pudo agregar");
@@ -336,18 +375,24 @@ public class MantenedorPerfil extends javax.swing.JFrame {
                 nom = tfPerfil.getText().trim();
                 desc = taDescripcion.getText().trim();
 <<<<<<< HEAD
+<<<<<<< HEAD
                 SsfPerfil perf = new SsfPerfil();
                 perf.setId(BigDecimal.valueOf(Long.valueOf(id)));
                 perf.setPerfil(nom);
                 perf.setDescripcion(desc);
                 if (pbo.updateSP(perf)) {
 =======
+=======
+>>>>>>> Ignacio
                 SsfPerfil menu = new SsfPerfil();
                 menu.setId(BigDecimal.valueOf(Long.valueOf(id)));
                 menu.setPerfil(nom);
                 menu.setDescripcion(desc);
                 if (pbo.updateSP(menu)) {
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
                     lExito.setText("Perfil modificado exitosamente.");
                     // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblPerfil.getSelectedRow(), 1);
@@ -401,10 +446,16 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
 >>>>>>> YerkoBanda
+=======
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+>>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;
@@ -417,9 +468,13 @@ public class MantenedorPerfil extends javax.swing.JFrame {
 
     private SsfPerfilBO pbo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private FormsController formsController;
 >>>>>>> YerkoBanda
+=======
+    private FormsController formsController;
+>>>>>>> Ignacio
 
     private void cargaTabla() {
         borrarTabla();
@@ -480,5 +535,9 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         this.formsController = formsController;
     }
 >>>>>>> YerkoBanda
+
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
+    }
 
 }
