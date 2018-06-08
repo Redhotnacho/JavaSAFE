@@ -5,9 +5,9 @@
  */
 package duoc.cl.safe.presentacion.usuarios;
 
-import duoc.cl.safe.forms.*;
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.entity.SsfUsuario;
+import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfPersonaBO;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -69,6 +69,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
         tfCorreo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         bBuscar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -79,7 +81,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             }
         });
 
-        pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(204, 0, 153))); // NOI18N
+        pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16), new java.awt.Color(204, 0, 153))); // NOI18N
 
         lExito.setForeground(new java.awt.Color(0, 204, 51));
 
@@ -288,6 +290,11 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
         );
 
+        jMenu1.setText("Cargando...");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,7 +304,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 27, Short.MAX_VALUE)
+                .addGap(0, 26, Short.MAX_VALUE)
                 .addComponent(pMantenedorPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -305,6 +312,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setJMenuBar(formsController.getMenu().getMenuBar());
+        formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
         cargaTabla();
     }//GEN-LAST:event_formWindowOpened
@@ -693,6 +702,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -712,7 +723,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
     private static Logger log = Logger.getLogger(MantenedorPersona.class.getName());
     private DefaultTableModel model;
     private SsfPersonaBO pbo;
-
+    private FormsController formsController;
+    
     private void cargaTabla() {
         borrarTabla();
         pbo = new SsfPersonaBO();
@@ -795,12 +807,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
         tblPersona.removeAll();
     }
 
-    public SsfUsuario getUsuarioSesion() {
-        return usuarioSesion;
-    }
-
-    public void setUsuarioSesion(SsfUsuario usuarioSesion) {
-        this.usuarioSesion = usuarioSesion;
+    public void setFormsController(FormsController formsController) {
+        this.formsController = formsController;
     }
 
 }

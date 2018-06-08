@@ -14,7 +14,6 @@ import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfEvaluaciontipoBO;
 import duoc.cl.safe.negocio.SsfEvaluacionBO;
 import duoc.cl.safe.negocio.SsfEvaluacionestadoBO;
-import duoc.cl.safe.presentacion.usuarios.MantenedorPersona;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,6 +64,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         cbEmpresa = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -157,6 +157,10 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
 
         jLabel5.setText("Empresa:");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel8.setText("Mantenedor Evaluación");
+
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
@@ -194,7 +198,10 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(cbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(cbEstadoEval, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cbTipoEval, 0, 208, Short.MAX_VALUE))))
+                                            .addComponent(cbTipoEval, 0, 208, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addComponent(jLabel8)))
                                 .addGap(39, 39, 39)
                                 .addComponent(bAgregar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,7 +217,9 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbTipoEval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -508,6 +517,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -530,10 +540,10 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         SsfEvaluaciontipoBO etbo = new SsfEvaluaciontipoBO();
         List<SsfEvaluaciontipo> etlist = etbo.getAllSP();
         etlist.forEach((et) -> {
-            mapte.put(et.getTopo(), et.getId().intValue());
+            mapte.put(et.getTipo(), et.getId().intValue());
         });
         etlist.forEach((et) -> {
-            cbTipoEval.addItem(et.getTopo());
+            cbTipoEval.addItem(et.getTipo());
         });
     }
 
@@ -572,7 +582,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
             } else {
                 sfecha = "";
             }
-            model.addRow(new Object[]{e.getId(), e.getNombre(), sfecha, e.getIdEmpresa().getNombre(), e.getIdEvaluacionestado().getEstadoeval(), e.getIdEvaluaciontipo().getTopo(), sdf.format(e.getFechCreacion()), e.getEstado()});
+            model.addRow(new Object[]{e.getId(), e.getNombre(), sfecha, e.getIdEmpresa().getNombre(), e.getIdEvaluacionestado().getEstadoeval(), e.getIdEvaluaciontipo().getTipo(), sdf.format(e.getFechCreacion()), e.getEstado()});
         }
         tblEvaluacion.setModel(model);
     }
@@ -611,10 +621,6 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private void limpiarMsgs() {
         lExito.setText("");
         lError.setText("");
-    }
-    
-    public FormsController getFormsController() {
-        return formsController;
     }
 
     public void setFormsController(FormsController formsController) {

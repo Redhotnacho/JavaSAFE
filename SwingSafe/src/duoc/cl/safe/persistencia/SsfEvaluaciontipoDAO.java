@@ -165,12 +165,12 @@ public class SsfEvaluaciontipoDAO {
             EntityManager em = emf.createEntityManager();
 
             StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("pkg_ssfEvaluaciontipo.sp_add", SsfEvaluaciontipo.class);
-            storedProcedure.registerStoredProcedureParameter("p_topo", String.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_tipo", String.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_descripcion", String.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
-            storedProcedure.setParameter("p_topo", evaluaciontipo.getTopo());
+            storedProcedure.setParameter("p_tipo", evaluaciontipo.getTipo());
             storedProcedure.setParameter("p_descripcion", evaluaciontipo.getDescripcion());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
@@ -199,12 +199,12 @@ public class SsfEvaluaciontipoDAO {
 
             StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("pkg_ssfEvaluaciontipo.sp_update", SsfEvaluaciontipo.class);
             storedProcedure.registerStoredProcedureParameter("p_id", BigDecimal.class, ParameterMode.IN);
-            storedProcedure.registerStoredProcedureParameter("p_topo", String.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_tipo", String.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_descripcion", String.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", evaluaciontipo.getId());
-            storedProcedure.setParameter("p_topo", evaluaciontipo.getTopo());
+            storedProcedure.setParameter("p_tipo", evaluaciontipo.getTipo());
             storedProcedure.setParameter("p_descripcion", evaluaciontipo.getDescripcion());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");

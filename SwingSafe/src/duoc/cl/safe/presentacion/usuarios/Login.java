@@ -279,7 +279,7 @@ public class Login extends javax.swing.JFrame{
     }
         
     private void ejecutarAction(){
-        if (tfUsuario.getText().equals("")||pfPassword.getText().equals("")) {
+        if (tfUsuario.getText().trim().equals("")||pfPassword.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "No se aceptan cuadros vacíos." );
         }else{     
             loading();
