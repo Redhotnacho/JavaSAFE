@@ -12,6 +12,10 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -24,6 +28,7 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
      */
     public MantenedorEvaluacionTipo() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /**
@@ -217,7 +222,7 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
@@ -266,8 +271,10 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
             tbEstado.setEnabled(false);
             if (tblEvaluacionTipo.getRowCount() == 0) {
                 lError.setText("Tabla vacía");
+                Logger.getLogger(MantenedorEvaluacionTipo.class.getName()).log(Level.WARN, "Tabla vacía");
             } else {
                 lError.setText("No hay fila seleccionada");
+                Logger.getLogger(MantenedorEvaluacionTipo.class.getName()).log(Level.WARN, "No hay fila seleccionada");
             }
         } else {
             int id = Short.parseShort(model.getValueAt(tblEvaluacionTipo.getSelectedRow(), 0).toString());
@@ -291,7 +298,7 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
         if (tfTipoEval.getText().trim().equals("")) {
             lError.setText("Ingrese un nombre para el Tipo de Evaluación");
         } else {
-            String nom,desc;
+            String nom, desc;
             nom = tfTipoEval.getText();
             desc = taDescripcion.getText();
             SsfEvaluaciontipo perf = new SsfEvaluaciontipo();
@@ -321,7 +328,7 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
             if (tfTipoEval.getText().trim().equals("")) {
                 lError.setText("Nombre Tipo Evaluación no puede estar en blanco");
             } else {
-                String desc,nom,id;
+                String desc, nom, id;
                 id = model.getValueAt(tblEvaluacionTipo.getSelectedRow(), 0).toString();
                 nom = tfTipoEval.getText().trim();
                 desc = taDescripcion.getText().trim();
@@ -331,7 +338,6 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
                 menu.setDescripcion(desc);
                 if (etbo.updateSP(menu)) {
                     lExito.setText("Tipo Evaluación modificada exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblEvaluacionTipo.getSelectedRow(), 1);
                     model.setValueAt(desc, tblEvaluacionTipo.getSelectedRow(), 2);
                 } else {
@@ -404,8 +410,9 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
     }
 
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblEvaluacionTipo.getModel();
+        model.setRowCount(0);
         etbo = new SsfEvaluaciontipoBO();
         List<SsfEvaluaciontipo> let = etbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -414,27 +421,6 @@ public class MantenedorEvaluacionTipo extends javax.swing.JFrame {
         });
         tblEvaluacionTipo.setModel(model);
 
-    }
-
-    private void borrarTabla() {
-        tblEvaluacionTipo.removeAll();
-        tblEvaluacionTipo.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblEvaluacionTipo.getModel();
-        model.fireTableDataChanged();
-        tblEvaluacionTipo.repaint();
-        tblEvaluacionTipo.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblEvaluacionTipo.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblEvaluacionTipo.repaint();
-        tblEvaluacionTipo.setModel(model);
-        tblEvaluacionTipo.repaint();
-        tblEvaluacionTipo.removeAll();
     }
 
     private void desactivarEstado() {

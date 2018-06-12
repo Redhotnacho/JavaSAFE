@@ -16,7 +16,8 @@ import duoc.cl.safe.presentacion.usuarios.Login;
  *
  * @author yerko
  */
-public class ValidarUsuario implements Runnable{
+public class ValidarUsuario implements Runnable {
+
     private String username;
     private String password;
     private Login login;
@@ -28,16 +29,15 @@ public class ValidarUsuario implements Runnable{
         ubo = new SsfUsuarioBO();
         cargando.jLabel2.setText("Validando Usuario...");
         SsfUsuario usuarioSesion = ubo.validaUsuarioSP(username, password);
-        if (usuarioSesion==null) {
+        if (usuarioSesion == null) {
             login.incorecto();
-        }
-        else{  
-            cargando.jLabel2.setText("Buscando Permisos...");            
+        } else {
+            cargando.jLabel2.setText("Buscando Permisos...");
             Menu menu = new Menu(usuarioSesion);
             menu.menu();
-            FormsController formsController = new FormsController(2,menu);
+            FormsController formsController = new FormsController(2, menu);
             formsController.abrirJframe();
-            login.dispose(); 
+            login.dispose();
             cargando.dispose();
         }
     }
@@ -48,9 +48,7 @@ public class ValidarUsuario implements Runnable{
         this.username = username;
         this.password = password;
     }
-    
-    
-    
+
     public String getUsername() {
         return username;
     }
@@ -65,5 +63,5 @@ public class ValidarUsuario implements Runnable{
 
     public void setPassword(String password) {
         this.password = password;
-    }    
+    }
 }

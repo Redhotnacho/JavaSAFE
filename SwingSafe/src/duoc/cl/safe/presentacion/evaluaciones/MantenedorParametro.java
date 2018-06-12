@@ -15,6 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -27,6 +31,7 @@ public class MantenedorParametro extends javax.swing.JFrame {
      */
     public MantenedorParametro() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /**
@@ -293,8 +298,10 @@ public class MantenedorParametro extends javax.swing.JFrame {
             tbEstado.setEnabled(false);
             if (tblParametro.getRowCount() == 0) {
                 lError.setText("Tabla vacía");
+                Logger.getLogger(MantenedorParametro.class.getName()).log(Level.WARN, "Tabla vacía");
             } else {
                 lError.setText("No hay fila seleccionada");
+                Logger.getLogger(MantenedorParametro.class.getName()).log(Level.WARN, "No hay fila seleccionada");
             }
         } else {
             int id = Short.parseShort(model.getValueAt(tblParametro.getSelectedRow(), 0).toString());
@@ -366,7 +373,6 @@ public class MantenedorParametro extends javax.swing.JFrame {
                 pm.setIdEvaluaciontipo(new SsfEvaluaciontipo(BigDecimal.valueOf((long) Long.valueOf(idtipoeval))));
                 if (pmbo.updateSP(pm)) {
                     lExito.setText("Parámetro modificado exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblParametro.getSelectedRow(), 1);
                     model.setValueAt(desc, tblParametro.getSelectedRow(), 2);
                 } else {
@@ -455,8 +461,9 @@ public class MantenedorParametro extends javax.swing.JFrame {
     }
 
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblParametro.getModel();
+        model.setRowCount(0);
         pmbo = new SsfParametroBO();
         List<SsfParametro> lpm = pmbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -465,27 +472,6 @@ public class MantenedorParametro extends javax.swing.JFrame {
         });
         tblParametro.setModel(model);
 
-    }
-
-    private void borrarTabla() {
-        tblParametro.removeAll();
-        tblParametro.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblParametro.getModel();
-        model.fireTableDataChanged();
-        tblParametro.repaint();
-        tblParametro.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblParametro.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblParametro.repaint();
-        tblParametro.setModel(model);
-        tblParametro.repaint();
-        tblParametro.removeAll();
     }
 
     private void desactivarEstado() {

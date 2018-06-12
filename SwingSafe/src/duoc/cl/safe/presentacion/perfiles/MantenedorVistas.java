@@ -15,6 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -27,6 +31,7 @@ public class MantenedorVistas extends javax.swing.JFrame {
      */
     public MantenedorVistas() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /**
@@ -260,8 +265,10 @@ public class MantenedorVistas extends javax.swing.JFrame {
             tbEstado.setEnabled(false);
             if (tblVista.getRowCount() == 0) {
                 lError.setText("Tabla vacía");
+                Logger.getLogger(MantenedorVistas.class.getName()).log(Level.WARN, "Tabla vacía");
             } else {
                 lError.setText("No hay fila seleccionada");
+                Logger.getLogger(MantenedorVistas.class.getName()).log(Level.WARN, "No hay fila seleccionada");
             }
         } else {
             int id = Short.parseShort(model.getValueAt(tblVista.getSelectedRow(), 0).toString());
@@ -337,13 +344,12 @@ public class MantenedorVistas extends javax.swing.JFrame {
                 url = tfURL.getText().trim();
                 idmenu = mapm.get(cbMenu.getSelectedItem()).toString();
                 SsfVista vista = new SsfVista();
-                vista.setId(BigDecimal.valueOf((long)Long.valueOf(id)));
+                vista.setId(BigDecimal.valueOf((long) Long.valueOf(id)));
                 vista.setNombre(nom);
                 vista.setUrl(url);
-                vista.setIdMenu(new SsfMenu(BigDecimal.valueOf((long)Long.valueOf(idmenu))));
+                vista.setIdMenu(new SsfMenu(BigDecimal.valueOf((long) Long.valueOf(idmenu))));
                 if (vbo.updateSP(vista)) {
                     lExito.setText("Vista modificada exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblVista.getSelectedRow(), 1);
                     model.setValueAt(url, tblVista.getSelectedRow(), 2);
                     model.setValueAt(cbMenu.getSelectedItem(), tblVista.getSelectedRow(), 3);
@@ -414,46 +420,26 @@ public class MantenedorVistas extends javax.swing.JFrame {
     private FormsController formsController;
 
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblVista.getModel();
+        model.setRowCount(0);
         vbo = new SsfVistaBO();
         List<SsfVista> lv = vbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         lv.forEach((v) -> {
             String fecha = "";
-            if(v.getFechCreacion().toString() != null && v.getFechCreacion().toString() != ""){
+            if (v.getFechCreacion().toString() != null && v.getFechCreacion().toString() != "") {
                 fecha = sdf.format(v.getFechCreacion());
             }
-            model.addRow(new Object[]{v.getId(), 
-                v.getNombre(), 
-                v.getUrl(), 
-                v.getIdMenu().getNombre(), 
-                fecha, 
+            model.addRow(new Object[]{v.getId(),
+                v.getNombre(),
+                v.getUrl(),
+                v.getIdMenu().getNombre(),
+                fecha,
                 v.getEstado()});
         });
         tblVista.setModel(model);
 
-    }
-
-    private void borrarTabla() {
-        tblVista.removeAll();
-        tblVista.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblVista.getModel();
-        model.fireTableDataChanged();
-        tblVista.repaint();
-        tblVista.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblVista.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblVista.repaint();
-        tblVista.setModel(model);
-        tblVista.repaint();
-        tblVista.removeAll();
     }
 
     private void desactivarEstado() {

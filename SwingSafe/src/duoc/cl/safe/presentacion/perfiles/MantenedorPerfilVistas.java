@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -30,6 +34,8 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
      */
     public MantenedorPerfilVistas() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
+        model = (DefaultTableModel) tblPerfilVista.getModel();
     }
 
     /**
@@ -301,6 +307,7 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
                 cargaTabla();
             } else {
                 lError.setText("No se pudo agregar");
+                Logger.getLogger(MantenedorPerfilVistas.class.getName()).log(Level.WARN, "No se pudo agregar");
             }
         }
     }//GEN-LAST:event_bAgregarActionPerformed
@@ -460,6 +467,16 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     }//GEN-LAST:event_bBuscarVistaPerfilActionPerformed
 
     private void bRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefrescarActionPerformed
+        tbEstado.setEnabled(false);
+        limpiarMsgs();
+        tblPerfilVista.clearSelection();
+        tfBuscarVista.setText("");
+        tfBuscarVistaPerfil.setText("");
+        tfMenu.setText("");
+        tfURL.setText("");
+        cargaVista();
+        cbVista.setSelectedIndex(0);
+        cbPerfil.setSelectedIndex(0);
         cargaTabla();
     }//GEN-LAST:event_bRefrescarActionPerformed
 
@@ -583,10 +600,10 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
         cbVista.removeAllItems();
         cbVista.addItem("- Seleccione Vista -");
         SsfVistaBO vbo = new SsfVistaBO();
-        if (vlist==null) {
+        if (vlist == null) {
             vlist = vbo.getAllSP();
         }
-        
+
         vlist.forEach((v) -> {
             mapv.put(v.getNombre(), v);
         });
@@ -622,7 +639,7 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     }
 
     private void cargaPerfilvistas(List<SsfPerfilvista> pvv) {
-        borrarTabla();
+        model.setRowCount(0);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         for (SsfPerfilvista pv : pvv) {
 
@@ -652,7 +669,7 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     }
 
     private void cargaTabla() {
-        borrarTabla();
+        model.setRowCount(0);
         SsfPerfilvistaBO pvbo = new SsfPerfilvistaBO();
         List<SsfPerfilvista> lpv = pvbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -663,27 +680,6 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
                 pv.getEstado()});
         }
         tblPerfilVista.setModel(model);
-    }
-
-    private void borrarTabla() {
-        tblPerfilVista.removeAll();
-        tblPerfilVista.repaint();
-        model = (DefaultTableModel) tblPerfilVista.getModel();
-        model.fireTableDataChanged();
-        tblPerfilVista.repaint();
-        tblPerfilVista.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblPerfilVista.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblPerfilVista.repaint();
-        tblPerfilVista.setModel(model);
-        tblPerfilVista.repaint();
-        tblPerfilVista.removeAll();
     }
 
     private void limpiarMsgs() {
@@ -718,7 +714,6 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
         return v;
     }
      */
-
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }

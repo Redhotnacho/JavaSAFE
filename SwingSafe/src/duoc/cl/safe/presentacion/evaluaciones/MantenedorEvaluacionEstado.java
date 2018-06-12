@@ -12,6 +12,10 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -24,6 +28,7 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
      */
     public MantenedorEvaluacionEstado() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /**
@@ -267,6 +272,7 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
                 lError.setText("Tabla vacía");
             } else {
                 lError.setText("No hay fila seleccionada");
+                Logger.getLogger(MantenedorEvaluacionEstado.class.getName()).log(Level.WARN, "No hay fila seleccionada");
             }
         } else {
             int id = Short.parseShort(model.getValueAt(tblEvaluacionEstado.getSelectedRow(), 0).toString());
@@ -290,7 +296,7 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
         if (tfEstadoEval.getText().trim().equals("")) {
             lError.setText("Ingrese un nombre para el Estado de Evaluación");
         } else {
-            String nom,desc;
+            String nom, desc;
             nom = tfEstadoEval.getText();
             desc = taDescripcion.getText();
             SsfEvaluacionestado perf = new SsfEvaluacionestado();
@@ -320,7 +326,7 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
             if (tfEstadoEval.getText().trim().equals("")) {
                 lError.setText("Nombre Estado Evaluación no puede estar en blanco");
             } else {
-                String desc,nom,id;
+                String desc, nom, id;
                 id = model.getValueAt(tblEvaluacionEstado.getSelectedRow(), 0).toString();
                 nom = tfEstadoEval.getText().trim();
                 desc = taDescripcion.getText().trim();
@@ -330,7 +336,6 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
                 menu.setDescripcion(desc);
                 if (eebo.updateSP(menu)) {
                     lExito.setText("Estado Evaluación modificado exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblEvaluacionEstado.getSelectedRow(), 1);
                     model.setValueAt(desc, tblEvaluacionEstado.getSelectedRow(), 2);
                 } else {
@@ -403,10 +408,11 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
-    
+
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblEvaluacionEstado.getModel();
+        model.setRowCount(0);
         eebo = new SsfEvaluacionestadoBO();
         List<SsfEvaluacionestado> lee = eebo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -415,27 +421,6 @@ public class MantenedorEvaluacionEstado extends javax.swing.JFrame {
         });
         tblEvaluacionEstado.setModel(model);
 
-    }
-
-    private void borrarTabla() {
-        tblEvaluacionEstado.removeAll();
-        tblEvaluacionEstado.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblEvaluacionEstado.getModel();
-        model.fireTableDataChanged();
-        tblEvaluacionEstado.repaint();
-        tblEvaluacionEstado.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblEvaluacionEstado.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblEvaluacionEstado.repaint();
-        tblEvaluacionEstado.setModel(model);
-        tblEvaluacionEstado.repaint();
-        tblEvaluacionEstado.removeAll();
     }
 
     private void desactivarEstado() {

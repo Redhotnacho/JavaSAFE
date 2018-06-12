@@ -23,22 +23,25 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
  * @author Nacho
  */
 public class FormularioEvaluacion extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form MantenedorEvaluación
      */
     public FormularioEvaluacion() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /**
@@ -478,7 +481,6 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             cargaParametroList(cbTipoEval.getSelectedItem().toString());
         }
 
-
     }//GEN-LAST:event_tblEvaluacionMouseClicked
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
@@ -545,15 +547,12 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
                 if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
                     if (sfech.length() < 10) {
                         sdf = new SimpleDateFormat("dd-MM-yy");
-                        fecha = sdf.parse(sfech);
                     }
                     fecha = sdf.parse(sfech);
                     e.setFecha(fecha);
                 }
             } catch (ParseException ex) {
-                Logger.getLogger(FormularioEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
-                log.log(Level.SEVERE, "Error en formato de fecha", ex);
-                //sfech = "error";
+                log.log(Level.ERROR, "Error en formato de fecha", ex);
                 lError.setText("Error en formato de fecha");
             }
             e.setNombre(nom);
@@ -603,14 +602,12 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
                     if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
                         if (sfech.length() < 10) {
                             sdf = new SimpleDateFormat("dd-MM-yy");
-                            fecha = sdf.parse(sfech);
                         }
                         fecha = sdf.parse(sfech);
                         e.setFecha(fecha);
                     }
                 } catch (ParseException ex) {
-                    Logger.getLogger(FormularioEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
-                    log.log(Level.SEVERE, "Error en formato de fecha", ex);
+                    log.log(Level.ERROR, "Error en formato de fecha", ex);
                     sfech = "error";
                     lError.setText("Error en formato de fecha");
                 }
@@ -621,12 +618,11 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
                 e.setIdEmpresa(new SsfEmpresa(BigDecimal.valueOf((long) Long.valueOf(idempresa))));
                 if (ebo.updateSP(e)) {
                     lExito.setText("Evaluación modificada exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblEvaluacion.getSelectedRow(), 1);
                     model.setValueAt(cbEmpresa.getSelectedItem(), tblEvaluacion.getSelectedRow(), 3);
                     model.setValueAt(cbEstadoEval.getSelectedItem(), tblEvaluacion.getSelectedRow(), 4);
                     model.setValueAt(cbTipoEval.getSelectedItem(), tblEvaluacion.getSelectedRow(), 5);
-                    if (!sfech.equals("error")) {
+                    if (!sfech.equals("error") && fecha != null) {
                         sdf = new SimpleDateFormat("dd-MM-yyyy");
                         model.setValueAt(sdf.format(fecha), tblEvaluacion.getSelectedRow(), 2);
                     }
@@ -668,7 +664,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             lErrorParametro.setText("Tabla evaluación vacía");
         } /*else if (tblParametro.getRowCount() == -1) {
             lErrorParametro.setText("Tabla parámetro vacía");
-        } */else if (lstParametro.getSelectedIndex() == -1) {
+        } */ else if (lstParametro.getSelectedIndex() == -1) {
             lErrorParametro.setText("No hay lista seleccionada");
         } else {
             SsfEvaluacionparametro ep = null;
@@ -839,8 +835,9 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     }
 
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblEvaluacion.getModel();
+        model.setRowCount(0);
         ebo = new SsfEvaluacionBO();
         List<SsfEvaluacion> le = ebo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -855,28 +852,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         }
         tblEvaluacion.setModel(model);
     }
-
-    private void borrarTabla() {
-        tblEvaluacion.removeAll();
-        tblEvaluacion.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblEvaluacion.getModel();
-        model.fireTableDataChanged();
-        tblEvaluacion.repaint();
-        tblEvaluacion.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblEvaluacion.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblEvaluacion.repaint();
-        tblEvaluacion.setModel(model);
-        tblEvaluacion.repaint();
-        tblEvaluacion.removeAll();
-    }
-
+    
     private void desactivarEstado() {
         tbEstado.setText("Desactivado");
         tbEstado.setBackground(new java.awt.Color(255, 51, 51));
@@ -921,7 +897,6 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         }
         tblParametro.setModel(model2);
     }*/
-
     private void cargaParametroList(String tipoeval) {
         if (tblEvaluacion.getSelectedRow() == -1) {
             tbEstado.setEnabled(false);
@@ -1020,7 +995,6 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         tblParametro.repaint();
         tblParametro.removeAll();
     }*/
-
     private void limpiarParametro() {
         taObservacion.setText("");
         rPendiente.setSelected(true);
@@ -1030,5 +1004,4 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         bModificarParametro.setEnabled(false);
     }
 
-    
 }

@@ -6,7 +6,6 @@
 package duoc.cl.safe.presentacion.usuarios;
 
 import duoc.cl.safe.entity.SsfPersona;
-import duoc.cl.safe.entity.SsfUsuario;
 import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfPersonaBO;
 import java.math.BigDecimal;
@@ -16,10 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -32,6 +32,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
      */
     public MantenedorPersona() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
+        model = (DefaultTableModel) tblPersona.getModel();
     }
 
     /**
@@ -430,13 +432,15 @@ public class MantenedorPersona extends javax.swing.JFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             SsfPersona p = new SsfPersona();
             try {
-                if (!sfech.equals("")) {
+                if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                    if (sfech.length() < 10) {
+                        sdf = new SimpleDateFormat("dd-MM-yy");
+                    }
                     fecha = sdf.parse(sfech);
                     p.setFechaNac(fecha);
                 }
             } catch (ParseException ex) {
-                //Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, ex);
-                log.log(Level.SEVERE, "Error en formato de fecha", ex);
+                log.log(Level.ERROR, "Error en formato de fecha", ex);
                 sfech = "error";
                 lError.setText("Error en formato de fecha");
             }
@@ -446,8 +450,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                     p.setTelefono(telbi);
                 }
             } catch (Exception e) {
-                Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, e);
-                log.log(Level.SEVERE, "Error en valor de telefono", e);
+                log.log(Level.ERROR, "Error en valor de telefono", e);
                 lError.setText("Error en valor de telefono");
             }
             if (!sfech.equals("error")) {
@@ -496,13 +499,15 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 SsfPersona p = new SsfPersona();
                 try {
-                    if (!sfech.equals("")) {
+                    if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                        if (sfech.length() < 10) {
+                            sdf = new SimpleDateFormat("dd-MM-yy");
+                        }
                         fecha = sdf.parse(sfech);
                         p.setFechaNac(fecha);
                     }
                 } catch (ParseException ex) {
-                    Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, ex);
-                    log.log(Level.SEVERE, "Error en formato de fecha", ex);
+                    log.log(Level.ERROR, "Error en formato de fecha", ex);
                     sfech = "error";
                     lError.setText("Error en formato de fecha");
                 }
@@ -512,8 +517,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                         p.setTelefono(telbi);
                     }
                 } catch (Exception e) {
-                    Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, e);
-                    log.log(Level.SEVERE, "Error en valor de telefono", e);
+                    log.log(Level.ERROR, "Error en valor de telefono", e);
                     lError.setText("Error en valor de telefono");
                     tel = "error";
                 }
@@ -526,7 +530,6 @@ public class MantenedorPersona extends javax.swing.JFrame {
                     p.setCorreo(correo);
                     if (pbo.updateSP(p)) {
                         lExito.setText("Persona modificada exitosamente.");
-                        // método cargaTabla() no actualiza la tabla por motivos desconocidos
                         model.setValueAt(rut, tblPersona.getSelectedRow(), 1);
                         model.setValueAt(nom, tblPersona.getSelectedRow(), 2);
                         model.setValueAt(ap1, tblPersona.getSelectedRow(), 3);
@@ -535,7 +538,10 @@ public class MantenedorPersona extends javax.swing.JFrame {
                         if (!tel.equals("error")) {
                             model.setValueAt(tel, tblPersona.getSelectedRow(), 6);
                         }
-                        model.setValueAt(sfech, tblPersona.getSelectedRow(), 7);
+                        if (!sfech.equalsIgnoreCase("error") && fecha != null) {
+                            sdf = new SimpleDateFormat("dd-MM-yyyy");
+                            model.setValueAt(sdf.format(fecha), tblPersona.getSelectedRow(), 7);
+                        }
 
                     } else {
                         lError.setText("No se pudo modificar");
@@ -644,10 +650,21 @@ public class MantenedorPersona extends javax.swing.JFrame {
 
         }
 
-
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefrescarActionPerformed
+        tfFechaNac.setText("DD-MM-AAAA");
+        tbEstado.setEnabled(false);
+        bModificar.setEnabled(false);
+        limpiarMsgs();
+        tblPersona.clearSelection();
+        tfRut.setText("");
+        tfNombre.setText("");
+        tfAp1.setText("");
+        tfAp2.setText("");
+        tfCorreo.setText("");
+        tfTelefono.setText("");
+        tfBuscar.setText("");
         cargaTabla();
     }//GEN-LAST:event_bRefrescarActionPerformed
 
@@ -719,14 +736,14 @@ public class MantenedorPersona extends javax.swing.JFrame {
     private javax.swing.JTextField tfRut;
     private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
-    private SsfUsuario usuarioSesion;
+
     private static Logger log = Logger.getLogger(MantenedorPersona.class.getName());
     private DefaultTableModel model;
     private SsfPersonaBO pbo;
     private FormsController formsController;
-    
+
     private void cargaTabla() {
-        borrarTabla();
+        model.setRowCount(0);
         pbo = new SsfPersonaBO();
         List<SsfPersona> lp = pbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -769,7 +786,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
     }
 
     private void cargaPersonas(List<SsfPersona> pp) {
-        borrarTabla();
+        model.setRowCount(0);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String sfecha = null;
         for (SsfPersona p : pp) {

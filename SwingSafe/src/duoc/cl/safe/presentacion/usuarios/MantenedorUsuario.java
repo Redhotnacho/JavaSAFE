@@ -21,6 +21,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -33,6 +37,8 @@ public class MantenedorUsuario extends javax.swing.JFrame {
      */
     public MantenedorUsuario() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
+        model = (DefaultTableModel) tblUsuario.getModel();
     }
 
     /**
@@ -521,10 +527,10 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                 cargaTabla();
             } else {
                 lError.setText("No se pudo agregar");
+                log.log(Level.INFO, "No se pudo agregar");
             }
 
         }
-
 
     }//GEN-LAST:event_bAgregarActionPerformed
 
@@ -578,6 +584,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
 
                 } else {
                     lError.setText("No se pudo modificar");
+                    log.log(Level.INFO, "No se pudo modificar");
                 }
             }
         }
@@ -692,6 +699,18 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_bBuscarUsuarioActionPerformed
 
     private void bRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefrescarActionPerformed
+        tbEstado.setEnabled(false);
+        bModificar.setEnabled(false);
+        cbPersona.setEnabled(false);
+        limpiarMsgs();
+        tblUsuario.clearSelection();
+        tfUsuario.setText("");
+        tfBuscarPersona.setText("");
+        tfBuscarUsuario.setText("");
+        pfPassword.setText("");
+        pfRepetirPass.setText("");
+        cbEmpresa.setSelectedIndex(0);
+        cbPerfil.setSelectedIndex(0);
         cargaTabla();
     }//GEN-LAST:event_bRefrescarActionPerformed
 
@@ -760,6 +779,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField tfBuscarUsuario;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
+    private static Logger log = Logger.getLogger(MantenedorUsuario.class.getName());
     private HashMap<String, Integer> mape = new HashMap<>();
     private HashMap<String, Integer> mapp = new HashMap<>();
     private HashMap<String, Integer> mappers = new HashMap<>();
@@ -767,7 +787,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
 
     private DefaultTableModel model;
     private List<SsfUsuario> lu;
-    private SsfUsuarioBO ubo;    
+    private SsfUsuarioBO ubo;
 
     public void cargaEmpresa() {
         SsfEmpresaBO ebo = new SsfEmpresaBO();
@@ -795,7 +815,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         mappers = new HashMap<>();
         cbPersona.setEnabled(true);
         cbPersona.removeAllItems();
-        
+
         pp.forEach((p) -> {
             mappers.put("Rut: " + p.getRut() + " - Nombre: " + p.getNombre() + " " + p.getApPaterno() + " " + p.getApMaterno(), p.getId().intValue());
         });
@@ -841,7 +861,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     }
 
     private void cargaTabla() {
-        borrarTabla();
+        model.setRowCount(0);
         ubo = new SsfUsuarioBO();
         lu = ubo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -901,7 +921,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     }
 
     private void cargaUsuarios(List<SsfUsuario> uu) {
-        borrarTabla();
+        model.setRowCount(0);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         for (SsfUsuario u : uu) {
 
@@ -916,5 +936,5 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
-    
+
 }

@@ -17,6 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -29,6 +33,7 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
      */
     public MantenedorEvaluacionParametro() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /**
@@ -346,8 +351,10 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
             tbEstado.setEnabled(false);
             if (tblEvaluacionParametro.getRowCount() == 0) {
                 lError.setText("Tabla vacía");
+                Logger.getLogger(MantenedorEvaluacionParametro.class.getName()).log(Level.WARN, "Tabla vacía");
             } else {
                 lError.setText("No hay fila seleccionada");
+                Logger.getLogger(MantenedorEvaluacionParametro.class.getName()).log(Level.WARN, "No hay fila seleccionada");
             }
         } else {
             int id = Short.parseShort(model.getValueAt(tblEvaluacionParametro.getSelectedRow(), 0).toString());
@@ -437,7 +444,6 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
                 ep.setIdParametro(new SsfParametro(BigDecimal.valueOf((long) Long.valueOf(idpm))));
                 if (epbo.updateSP(ep)) {
                     lExito.setText("Parámetro evaluación modificado exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(ob, tblEvaluacionParametro.getSelectedRow(), 4);
                     model.setValueAt(aprueba, tblEvaluacionParametro.getSelectedRow(), 3);
                     model.setValueAt(cbEvaluacion.getSelectedItem(), tblEvaluacionParametro.getSelectedRow(), 2);
@@ -549,8 +555,9 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
     }
 
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblEvaluacionParametro.getModel();
+        model.setRowCount(0);
         epbo = new SsfEvaluacionparametroBO();
         List<SsfEvaluacionparametro> lep = epbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -559,27 +566,6 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
         });
         tblEvaluacionParametro.setModel(model);
 
-    }
-
-    private void borrarTabla() {
-        tblEvaluacionParametro.removeAll();
-        tblEvaluacionParametro.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblEvaluacionParametro.getModel();
-        model.fireTableDataChanged();
-        tblEvaluacionParametro.repaint();
-        tblEvaluacionParametro.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblEvaluacionParametro.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblEvaluacionParametro.repaint();
-        tblEvaluacionParametro.setModel(model);
-        tblEvaluacionParametro.repaint();
-        tblEvaluacionParametro.removeAll();
     }
 
     private void desactivarEstado() {

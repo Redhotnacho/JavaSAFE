@@ -25,14 +25,15 @@ import duoc.cl.safe.presentacion.usuarios.MantenedorUsuario;
  * @author yerko
  */
 public class FormsController {
+
     private int idVista;
     private Menu menu;
 
-    public FormsController(int idVista,Menu menu) {
+    public FormsController(int idVista, Menu menu) {
         this.menu = menu;
         this.idVista = idVista;
-    }      
-    
+    }
+
     public int getIdVista() {
         return idVista;
     }
@@ -48,10 +49,9 @@ public class FormsController {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-    
-    
-    public void abrirJframe(){
-        if(idVista == 2 || idVista == 61){
+
+    public void abrirJframe() {
+        if (idVista == 2 || idVista == 61) {
             MantenedorUsuario mpf = new MantenedorUsuario();
             mpf.setFormsController(this);
             mpf.setVisible(true);
@@ -66,37 +66,37 @@ public class FormsController {
             mantenedorEvParametro.setFormsController(this);
             mantenedorEvParametro.setVisible(true);
         }
-        if(idVista == 5 || idVista == 63){
+        if (idVista == 5 || idVista == 63) {
             MantenedorEmpresa mpp = new MantenedorEmpresa();
             mpp.setFormsController(this);
             mpp.setVisible(true);
         }
-        if(idVista == 21 || idVista == 65){
+        if (idVista == 21 || idVista == 65) {
             MantenedorPerfil mpp = new MantenedorPerfil();
             mpp.setFormsController(this);
             mpp.setVisible(true);
         }
-        if(idVista == 41 || idVista == 1){
+        if (idVista == 41 || idVista == 1) {
             MantenedorEvaluacion mantenedorEv = new MantenedorEvaluacion();
             mantenedorEv.setFormsController(this);
             mantenedorEv.setVisible(true);
         }
-        if(idVista == 42 || idVista == 64){
+        if (idVista == 42 || idVista == 64) {
             MantenedorMenu mantendorMenu = new MantenedorMenu();
             mantendorMenu.setFormsController(this);
             mantendorMenu.setVisible(true);
         }
-        if(idVista == 43 || idVista == 67){
+        if (idVista == 43 || idVista == 67) {
             MantenedorVistas mantendoVistas = new MantenedorVistas();
             mantendoVistas.setFormsController(this);
             mantendoVistas.setVisible(true);
         }
-        if(idVista == 44 || idVista == 66){
+        if (idVista == 44 || idVista == 66) {
             MantenedorPerfilVistas mantendoPerfilesVistas = new MantenedorPerfilVistas();
             mantendoPerfilesVistas.setFormsController(this);
             mantendoPerfilesVistas.setVisible(true);
         }
-        if(idVista == 45 || idVista == 81){
+        if (idVista == 45 || idVista == 81) {
             Login login = new Login();
             login.setVisible(true);
         }
