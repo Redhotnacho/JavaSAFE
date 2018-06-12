@@ -19,6 +19,10 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -31,6 +35,7 @@ public class MantenedorMenu extends javax.swing.JFrame {
      */
     public MantenedorMenu() {
         initComponents();
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /**
@@ -293,7 +298,7 @@ public class MantenedorMenu extends javax.swing.JFrame {
             if (tfNombre.getText().trim().equals("")) {
                 lError.setText("Nombre Menú no puede estar en blanco");
             } else {
-                String nom,id;
+                String nom, id;
                 id = model.getValueAt(tblMenu.getSelectedRow(), 0).toString();
                 nom = tfNombre.getText().trim();
                 SsfMenu menu = new SsfMenu();
@@ -301,10 +306,10 @@ public class MantenedorMenu extends javax.swing.JFrame {
                 menu.setNombre(nom);
                 if (mbo.updateSP(menu)) {
                     lExito.setText("Menú modificado exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblMenu.getSelectedRow(), 1);
                 } else {
                     lError.setText("No se pudo modificar");
+                    Logger.getLogger(MantenedorMenu.class.getName()).log(Level.WARN, "No se pudo modificar");
                 }
             }
         }
@@ -414,8 +419,9 @@ public class MantenedorMenu extends javax.swing.JFrame {
 >>>>>>> Ignacio
 
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblMenu.getModel();
+        model.setRowCount(0);
         mbo = new SsfMenuBO();
         List<SsfMenu> lm = mbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -424,27 +430,6 @@ public class MantenedorMenu extends javax.swing.JFrame {
         });
         tblMenu.setModel(model);
 
-    }
-
-    private void borrarTabla() {
-        tblMenu.removeAll();
-        tblMenu.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblMenu.getModel();
-        model.fireTableDataChanged();
-        tblMenu.repaint();
-        tblMenu.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblMenu.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblMenu.repaint();
-        tblMenu.setModel(model);
-        tblMenu.repaint();
-        tblMenu.removeAll();
     }
 
     private void desactivarEstado() {
@@ -472,8 +457,9 @@ public class MantenedorMenu extends javax.swing.JFrame {
     }
 
     private void cargaMenus(List<SsfMenu> mm) {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblMenu.getModel();
+        model.setRowCount(0);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         for (SsfMenu m : mm) {
             model.addRow(new Object[]{m.getId(), m.getNombre(),
@@ -483,6 +469,7 @@ public class MantenedorMenu extends javax.swing.JFrame {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
@@ -490,6 +477,8 @@ public class MantenedorMenu extends javax.swing.JFrame {
         return formsController;
     }
 
+=======
+>>>>>>> Ignacio
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }

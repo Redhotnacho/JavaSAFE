@@ -45,10 +45,10 @@ public class SsfEvaluaciontipo implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private BigDecimal id;
-    @Column(name = "FECH_CREACION", insertable = false, updatable = false)
+    @Column(name = "FECH_CREACION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechCreacion;
-    @Column(name = "ESTADO", insertable = false)
+    @Column(name = "ESTADO")
     private Short estado;
     @Column(name = "TIPO")
     private String tipo;
@@ -148,5 +148,5 @@ public class SsfEvaluaciontipo implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfEvaluaciontipo[ id=" + id + " ]";
     }
-    
+
 }

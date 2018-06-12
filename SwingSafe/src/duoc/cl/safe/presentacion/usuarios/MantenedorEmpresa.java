@@ -21,9 +21,11 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -37,9 +39,13 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     public MantenedorEmpresa() {
         initComponents();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         this.setLocationRelativeTo(null);
 >>>>>>> YerkoBanda
+=======
+        PropertyConfigurator.configure("log4j.properties");
+>>>>>>> Ignacio
     }
 
     /**
@@ -421,6 +427,14 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefrescarActionPerformed
+        tbEstado.setEnabled(false);
+        bModificar.setEnabled(false);
+        limpiarMsgs();
+        tblEmpresa.clearSelection();
+        tfEmpresa.setText("");
+        tfDireccion.setText("");
+        tfTelefono.setText("");
+        tfBuscar.setText("");
         cargaTabla();
     }//GEN-LAST:event_bRefrescarActionPerformed
 
@@ -441,8 +455,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                     emp.setTelefono(telbi);
                 }
             } catch (Exception e) {
-                Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, e);
-                log.log(Level.SEVERE, "Error en valor de telefono", e);
+                log.log(Level.ERROR, "Error en valor de telefono", e);
                 lError.setText("Error en valor de telefono");
             }
             emp.setNombre(nom);
@@ -484,8 +497,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                         emp.setTelefono(telbi);
                     }
                 } catch (Exception e) {
-                    Logger.getLogger(MantenedorPersona.class.getName()).log(Level.SEVERE, null, e);
-                    log.log(Level.SEVERE, "Error en valor de telefono", e);
+                    log.log(Level.ERROR, "Error en valor de telefono", e);
                     lError.setText("Error en valor de telefono");
                     tel = "error";
                 }
@@ -494,7 +506,6 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                 emp.setDireccion(dir);
                 if (ebo.updateSP(emp)) {
                     lExito.setText("Empresa modificada exitosamente.");
-                    // método cargaTabla() no actualiza la tabla por motivos desconocidos
                     model.setValueAt(nom, tblEmpresa.getSelectedRow(), 1);
                     model.setValueAt(dir, tblEmpresa.getSelectedRow(), 2);
                     if (!tel.equals("error")) {
@@ -592,8 +603,9 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
 >>>>>>> Ignacio
 
     private void cargaTabla() {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
+        model.setRowCount(0);
         ebo = new SsfEmpresaBO();
         List<SsfEmpresa> le = ebo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -602,27 +614,6 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         });
         tblEmpresa.setModel(model);
 
-    }
-
-    private void borrarTabla() {
-        tblEmpresa.removeAll();
-        tblEmpresa.repaint();
-        DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
-        model.fireTableDataChanged();
-        tblEmpresa.repaint();
-        tblEmpresa.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblEmpresa.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblEmpresa.repaint();
-        tblEmpresa.setModel(model);
-        tblEmpresa.repaint();
-        tblEmpresa.removeAll();
     }
 
     private void desactivarEstado() {
@@ -650,8 +641,9 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     }
 
     private void cargaEmpresas(List<SsfEmpresa> ee) {
-        borrarTabla();
+        
         DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
+        model.setRowCount(0);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         for (SsfEmpresa e : ee) {
             model.addRow(new Object[]{e.getId(), e.getNombre(),
@@ -674,9 +666,12 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         this.formsController = formsController;
     }
 
+<<<<<<< HEAD
     
 <<<<<<< HEAD
 >>>>>>> YerkoBanda
+=======
+>>>>>>> Ignacio
 =======
 >>>>>>> Ignacio
 }

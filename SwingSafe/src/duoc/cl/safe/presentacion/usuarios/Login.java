@@ -34,22 +34,27 @@ import duoc.cl.safe.herramientas.Cargando;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
-public class Login extends javax.swing.JFrame{
-     Cargando cargando;
-    
+public class Login extends javax.swing.JFrame {
+
+    Cargando cargando;
+
     public Login() {
-        initComponents();        
-        
-        cargando = new Cargando(); 
+        initComponents();
+
+        cargando = new Cargando();
         cargando.setLocationRelativeTo(this);
-        
+
     }
+<<<<<<< HEAD
     
    
 >>>>>>> YerkoBanda
 =======
     
    
+>>>>>>> Ignacio
+=======
+
 >>>>>>> Ignacio
     /**
      * This method is called from within the constructor to initialize the form.
@@ -403,7 +408,7 @@ public class Login extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tfUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfUsuarioKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             ejecutarAction();
         }
     }//GEN-LAST:event_tfUsuarioKeyPressed
@@ -411,16 +416,20 @@ public class Login extends javax.swing.JFrame{
 =======
 >>>>>>> Ignacio
     private void pfPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pfPasswordKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             ejecutarAction();
-        }        
+        }
     }//GEN-LAST:event_pfPasswordKeyPressed
+<<<<<<< HEAD
         
     
     
 <<<<<<< HEAD
 >>>>>>> YerkoBanda
 =======
+>>>>>>> Ignacio
+=======
+
 >>>>>>> Ignacio
     /**
      * @param args the command line arguments
@@ -511,25 +520,27 @@ public class Login extends javax.swing.JFrame{
 =======
 >>>>>>> Ignacio
 
-    private void limpiar() {                                         
+    private void limpiar() {
         tfUsuario.setText("");
         pfPassword.setText("");
     }
-    
+
     private void loading() {
         cargando.setVisible(true);
-        this.setEnabled(false);        
+        this.setEnabled(false);
     }
+
     private void Desloading() {
         cargando.setVisible(false);
         this.setEnabled(true);
     }
-    
-    public void incorecto(){
+
+    public void incorecto() {
         Desloading();
-        JOptionPane.showMessageDialog(this,"Nombre de usuario o contraseña no válidos");
+        JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña no válidos");
         limpiar();
     }
+<<<<<<< HEAD
         
     private void ejecutarAction(){
 <<<<<<< HEAD
@@ -539,9 +550,16 @@ public class Login extends javax.swing.JFrame{
 >>>>>>> Ignacio
             JOptionPane.showMessageDialog(this, "No se aceptan cuadros vacíos." );
         }else{     
+=======
+
+    private void ejecutarAction() {
+        if (tfUsuario.getText().trim().equals("") || pfPassword.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "No se aceptan cuadros vacíos.");
+        } else {
+>>>>>>> Ignacio
             loading();
-            ValidarUsuario valida = new ValidarUsuario(this,cargando,tfUsuario.getText(), pfPassword.getText());
-              new Thread(valida).start();
+            ValidarUsuario valida = new ValidarUsuario(this, cargando, tfUsuario.getText(), pfPassword.getText());
+            new Thread(valida).start();
         }
     }
 <<<<<<< HEAD

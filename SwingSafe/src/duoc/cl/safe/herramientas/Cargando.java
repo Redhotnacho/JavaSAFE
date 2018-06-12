@@ -10,11 +10,11 @@ package duoc.cl.safe.herramientas;
  * @author yerko
  */
 public class Cargando extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Prueba2
      */
-    public Cargando() {        
+    public Cargando() {
         this.setUndecorated(true);
         initComponents();
     }

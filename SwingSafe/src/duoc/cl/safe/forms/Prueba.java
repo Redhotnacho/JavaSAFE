@@ -26,11 +26,12 @@ import javax.swing.JMenuBar;
  * @author Nacho
  */
 public class Prueba extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Prueba
      */
     public Prueba() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         initComponents();
@@ -39,6 +40,9 @@ public class Prueba extends javax.swing.JFrame {
 >>>>>>> YerkoBanda
 =======
         initComponents();    
+>>>>>>> Ignacio
+=======
+        initComponents();
 >>>>>>> Ignacio
     }
 
@@ -192,12 +196,16 @@ public class Prueba extends javax.swing.JFrame {
 //            lRemove.setText("borrado error");
 //        }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
 =======
 >>>>>>> Ignacio
         
         
         
+=======
+
+>>>>>>> Ignacio
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -241,7 +249,7 @@ public class Prueba extends javax.swing.JFrame {
     private javax.swing.JLabel lGetAll;
     private javax.swing.JLabel lRemove;
     // End of variables declaration//GEN-END:variables
-    
+
     private SsfUsuario usuarioSesion;
     private JMenuBar menuBar;
 
@@ -252,6 +260,5 @@ public class Prueba extends javax.swing.JFrame {
     public void setMenuBar(JMenuBar menuBar) {
         this.menuBar = menuBar;
     }
-    
-    
+
 }
