@@ -145,17 +145,17 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo Capacitación:");
 
-        tfFechaTerm.setText("DD-MM-AAAA");
+        tfFechaTerm.setText("dd-MM-aaaa");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel8.setText("Mantenedor Evaluación");
+        jLabel8.setText("Mantenedor Capacitación");
 
         jLabel6.setText("Capacitación:");
 
         jLabel7.setText("Fecha inicio:");
 
-        tfFechaIni.setText("DD-MM-AAAA");
+        tfFechaIni.setText("dd-MM-aaaa");
 
         bRefrescar.setText("Refrescar");
         bRefrescar.addActionListener(new java.awt.event.ActionListener() {
@@ -308,21 +308,21 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
         }
         if (model.getValueAt(tblCapacitacion.getSelectedRow(), 4) != null) {
             if (model.getValueAt(tblCapacitacion.getSelectedRow(), 4).toString().trim().isEmpty()) {
-                tfFechaIni.setText("DD-MM-AAAA");
+                tfFechaIni.setText("dd-MM-aaaa");
             } else {
                 tfFechaIni.setText(model.getValueAt(tblCapacitacion.getSelectedRow(), 4).toString());
             }
         } else {
-            tfFechaIni.setText("DD-MM-AAAA");
+            tfFechaIni.setText("dd-MM-aaaa");
         }
         if (model.getValueAt(tblCapacitacion.getSelectedRow(), 5) != null) {
             if (model.getValueAt(tblCapacitacion.getSelectedRow(), 5).toString().isEmpty()) {
-                tfFechaTerm.setText("DD-MM-AAAA");
+                tfFechaTerm.setText("dd-MM-aaaa");
             } else {
                 tfFechaTerm.setText(model.getValueAt(tblCapacitacion.getSelectedRow(), 5).toString());
             }
         } else {
-            tfFechaTerm.setText("DD-MM-AAAA");
+            tfFechaTerm.setText("dd-MM-aaaa");
         }
 
     }//GEN-LAST:event_tblCapacitacionMouseClicked
@@ -334,8 +334,8 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
         tblCapacitacion.clearSelection();
         tfHoras.setText("");
         tfCap.setText("");
-        tfFechaIni.setText("DD-MM-AAAA");
-        tfFechaTerm.setText("DD-MM-AAAA");
+        tfFechaIni.setText("dd-MM-aaaa");
+        tfFechaTerm.setText("dd-MM-aaaa");
         cbTipoCap.setSelectedIndex(0);
     }//GEN-LAST:event_bLimpiarActionPerformed
 
@@ -395,7 +395,7 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
                 lError.setText("Error al ingresar horas");
             }
             try {
-                if (!sfech.isEmpty() && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                if (!sfech.isEmpty() && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                     if (sfech.length() < 10) {
                         sdf = new SimpleDateFormat("dd-MM-yy");
                     }
@@ -407,7 +407,7 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
                 lError.setText("Error en formato de fecha inicio");
             }
             try {
-                if (!sfech2.isEmpty() && !sfech2.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                if (!sfech2.isEmpty() && !sfech2.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                     if (sfech2.length() < 10) {
                         sdf = new SimpleDateFormat("dd-MM-yy");
                     }
@@ -457,7 +457,7 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
                 Date fecha = null;
                 Date fecha2 = null;
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                if (!sfech.isEmpty() && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                if (!sfech.isEmpty() && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                     try {
 
                         if (sfech.length() < 10) {
@@ -472,7 +472,7 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
                         lError.setText("Error en formato de fecha inicio");
                     }
                 }
-                if (!sfech2.isEmpty() && !sfech2.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                if (!sfech2.isEmpty() && !sfech2.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                     try {
 
                         if (sfech2.length() < 10) {
@@ -529,8 +529,8 @@ public class MantenedorCapacitacion extends javax.swing.JFrame {
         tblCapacitacion.clearSelection();
         tfHoras.setText("");
         tfCap.setText("");
-        tfFechaIni.setText("DD-MM-AAAA");
-        tfFechaTerm.setText("DD-MM-AAAA");
+        tfFechaIni.setText("dd-MM-aaaa");
+        tfFechaTerm.setText("dd-MM-aaaa");
         cbTipoCap.setSelectedIndex(0);
         cargaTabla();
     }//GEN-LAST:event_bRefrescarActionPerformed
