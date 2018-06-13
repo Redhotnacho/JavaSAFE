@@ -150,7 +150,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo Evaluación:");
 
-        tfFecha.setText("DD-MM-AAAA");
+        tfFecha.setText("dd-MM-aaaa");
 
         cbEstadoEval.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccione Estado Evaluación -" }));
 
@@ -318,7 +318,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         limpiarMsgs();
         tblEvaluacion.clearSelection();
         tfEvaluacion.setText("");
-        tfFecha.setText("DD-MM-AAAA");
+        tfFecha.setText("dd-MM-aaaa");
         cbTipoEval.setSelectedIndex(0);
         cbEstadoEval.setSelectedIndex(0);
         cbEmpresa.setSelectedIndex(0);
@@ -372,7 +372,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
             SsfEvaluacion e = new SsfEvaluacion();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             try {
-                if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                if (!sfech.equals("") && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                     if (sfech.length() < 10) {
                         sdf = new SimpleDateFormat("dd-MM-yy");
                     }
@@ -426,7 +426,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
                 Date fecha = null;
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 try {
-                    if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                    if (!sfech.equals("") && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                         if (sfech.length() < 10) {
                             sdf = new SimpleDateFormat("dd-MM-yy");
                         }

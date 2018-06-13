@@ -140,7 +140,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             }
         });
 
-        tfFechaNac.setText("DD-MM-AAAA");
+        tfFechaNac.setText("dd-MM-aaaa");
 
         jLabel5.setText("Correo:");
 
@@ -400,7 +400,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_tbEstadoActionPerformed
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
-        tfFechaNac.setText("DD-MM-AAAA");
+        tfFechaNac.setText("dd-MM-aaaa");
         tbEstado.setEnabled(false);
         bModificar.setEnabled(false);
         limpiarMsgs();
@@ -432,7 +432,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             SsfPersona p = new SsfPersona();
             try {
-                if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                if (!sfech.equals("") && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                     if (sfech.length() < 10) {
                         sdf = new SimpleDateFormat("dd-MM-yy");
                     }
@@ -499,7 +499,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 SsfPersona p = new SsfPersona();
                 try {
-                    if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
+                    if (!sfech.equals("") && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
                         if (sfech.length() < 10) {
                             sdf = new SimpleDateFormat("dd-MM-yy");
                         }
@@ -653,7 +653,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefrescarActionPerformed
-        tfFechaNac.setText("DD-MM-AAAA");
+        tfFechaNac.setText("dd-MM-aaaa");
         tbEstado.setEnabled(false);
         bModificar.setEnabled(false);
         limpiarMsgs();
