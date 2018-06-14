@@ -39,6 +39,7 @@ public class MantenedorVistas extends javax.swing.JFrame {
     public MantenedorVistas() {
         initComponents();
         PropertyConfigurator.configure("log4j.properties");
+        resizeTabla();
     }
 
     /**
@@ -485,6 +486,7 @@ public class MantenedorVistas extends javax.swing.JFrame {
         lv.forEach((v) -> {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             model.addRow(new Object[]{v.getId(), v.getNombre(), v.getUrl(), v.getIdMenu().getNombre(), sdf.format(v.getFechCreacion()), v.getEstado()});
 =======
 =======
@@ -493,11 +495,13 @@ public class MantenedorVistas extends javax.swing.JFrame {
             if (v.getFechCreacion().toString() != null && v.getFechCreacion().toString() != "") {
                 fecha = sdf.format(v.getFechCreacion());
             }
+=======
+>>>>>>> Ignacio
             model.addRow(new Object[]{v.getId(),
                 v.getNombre(),
                 v.getUrl(),
                 v.getIdMenu().getNombre(),
-                fecha,
+                sdf.format(v.getFechCreacion()),
                 v.getEstado()});
 <<<<<<< HEAD
 >>>>>>> YerkoBanda
@@ -545,10 +549,23 @@ public class MantenedorVistas extends javax.swing.JFrame {
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
+<<<<<<< HEAD
 >>>>>>> YerkoBanda
 =======
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
+>>>>>>> Ignacio
+=======
+    
+    private void resizeTabla() { 
+        tblVista.getColumnModel().getColumn(0).setMaxWidth(40);
+        tblVista.getColumnModel().getColumn(1).setMaxWidth(250);
+        tblVista.getColumnModel().getColumn(2).setMaxWidth(200);
+        tblVista.getColumnModel().getColumn(3).setMaxWidth(200);
+        tblVista.getColumnModel().getColumn(4).setMaxWidth(110);
+        tblVista.getColumnModel().getColumn(5).setMaxWidth(50);
+    }
+    
 >>>>>>> Ignacio
 }

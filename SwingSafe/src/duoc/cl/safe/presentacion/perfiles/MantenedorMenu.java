@@ -36,6 +36,7 @@ public class MantenedorMenu extends javax.swing.JFrame {
     public MantenedorMenu() {
         initComponents();
         PropertyConfigurator.configure("log4j.properties");
+        resizeTabla();
     }
 
     /**
@@ -489,4 +490,12 @@ public class MantenedorMenu extends javax.swing.JFrame {
     }
 >>>>>>> Ignacio
 
+    private void resizeTabla() {
+        tblMenu.getColumnModel().getColumn(0).setMaxWidth(100);
+        tblMenu.getColumnModel().getColumn(1).setMaxWidth(400);
+        tblMenu.getColumnModel().getColumn(2).setMaxWidth(120);
+        tblMenu.getColumnModel().getColumn(3).setMaxWidth(100);
+    }
+    
+    
 }

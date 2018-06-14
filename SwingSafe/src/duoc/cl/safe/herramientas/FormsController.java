@@ -6,8 +6,16 @@
 package duoc.cl.safe.herramientas;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import duoc.cl.safe.presentacion.evaluaciones.MantenedorEvaluacion;
 =======
+=======
+import duoc.cl.safe.presentacion.capacitaciones.MantenedorCapEmpresa;
+import duoc.cl.safe.presentacion.capacitaciones.MantenedorCapacitacion;
+import duoc.cl.safe.presentacion.capacitaciones.MantenedorCapacitacionDia;
+import duoc.cl.safe.presentacion.capacitaciones.MantenedorCapacitacionTipo;
+import duoc.cl.safe.presentacion.capacitaciones.MantenedorEstadoCapacitacion;
+>>>>>>> Ignacio
 import duoc.cl.safe.presentacion.evaluaciones.FormularioEvaluacion;
 import duoc.cl.safe.presentacion.evaluaciones.MantenedorEvaluacion;
 import duoc.cl.safe.presentacion.evaluaciones.MantenedorEvaluacionEstado;
@@ -165,6 +173,7 @@ public class FormsController {
         }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(idVista == 45){
             Login login = new Login();
             login.setVisible(true);
@@ -177,6 +186,8 @@ public class FormsController {
             Login login = new Login();
             login.setVisible(true);
         }
+=======
+>>>>>>> Ignacio
         if (idVista == 62) {
             MantenedorPersona mantenedorPersona = new MantenedorPersona();
             mantenedorPersona.setFormsController(this);
@@ -196,6 +207,38 @@ public class FormsController {
             MantenedorParametro mantenedorParametro = new MantenedorParametro();
             mantenedorParametro.setFormsController(this);
             mantenedorParametro.setVisible(true);
+        }
+<<<<<<< HEAD
+>>>>>>> Ignacio
+=======
+        if (idVista == 101) {
+            MantenedorCapEmpresa mantenedorCapEmpresa = new MantenedorCapEmpresa();
+            mantenedorCapEmpresa.setFormsController(this);
+            mantenedorCapEmpresa.setVisible(true);
+        }
+        if (idVista == 102) {
+            MantenedorCapacitacion mantenedorCapacitacion = new MantenedorCapacitacion();
+            mantenedorCapacitacion.setFormsController(this);
+            mantenedorCapacitacion.setVisible(true);
+        }
+        if (idVista == 103) {
+            MantenedorCapacitacionDia mantenedorCapacitacionDia = new MantenedorCapacitacionDia();
+            mantenedorCapacitacionDia.setFormsController(this);
+            mantenedorCapacitacionDia.setVisible(true);
+        }
+        if (idVista == 104) {
+            MantenedorCapacitacionTipo mantenedorCapacitacionTipo = new MantenedorCapacitacionTipo();
+            mantenedorCapacitacionTipo.setFormsController(this);
+            mantenedorCapacitacionTipo.setVisible(true);
+        }
+        if (idVista == 105) {
+            MantenedorEstadoCapacitacion mantenedorEstadoCapacitacion = new MantenedorEstadoCapacitacion();
+            mantenedorEstadoCapacitacion.setFormsController(this);
+            mantenedorEstadoCapacitacion.setVisible(true);
+        }
+        if (idVista == 45 || idVista == 81) {
+            Login login = new Login();
+            login.setVisible(true);
         }
 >>>>>>> Ignacio
     }
