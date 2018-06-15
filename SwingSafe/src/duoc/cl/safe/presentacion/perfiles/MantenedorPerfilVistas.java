@@ -8,14 +8,7 @@ package duoc.cl.safe.presentacion.perfiles;
 import duoc.cl.safe.entity.SsfPerfil;
 import duoc.cl.safe.entity.SsfPerfilvista;
 import duoc.cl.safe.entity.SsfVista;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import duoc.cl.safe.herramientas.FormsController;
->>>>>>> YerkoBanda
-=======
-import duoc.cl.safe.herramientas.FormsController;
->>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import duoc.cl.safe.negocio.SsfPerfilvistaBO;
 import duoc.cl.safe.negocio.SsfVistaBO;
@@ -77,17 +70,9 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
         tfBuscarVistaPerfil = new javax.swing.JTextField();
         bBuscarVistaPerfil = new javax.swing.JButton();
         bRefrescar = new javax.swing.JButton();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
->>>>>>> YerkoBanda
-=======
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
->>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -196,24 +181,15 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Asignar Vistas a Perfil");
 
->>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -339,18 +315,9 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     }//GEN-LAST:event_bAgregarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
->>>>>>> YerkoBanda
-=======
-        this.setJMenuBar(formsController.getMenu().getMenuBar());
-        formsController.getMenu().setjFrame(this);
-        this.setLocationRelativeTo(null);
->>>>>>> Ignacio
         cargaVista();
         cargaPerfil();
         cargaTabla();
@@ -525,10 +492,12 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
             String[] palabras = busqueda.split("\\s+");
             //String[] palabras2 = busqueda.split(Pattern.quote("."));
             List<SsfVista> vv = new LinkedList<>();
-            SsfVistaBO vistaBO = new SsfVistaBO();
-            List<SsfVista> vvall = vistaBO.getAllSP();
+            if (vlist == null) {
+                SsfVistaBO vistaBO = new SsfVistaBO();
+                vlist = vistaBO.getAllSP();
+            }
             for (String s : palabras) {
-                for (SsfVista v : vvall) {
+                for (SsfVista v : vlist) {
                     if (v.getNombre() != null) {
                         if (!vv.isEmpty()) {
                             if (!existeIdVista(vv, v) && v.getNombre().toLowerCase().contains(s.toLowerCase())) {
@@ -611,17 +580,9 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
->>>>>>> YerkoBanda
-=======
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
->>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lErrorBuscarVista;
@@ -637,28 +598,17 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
     private HashMap<String, Integer> mapp;
     private List<SsfVista> vlist;
     private DefaultTableModel model;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     private FormsController formsController;
->>>>>>> YerkoBanda
-=======
-    private FormsController formsController;
-<<<<<<< HEAD
->>>>>>> Ignacio
-=======
     List<SsfPerfilvista> lpv;
->>>>>>> Ignacio
 
     public void cargaVista() {
         mapv = new HashMap<>();
         cbVista.removeAllItems();
         cbVista.addItem("- Seleccione Vista -");
-        SsfVistaBO vbo = new SsfVistaBO();
         if (vlist == null) {
+            SsfVistaBO vbo = new SsfVistaBO();
             vlist = vbo.getAllSP();
         }
-
         vlist.forEach((v) -> {
             mapv.put(v.getNombre(), v);
         });
@@ -769,27 +719,9 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
         return v;
     }
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    public FormsController getFormsController() {
-        return formsController;
-    }
-=======
->>>>>>> Ignacio
-
-=======
->>>>>>> Ignacio
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
-=======
     
     private void resizeTabla() { 
         tblPerfilVista.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -801,5 +733,4 @@ public class MantenedorPerfilVistas extends javax.swing.JFrame {
         tblPerfilVista.getColumnModel().getColumn(5).setMaxWidth(50);
     }
     
->>>>>>> Ignacio
 }

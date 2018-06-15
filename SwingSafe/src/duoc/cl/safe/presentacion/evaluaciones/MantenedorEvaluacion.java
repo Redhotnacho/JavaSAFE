@@ -9,14 +9,7 @@ import duoc.cl.safe.entity.SsfEmpresa;
 import duoc.cl.safe.entity.SsfEvaluaciontipo;
 import duoc.cl.safe.entity.SsfEvaluacion;
 import duoc.cl.safe.entity.SsfEvaluacionestado;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import duoc.cl.safe.herramientas.FormsController;
->>>>>>> YerkoBanda
-=======
-import duoc.cl.safe.herramientas.FormsController;
->>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfEvaluaciontipoBO;
 import duoc.cl.safe.negocio.SsfEvaluacionBO;
@@ -75,17 +68,9 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         cbEmpresa = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
->>>>>>> YerkoBanda
-=======
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
->>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -176,24 +161,15 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
 
         jLabel5.setText("Empresa:");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Mantenedor Evaluación");
 
->>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -289,18 +265,9 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
->>>>>>> YerkoBanda
-=======
-        this.setJMenuBar(formsController.getMenu().getMenuBar());
-        formsController.getMenu().setjFrame(this);
-        this.setLocationRelativeTo(null);
->>>>>>> Ignacio
         cargaTabla();
         cargaEvaluacionTipo();
         cargaEmpresa();
@@ -548,17 +515,9 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
->>>>>>> YerkoBanda
-=======
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
->>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -573,14 +532,7 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
     private HashMap<String, Integer> mape = new HashMap<>();
     private HashMap<String, Integer> mapee = new HashMap<>();
     private static Logger log = Logger.getLogger(MantenedorEvaluacion.class.getName());
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     private FormsController formsController;
->>>>>>> YerkoBanda
-=======
-    private FormsController formsController;
->>>>>>> Ignacio
 
     public void cargaEvaluacionTipo() {
         SsfEvaluaciontipoBO etbo = new SsfEvaluaciontipoBO();
@@ -648,17 +600,6 @@ public class MantenedorEvaluacion extends javax.swing.JFrame {
         lExito.setText("");
         lError.setText("");
     }
-<<<<<<< HEAD
-=======
-    
-    public FormsController getFormsController() {
-        return formsController;
-    }
-
-    public void setFormsController(FormsController formsController) {
-        this.formsController = formsController;
-    }
->>>>>>> YerkoBanda
 
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;

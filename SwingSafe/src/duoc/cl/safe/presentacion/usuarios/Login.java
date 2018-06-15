@@ -5,30 +5,6 @@
  */
 package duoc.cl.safe.presentacion.usuarios;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import duoc.cl.safe.entity.SsfUsuario;
-import duoc.cl.safe.negocio.SsfUsuarioBO;
-=======
-import duoc.cl.safe.actions.ValidarUsuario;
-import duoc.cl.safe.herramientas.Cargando;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
->>>>>>> Ignacio
-
-public class Login extends javax.swing.JFrame{
-     Cargando cargando;
-    
-    public Login() {
-        initComponents();        
-        
-        cargando = new Cargando(); 
-        cargando.setLocationRelativeTo(this);
-        
-    }
-<<<<<<< HEAD
-
-=======
 import duoc.cl.safe.actions.ValidarUsuario;
 import duoc.cl.safe.herramientas.Cargando;
 import java.awt.event.KeyEvent;
@@ -45,17 +21,7 @@ public class Login extends javax.swing.JFrame {
         cargando.setLocationRelativeTo(this);
 
     }
-<<<<<<< HEAD
-    
-   
->>>>>>> YerkoBanda
-=======
-    
-   
->>>>>>> Ignacio
-=======
 
->>>>>>> Ignacio
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,148 +31,6 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        pLogin = new javax.swing.JPanel();
-        bLogin = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-=======
-        jPanel2 = new javax.swing.JPanel();
-        panelRound1 = new org.edisoncor.gui.panel.PanelRound();
-        lbl_contrasena = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
->>>>>>> Ignacio
-        pfPassword = new javax.swing.JPasswordField();
-        lbl_usuario1 = new javax.swing.JLabel();
-        lbl_usuario2 = new javax.swing.JLabel();
-        lbl_usuario3 = new javax.swing.JLabel();
-        tfUsuario = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema SAFE");
-        setBackground(new java.awt.Color(0, 153, 102));
-        setIconImage(getIconImage());
-        setResizable(false);
-
-        jPanel2.setBackground(new java.awt.Color(0, 102, 153));
-        jPanel2.setLayout(null);
-
-        panelRound1.setAnchoDeBorde(0.0F);
-        panelRound1.setColorDeBorde(new java.awt.Color(255, 255, 255));
-        panelRound1.setColorDeSegundoBorde(new java.awt.Color(0, 102, 0));
-        panelRound1.setColorPrimario(new java.awt.Color(255, 255, 255));
-        panelRound1.setColorSecundario(new java.awt.Color(204, 204, 204));
-
-        lbl_contrasena.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
-        lbl_contrasena.setForeground(new java.awt.Color(0, 102, 0));
-        lbl_contrasena.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_contrasena.setText("CONTRASEÑA");
-        lbl_contrasena.setToolTipText("");
-
-        jButton1.setFont(new java.awt.Font("Arial Narrow", 0, 24)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duoc/cl/safe/img/INGRESAR-01.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setDefaultCapable(false);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/duoc/cl/safe/img/INGRESAR1-01-01.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        pfPassword.setForeground(new java.awt.Color(0, 102, 0));
-        pfPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pfPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 0), 2, true));
-        pfPassword.setOpaque(false);
-        pfPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                pfPasswordKeyPressed(evt);
-            }
-        });
-
-        lbl_usuario1.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
-        lbl_usuario1.setForeground(new java.awt.Color(0, 102, 0));
-        lbl_usuario1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_usuario1.setText("USUARIO");
-        lbl_usuario1.setToolTipText("");
-        lbl_usuario1.setMaximumSize(new java.awt.Dimension(196, 32));
-        lbl_usuario1.setMinimumSize(new java.awt.Dimension(196, 32));
-        lbl_usuario1.setPreferredSize(new java.awt.Dimension(196, 32));
-
-        lbl_usuario2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 36)); // NOI18N
-        lbl_usuario2.setForeground(new java.awt.Color(0, 102, 0));
-        lbl_usuario2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_usuario2.setText("SAFE");
-        lbl_usuario2.setToolTipText("");
-        lbl_usuario2.setMaximumSize(new java.awt.Dimension(196, 32));
-        lbl_usuario2.setMinimumSize(new java.awt.Dimension(196, 32));
-        lbl_usuario2.setPreferredSize(new java.awt.Dimension(196, 32));
-
-        lbl_usuario3.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 36)); // NOI18N
-        lbl_usuario3.setForeground(new java.awt.Color(0, 102, 0));
-        lbl_usuario3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_usuario3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duoc/cl/safe/img/SAFE.jpg"))); // NOI18N
-        lbl_usuario3.setToolTipText("");
-        lbl_usuario3.setMaximumSize(new java.awt.Dimension(196, 32));
-        lbl_usuario3.setMinimumSize(new java.awt.Dimension(196, 32));
-        lbl_usuario3.setPreferredSize(new java.awt.Dimension(196, 32));
-
-        tfUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        tfUsuario.setForeground(new java.awt.Color(0, 102, 0));
-        tfUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tfUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 0), 2, true));
-        tfUsuario.setOpaque(false);
-        tfUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfUsuarioKeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(lbl_usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_usuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(pfPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbl_contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbl_usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55))
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_usuario3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                    .addComponent(lbl_usuario2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(lbl_contrasena)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
-        );
-
-<<<<<<< HEAD
-=======
         jPanel2 = new javax.swing.JPanel();
         panelRound1 = new org.edisoncor.gui.panel.PanelRound();
         lbl_contrasena = new javax.swing.JLabel();
@@ -340,8 +164,6 @@ public class Login extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-=======
->>>>>>> Ignacio
         jPanel2.add(panelRound1);
         panelRound1.setBounds(260, 130, 310, 320);
 
@@ -349,47 +171,10 @@ public class Login extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 540);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-<<<<<<< HEAD
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
-                .addComponent(pLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144))
-=======
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
->>>>>>> Ignacio
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        pack();
-        setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ejecutarAction();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void tfUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfUsuarioKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            ejecutarAction();
-        }
-    }//GEN-LAST:event_tfUsuarioKeyPressed
-
-<<<<<<< HEAD
-=======
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
@@ -413,24 +198,12 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfUsuarioKeyPressed
 
-=======
->>>>>>> Ignacio
     private void pfPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pfPasswordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             ejecutarAction();
         }
     }//GEN-LAST:event_pfPasswordKeyPressed
-<<<<<<< HEAD
-        
-    
-    
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
-=======
 
->>>>>>> Ignacio
     /**
      * @param args the command line arguments
      */
@@ -457,12 +230,6 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-=======
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -470,16 +237,6 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
->>>>>>> YerkoBanda
-=======
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
->>>>>>> Ignacio
             public void run() {
                 new Login().setVisible(true);
             }
@@ -487,25 +244,6 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-<<<<<<< HEAD
-    private javax.swing.JButton bLimpiar;
-    private javax.swing.JButton bLogin;
-=======
-    private javax.swing.JButton jButton1;
->>>>>>> Ignacio
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbl_contrasena;
-    private javax.swing.JLabel lbl_usuario1;
-    private javax.swing.JLabel lbl_usuario2;
-    private javax.swing.JLabel lbl_usuario3;
-    private org.edisoncor.gui.panel.PanelRound panelRound1;
-    private javax.swing.JPasswordField pfPassword;
-    private javax.swing.JTextField tfUsuario;
-    // End of variables declaration//GEN-END:variables
-<<<<<<< HEAD
-=======
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
@@ -517,8 +255,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
-=======
->>>>>>> Ignacio
 
     private void limpiar() {
         tfUsuario.setText("");
@@ -540,30 +276,14 @@ public class Login extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña no válidos");
         limpiar();
     }
-<<<<<<< HEAD
-        
-    private void ejecutarAction(){
-<<<<<<< HEAD
-        if (tfUsuario.getText().equals("")||pfPassword.getText().equals("")) {
-=======
-        if (tfUsuario.getText().trim().equals("")||pfPassword.getText().trim().equals("")) {
->>>>>>> Ignacio
-            JOptionPane.showMessageDialog(this, "No se aceptan cuadros vacíos." );
-        }else{     
-=======
 
     private void ejecutarAction() {
         if (tfUsuario.getText().trim().equals("") || pfPassword.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "No se aceptan cuadros vacíos.");
         } else {
->>>>>>> Ignacio
             loading();
             ValidarUsuario valida = new ValidarUsuario(this, cargando, tfUsuario.getText(), pfPassword.getText());
             new Thread(valida).start();
         }
     }
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
 }

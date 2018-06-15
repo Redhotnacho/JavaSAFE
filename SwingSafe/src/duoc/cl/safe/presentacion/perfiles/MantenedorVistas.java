@@ -7,14 +7,7 @@ package duoc.cl.safe.presentacion.perfiles;
 
 import duoc.cl.safe.entity.SsfMenu;
 import duoc.cl.safe.entity.SsfVista;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import duoc.cl.safe.herramientas.FormsController;
->>>>>>> YerkoBanda
-=======
-import duoc.cl.safe.herramientas.FormsController;
->>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfMenuBO;
 import duoc.cl.safe.negocio.SsfVistaBO;
 import java.math.BigDecimal;
@@ -65,17 +58,9 @@ public class MantenedorVistas extends javax.swing.JFrame {
         bAgregar = new javax.swing.JButton();
         lError = new javax.swing.JLabel();
         lExito = new javax.swing.JLabel();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
->>>>>>> YerkoBanda
-=======
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
->>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -149,24 +134,15 @@ public class MantenedorVistas extends javax.swing.JFrame {
 
         lExito.setForeground(new java.awt.Color(0, 204, 0));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Mantenedor Vistas");
 
->>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,15 +202,7 @@ public class MantenedorVistas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
-<<<<<<< HEAD
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
->>>>>>> YerkoBanda
-=======
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
->>>>>>> Ignacio
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lExito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,18 +221,9 @@ public class MantenedorVistas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
->>>>>>> YerkoBanda
-=======
-        this.setJMenuBar(formsController.getMenu().getMenuBar());
-        formsController.getMenu().setjFrame(this);
-        this.setLocationRelativeTo(null);
->>>>>>> Ignacio
         cargaMenu();
         cargaTabla();
     }//GEN-LAST:event_formWindowOpened
@@ -445,17 +404,9 @@ public class MantenedorVistas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
->>>>>>> YerkoBanda
-=======
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
->>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -467,14 +418,7 @@ public class MantenedorVistas extends javax.swing.JFrame {
 
     private SsfVistaBO vbo;
     private HashMap<String, Integer> mapm = new HashMap<>();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     private FormsController formsController;
->>>>>>> YerkoBanda
-=======
-    private FormsController formsController;
->>>>>>> Ignacio
 
     private void cargaTabla() {
         
@@ -484,29 +428,12 @@ public class MantenedorVistas extends javax.swing.JFrame {
         List<SsfVista> lv = vbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         lv.forEach((v) -> {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            model.addRow(new Object[]{v.getId(), v.getNombre(), v.getUrl(), v.getIdMenu().getNombre(), sdf.format(v.getFechCreacion()), v.getEstado()});
-=======
-=======
->>>>>>> Ignacio
-            String fecha = "";
-            if (v.getFechCreacion().toString() != null && v.getFechCreacion().toString() != "") {
-                fecha = sdf.format(v.getFechCreacion());
-            }
-=======
->>>>>>> Ignacio
             model.addRow(new Object[]{v.getId(),
                 v.getNombre(),
                 v.getUrl(),
                 v.getIdMenu().getNombre(),
                 sdf.format(v.getFechCreacion()),
                 v.getEstado()});
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         });
         tblVista.setModel(model);
 
@@ -537,26 +464,10 @@ public class MantenedorVistas extends javax.swing.JFrame {
             cbMenu.addItem(m.getNombre());
         });
     }
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-    
-    public FormsController getFormsController() {
-        return formsController;
-    }
 
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
-    public void setFormsController(FormsController formsController) {
-        this.formsController = formsController;
-    }
->>>>>>> Ignacio
-=======
     
     private void resizeTabla() { 
         tblVista.getColumnModel().getColumn(0).setMaxWidth(40);
@@ -567,5 +478,4 @@ public class MantenedorVistas extends javax.swing.JFrame {
         tblVista.getColumnModel().getColumn(5).setMaxWidth(50);
     }
     
->>>>>>> Ignacio
 }

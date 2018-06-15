@@ -66,17 +66,9 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
         rbNo = new javax.swing.JRadioButton();
         rbPendiente = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
->>>>>>> YerkoBanda
-=======
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
->>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -178,24 +170,15 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
 
         jLabel4.setText("Aprobado:");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Asignar Parámetro");
 
->>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -525,17 +508,9 @@ public class MantenedorEvaluacionParametro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
->>>>>>> YerkoBanda
-=======
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
->>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;

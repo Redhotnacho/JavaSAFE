@@ -6,14 +6,7 @@
 package duoc.cl.safe.presentacion.perfiles;
 
 import duoc.cl.safe.entity.SsfMenu;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import duoc.cl.safe.herramientas.FormsController;
->>>>>>> YerkoBanda
-=======
-import duoc.cl.safe.herramientas.FormsController;
->>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfMenuBO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -58,17 +51,9 @@ public class MantenedorMenu extends javax.swing.JFrame {
         bLimpiar = new javax.swing.JButton();
         bModificar = new javax.swing.JButton();
         bAgregar = new javax.swing.JButton();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
->>>>>>> YerkoBanda
-=======
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
->>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -143,24 +128,15 @@ public class MantenedorMenu extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Mantenedor Parámetro");
 
->>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,15 +190,7 @@ public class MantenedorMenu extends javax.swing.JFrame {
                     .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< HEAD
-<<<<<<< HEAD
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-=======
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
->>>>>>> YerkoBanda
-=======
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
->>>>>>> Ignacio
                 .addContainerGap())
         );
 
@@ -317,18 +285,9 @@ public class MantenedorMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_bModificarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
->>>>>>> YerkoBanda
-=======
-        this.setJMenuBar(formsController.getMenu().getMenuBar());
-        formsController.getMenu().setjFrame(this);
-        this.setLocationRelativeTo(null);
->>>>>>> Ignacio
         cargaTabla();
     }//GEN-LAST:event_formWindowOpened
 
@@ -391,17 +350,9 @@ public class MantenedorMenu extends javax.swing.JFrame {
     private javax.swing.JButton bLimpiar;
     private javax.swing.JButton bModificar;
     private javax.swing.JLabel jLabel1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
->>>>>>> YerkoBanda
-=======
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
->>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -410,14 +361,7 @@ public class MantenedorMenu extends javax.swing.JFrame {
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
     private SsfMenuBO mbo;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     private FormsController formsController;
->>>>>>> YerkoBanda
-=======
-    private FormsController formsController;
->>>>>>> Ignacio
 
     private void cargaTabla() {
         
@@ -469,26 +413,9 @@ public class MantenedorMenu extends javax.swing.JFrame {
         tblMenu.setModel(model);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-    public FormsController getFormsController() {
-        return formsController;
-    }
-
-=======
->>>>>>> Ignacio
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
->>>>>>> YerkoBanda
-=======
-    public void setFormsController(FormsController formsController) {
-        this.formsController = formsController;
-    }
->>>>>>> Ignacio
 
     private void resizeTabla() {
         tblMenu.getColumnModel().getColumn(0).setMaxWidth(100);

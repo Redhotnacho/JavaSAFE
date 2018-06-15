@@ -5,17 +5,8 @@
  */
 package duoc.cl.safe.presentacion.usuarios;
 
-<<<<<<< HEAD
-import duoc.cl.safe.entity.SsfEmpresa;
-<<<<<<< HEAD
-=======
-import duoc.cl.safe.forms.*;
 import duoc.cl.safe.entity.SsfEmpresa;
 import duoc.cl.safe.herramientas.FormsController;
->>>>>>> YerkoBanda
-=======
-import duoc.cl.safe.herramientas.FormsController;
->>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -38,18 +29,8 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
      */
     public MantenedorEmpresa() {
         initComponents();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        this.setLocationRelativeTo(null);
->>>>>>> YerkoBanda
-=======
         PropertyConfigurator.configure("log4j.properties");
-<<<<<<< HEAD
->>>>>>> Ignacio
-=======
         resizeTabla();
->>>>>>> Ignacio
     }
 
     /**
@@ -78,17 +59,9 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpresa = new javax.swing.JTable();
         bRefrescar = new javax.swing.JButton();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
->>>>>>> YerkoBanda
-=======
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
->>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -177,25 +150,15 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenu1.setText("File");
-=======
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Mantenedor Empresa");
 
         jMenu1.setText("Cargando...");
->>>>>>> Ignacio
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -273,15 +236,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
-<<<<<<< HEAD
-<<<<<<< HEAD
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-=======
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
->>>>>>> YerkoBanda
-=======
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
->>>>>>> Ignacio
                 .addContainerGap())
         );
 
@@ -289,17 +244,9 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        this.setJMenuBar(formsController.getMenu().getMenuBar());
-        formsController.getMenu().setjFrame(this);
->>>>>>> YerkoBanda
-=======
         this.setJMenuBar(formsController.getMenu().getMenuBar());
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
->>>>>>> Ignacio
         cargaTabla();
     }//GEN-LAST:event_formWindowOpened
 
@@ -380,10 +327,12 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
             String[] palabras = busqueda.split("\\s+");
             //String[] palabras2 = busqueda.split(Pattern.quote("."));
             List<SsfEmpresa> ee = new LinkedList<>();
-            ebo = new SsfEmpresaBO();
-            List<SsfEmpresa> eeall = ebo.getAllSP();
+            if (le==null) {
+                ebo = new SsfEmpresaBO();
+                le = ebo.getAllSP();
+            }
             for (String s : palabras) {
-                for (SsfEmpresa emp : eeall) {
+                for (SsfEmpresa emp : le) {
                     if (emp.getNombre() != null) {
                         if (!ee.isEmpty()) {
                             if (!existeIdEmp(ee, emp) && emp.getNombre().toLowerCase().contains(s.toLowerCase())) {
@@ -548,14 +497,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MantenedorEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         //</editor-fold>
->>>>>>> YerkoBanda
-=======
-        //</editor-fold>
->>>>>>> Ignacio
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -574,17 +516,9 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
->>>>>>> YerkoBanda
-=======
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
->>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
@@ -597,21 +531,15 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private SsfEmpresaBO ebo;
     private static Logger log = Logger.getLogger(MantenedorEmpresa.class.getName());
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-     private FormsController formsController;
->>>>>>> YerkoBanda
-=======
     private FormsController formsController;
->>>>>>> Ignacio
+    private List<SsfEmpresa> le;
 
     private void cargaTabla() {
         
         DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
         model.setRowCount(0);
         ebo = new SsfEmpresaBO();
-        List<SsfEmpresa> le = ebo.getAllSP();
+        le = ebo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         le.forEach((e) -> {
             model.addRow(new Object[]{e.getId(), e.getNombre(), e.getDireccion(), e.getTelefono(), sdf.format(e.getFechCreacion()), e.getEstado()});
@@ -657,29 +585,10 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         tblEmpresa.setModel(model);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    public FormsController getFormsController() {
-        return formsController;
-    }
-
-=======
->>>>>>> Ignacio
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
-=======
->>>>>>> Ignacio
-=======
     private void resizeTabla() { 
         tblEmpresa.getColumnModel().getColumn(0).setMaxWidth(40);
         tblEmpresa.getColumnModel().getColumn(1).setMaxWidth(300);
@@ -689,5 +598,4 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         tblEmpresa.getColumnModel().getColumn(5).setMaxWidth(50);
     }
     
->>>>>>> Ignacio
 }

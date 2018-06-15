@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Ignacio
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
@@ -17,22 +12,11 @@
       </SubComponents>
     </Menu>
   </NonVisualComponents>
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
->>>>>>> YerkoBanda
-=======
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
->>>>>>> Ignacio
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>

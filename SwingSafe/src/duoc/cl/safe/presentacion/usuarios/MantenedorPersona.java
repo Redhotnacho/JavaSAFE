@@ -5,10 +5,6 @@
  */
 package duoc.cl.safe.presentacion.usuarios;
 
-<<<<<<< HEAD
-=======
-import duoc.cl.safe.forms.*;
->>>>>>> YerkoBanda
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.negocio.SsfPersonaBO;
@@ -88,15 +84,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(204, 0, 153))); // NOI18N
-=======
-        pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(204, 0, 153))); // NOI18N
->>>>>>> YerkoBanda
-=======
         pMantenedorPersona.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mantenedor Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16), new java.awt.Color(204, 0, 153))); // NOI18N
->>>>>>> Ignacio
 
         lExito.setForeground(new java.awt.Color(0, 204, 51));
 
@@ -445,30 +433,10 @@ public class MantenedorPersona extends javax.swing.JFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             SsfPersona p = new SsfPersona();
             try {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
-=======
                 if (!sfech.equals("") && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
->>>>>>> Ignacio
-                    if (sfech.length() < 10) {
-                        sdf = new SimpleDateFormat("dd-MM-yy");
-                        fecha = sdf.parse(sfech);
-                    }
-=======
-                if (!sfech.equals("")) {
->>>>>>> YerkoBanda
-=======
-                if (!sfech.equals("")) {
->>>>>>> Ignacio
-=======
-                if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
                     if (sfech.length() < 10) {
                         sdf = new SimpleDateFormat("dd-MM-yy");
                     }
->>>>>>> Ignacio
                     fecha = sdf.parse(sfech);
                     p.setFechaNac(fecha);
                 }
@@ -532,30 +500,10 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 SsfPersona p = new SsfPersona();
                 try {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
-                        if (sfech.length() < 10) {
-                            sdf = new SimpleDateFormat("dd-MM-yy");
-                            fecha = sdf.parse(sfech);
-                        }
-=======
-                    if (!sfech.equals("")) {
->>>>>>> YerkoBanda
-=======
-                    if (!sfech.equals("")) {
->>>>>>> Ignacio
-=======
-                    if (!sfech.equals("") && !sfech.toLowerCase().equals("DD-MM-AAAA".toLowerCase())) {
-=======
                     if (!sfech.equals("") && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
->>>>>>> Ignacio
                         if (sfech.length() < 10) {
                             sdf = new SimpleDateFormat("dd-MM-yy");
                         }
->>>>>>> Ignacio
                         fecha = sdf.parse(sfech);
                         p.setFechaNac(fecha);
                     }
@@ -591,25 +539,10 @@ public class MantenedorPersona extends javax.swing.JFrame {
                         if (!tel.equals("error")) {
                             model.setValueAt(tel, tblPersona.getSelectedRow(), 6);
                         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        if (!sfech.equals("error")) {
-                            sdf = new SimpleDateFormat("dd-MM-yyyy");
-                            model.setValueAt(sdf.format(fecha), tblPersona.getSelectedRow(), 7);
-                        }
-=======
-                        model.setValueAt(sfech, tblPersona.getSelectedRow(), 7);
->>>>>>> YerkoBanda
-=======
-                        model.setValueAt(sfech, tblPersona.getSelectedRow(), 7);
->>>>>>> Ignacio
-=======
                         if (!sfech.equalsIgnoreCase("error") && fecha != null) {
                             sdf = new SimpleDateFormat("dd-MM-yyyy");
                             model.setValueAt(sdf.format(fecha), tblPersona.getSelectedRow(), 7);
                         }
->>>>>>> Ignacio
 
                     } else {
                         lError.setText("No se pudo modificar");
@@ -632,10 +565,12 @@ public class MantenedorPersona extends javax.swing.JFrame {
             String[] palabras = busqueda.split("\\s+");
             String[] palabras2 = busqueda.split(Pattern.quote("."));
             List<SsfPersona> pp = new LinkedList<>();
-            pbo = new SsfPersonaBO();
-            List<SsfPersona> ppall = pbo.getAllSP();
+            if (lp==null) {
+                pbo = new SsfPersonaBO();
+                lp = pbo.getAllSP();
+            }
             for (String s : palabras) {
-                for (SsfPersona pers : ppall) {
+                for (SsfPersona pers : lp) {
                     if (pers.getRut() != null) {
                         if (!pp.isEmpty()) {
                             if (!existeIdPers(pp, pers) && pers.getRut().contains(s)) {
@@ -694,7 +629,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 }
             }
             for (String s : palabras2) {
-                for (SsfPersona pers : ppall) {
+                for (SsfPersona pers : lp) {
                     if (pers.getRut() != null) {
                         if (!pp.isEmpty()) {
                             if (!existeIdPers(pp, pers) && pers.getRut().contains(s)) {
@@ -763,16 +698,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         //</editor-fold>
         //</editor-fold>
->>>>>>> YerkoBanda
-=======
-        //</editor-fold>
-        //</editor-fold>
->>>>>>> Ignacio
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -817,11 +744,12 @@ public class MantenedorPersona extends javax.swing.JFrame {
     private DefaultTableModel model;
     private SsfPersonaBO pbo;
     private FormsController formsController;
+    private List<SsfPersona> lp;
 
     private void cargaTabla() {
         model.setRowCount(0);
         pbo = new SsfPersonaBO();
-        List<SsfPersona> lp = pbo.getAllSP();
+        lp = pbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String sfecha = null;
         for (SsfPersona p : lp) {
@@ -877,27 +805,6 @@ public class MantenedorPersona extends javax.swing.JFrame {
                 sfecha, sdf.format(p.getFechCreacion()), p.getEstado()});
         }
         tblPersona.setModel(model);
-    }
-
-    private void borrarTabla() {
-        tblPersona.removeAll();
-        tblPersona.repaint();
-        model = (DefaultTableModel) tblPersona.getModel();
-        model.fireTableDataChanged();
-        tblPersona.repaint();
-        tblPersona.removeAll();
-        int rows = model.getRowCount();
-        for (int i = rows - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        tblPersona.removeAll();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        tblPersona.repaint();
-        tblPersona.setModel(model);
-        tblPersona.repaint();
-        tblPersona.removeAll();
     }
 
     public void setFormsController(FormsController formsController) {

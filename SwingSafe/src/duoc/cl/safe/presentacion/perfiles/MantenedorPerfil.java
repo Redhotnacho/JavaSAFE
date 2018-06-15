@@ -6,14 +6,7 @@
 package duoc.cl.safe.presentacion.perfiles;
 
 import duoc.cl.safe.entity.SsfPerfil;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import duoc.cl.safe.herramientas.FormsController;
->>>>>>> YerkoBanda
-=======
-import duoc.cl.safe.herramientas.FormsController;
->>>>>>> Ignacio
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -35,22 +28,8 @@ public class MantenedorPerfil extends javax.swing.JFrame {
      */
     public MantenedorPerfil() {
         initComponents();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        this.setLocationRelativeTo(null);
->>>>>>> YerkoBanda
-=======
-        
->>>>>>> Ignacio
-=======
         PropertyConfigurator.configure("log4j.properties");
-<<<<<<< HEAD
->>>>>>> Ignacio
-=======
         resizeTabla();
->>>>>>> Ignacio
     }
 
     /**
@@ -75,17 +54,9 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         bModificar = new javax.swing.JButton();
         bAgregar = new javax.swing.JButton();
         bLimpiar = new javax.swing.JButton();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
->>>>>>> YerkoBanda
-=======
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
->>>>>>> Ignacio
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -169,24 +140,15 @@ public class MantenedorPerfil extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Mantenedor Perfil");
 
->>>>>>> Ignacio
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,21 +226,7 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
         cargaTabla();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        this.setJMenuBar(formsController.getMenu().getMenuBar());
-        formsController.getMenu().setjFrame(this);
-        
-        
->>>>>>> YerkoBanda
-=======
-        
->>>>>>> Ignacio
-=======
 
->>>>>>> Ignacio
     }//GEN-LAST:event_formWindowOpened
 
     private void tblPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPerfilMouseClicked
@@ -357,15 +305,7 @@ public class MantenedorPerfil extends javax.swing.JFrame {
             perf.setPerfil(nom);
             perf.setDescripcion(desc);
             if (pbo.addSP(perf)) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                lExito.setText("Perfil agregado exitosamente.");
-=======
                 lExito.setText("Menú agregado exitosamente.");
->>>>>>> YerkoBanda
-=======
-                lExito.setText("Menú agregado exitosamente.");
->>>>>>> Ignacio
                 cargaTabla();
             } else {
                 lError.setText("No se pudo agregar");
@@ -392,25 +332,11 @@ public class MantenedorPerfil extends javax.swing.JFrame {
                 id = model.getValueAt(tblPerfil.getSelectedRow(), 0).toString();
                 nom = tfPerfil.getText().trim();
                 desc = taDescripcion.getText().trim();
-<<<<<<< HEAD
-<<<<<<< HEAD
-                SsfPerfil perf = new SsfPerfil();
-                perf.setId(BigDecimal.valueOf(Long.valueOf(id)));
-                perf.setPerfil(nom);
-                perf.setDescripcion(desc);
-                if (pbo.updateSP(perf)) {
-=======
-=======
->>>>>>> Ignacio
                 SsfPerfil menu = new SsfPerfil();
                 menu.setId(BigDecimal.valueOf(Long.valueOf(id)));
                 menu.setPerfil(nom);
                 menu.setDescripcion(desc);
                 if (pbo.updateSP(menu)) {
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
                     lExito.setText("Perfil modificado exitosamente.");
                     model.setValueAt(nom, tblPerfil.getSelectedRow(), 1);
                     model.setValueAt(desc, tblPerfil.getSelectedRow(), 2);
@@ -462,17 +388,9 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     private javax.swing.JButton bModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
->>>>>>> YerkoBanda
-=======
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
->>>>>>> Ignacio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lError;
@@ -484,14 +402,7 @@ public class MantenedorPerfil extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private SsfPerfilBO pbo;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     private FormsController formsController;
->>>>>>> YerkoBanda
-=======
-    private FormsController formsController;
->>>>>>> Ignacio
 
     private void cargaTabla() {
         
@@ -521,17 +432,6 @@ public class MantenedorPerfil extends javax.swing.JFrame {
         lExito.setText("");
         lError.setText("");
     }
-<<<<<<< HEAD
-=======
-    
-    public FormsController getFormsController() {
-        return formsController;
-    }
-
-    public void setFormsController(FormsController formsController) {
-        this.formsController = formsController;
-    }
->>>>>>> YerkoBanda
 
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;

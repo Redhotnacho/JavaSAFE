@@ -5,21 +5,9 @@
  */
 package duoc.cl.safe.forms;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import duoc.cl.safe.entity.SsfPersona;
-import duoc.cl.safe.negocio.SsfPersonaBO;
-import java.util.List;
-=======
 import duoc.cl.safe.entity.SsfUsuario;
 import duoc.cl.safe.herramientas.Menu;
 import javax.swing.JMenuBar;
->>>>>>> YerkoBanda
-=======
-import duoc.cl.safe.entity.SsfUsuario;
-import duoc.cl.safe.herramientas.Menu;
-import javax.swing.JMenuBar;
->>>>>>> Ignacio
 
 /**
  *
@@ -31,19 +19,7 @@ public class Prueba extends javax.swing.JFrame {
      * Creates new form Prueba
      */
     public Prueba() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         initComponents();
-=======
-        initComponents();    
->>>>>>> YerkoBanda
-=======
-        initComponents();    
->>>>>>> Ignacio
-=======
-        initComponents();
->>>>>>> Ignacio
     }
 
     /**
@@ -106,53 +82,6 @@ public class Prueba extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-        SsfPersonaBO personaBO = new SsfPersonaBO();
-        
-        
-        
-        List<SsfPersona> listaP = personaBO.getAll();
-        SsfPersona objP = null;
-        for (SsfPersona p : listaP) {
-            objP = p;
-            break;
-        }
-        if (objP != null) {
-            lGetAll.setText("Nombre: "+objP.getNombre()+", obtenido por método getAll()");
-        } else {
-            lGetAll.setText("nope");
-        }
-        
-        SsfPersona objP2 = personaBO.find(22);
-        if (objP2 != null) {
-            lFind.setText("Nombre: "+objP2.getNombre()+", obtenido por método find()");
-        } else {
-            lFind.setText("nope");
-        }
-        
-        SsfPersona objAdd = new SsfPersona();
-        objAdd.setNombre("Nuevo");
-        personaBO.add(objAdd);
-        listaP = personaBO.getAll();
-        int id = 0;
-        for (SsfPersona p : listaP) {
-            if (p.getNombre().equals("Nuevo")) {
-                lAdd.setText("Nombre: "+p.getNombre()+", obtenido por método add()");
-                id=p.getId().intValue();
-                break;
-            }
-        }
-        
-        if (personaBO.remove(id)) {
-            lRemove.setText("Nuevo borrado");
-        }else{
-            lRemove.setText("borrado error");
-        }
-=======
-=======
->>>>>>> Ignacio
         this.setJMenuBar(menuBar);
 //        SsfPersonaBO personaBO = new SsfPersonaBO();
 //        
@@ -195,17 +124,7 @@ public class Prueba extends javax.swing.JFrame {
 //        }else{
 //            lRemove.setText("borrado error");
 //        }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> YerkoBanda
-=======
->>>>>>> Ignacio
-        
-        
-        
-=======
 
->>>>>>> Ignacio
     }//GEN-LAST:event_formWindowOpened
 
     /**
