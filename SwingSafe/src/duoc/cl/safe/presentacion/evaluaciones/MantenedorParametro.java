@@ -46,7 +46,6 @@ public class MantenedorParametro extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfParametro = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         taDescripcion = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -60,10 +59,14 @@ public class MantenedorParametro extends javax.swing.JFrame {
         cbTipoEval = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        taParametro = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 526));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -79,6 +82,7 @@ public class MantenedorParametro extends javax.swing.JFrame {
         taDescripcion.setColumns(20);
         taDescripcion.setLineWrap(true);
         taDescripcion.setRows(5);
+        taDescripcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(taDescripcion);
 
         tblParametro.setModel(new javax.swing.table.DefaultTableModel(
@@ -111,9 +115,9 @@ public class MantenedorParametro extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblParametro);
 
-        lExito.setForeground(new java.awt.Color(0, 204, 51));
+        lExito.setForeground(new java.awt.Color(0, 102, 0));
 
-        lError.setForeground(new java.awt.Color(255, 0, 0));
+        lError.setForeground(new java.awt.Color(204, 0, 0));
 
         tbEstado.setText("Activo");
         tbEstado.setEnabled(false);
@@ -153,6 +157,17 @@ public class MantenedorParametro extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Mantenedor Parámetro");
 
+        taParametro.setColumns(20);
+        taParametro.setLineWrap(true);
+        taParametro.setRows(5);
+        taParametro.setWrapStyleWord(true);
+        taParametro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                taParametroMousePressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(taParametro);
+
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
@@ -165,78 +180,68 @@ public class MantenedorParametro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTipoEval, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                            .addComponent(lExito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 43, Short.MAX_VALUE)
+                                .addComponent(bAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(4, 4, 4)
-                                                        .addComponent(jLabel1)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(tfParametro))))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(cbTipoEval, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(39, 39, 39)
-                                        .addComponent(bAgregar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bModificar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bLimpiar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 41, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)))
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbTipoEval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bAgregar)
                             .addComponent(bLimpiar)
                             .addComponent(bModificar)
-                            .addComponent(tbEstado))
-                        .addGap(29, 29, 29)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tbEstado)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(cbTipoEval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lExito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -264,9 +269,9 @@ public class MantenedorParametro extends javax.swing.JFrame {
             desactivarEstado();
         }
         if (model.getValueAt(tblParametro.getSelectedRow(), 1) != null) {
-            tfParametro.setText(model.getValueAt(tblParametro.getSelectedRow(), 1).toString());
+            taParametro.setText(model.getValueAt(tblParametro.getSelectedRow(), 1).toString());
         } else {
-            tfParametro.setText("");
+            taParametro.setText("");
         }
         if (model.getValueAt(tblParametro.getSelectedRow(), 2) != null) {
             taDescripcion.setText(model.getValueAt(tblParametro.getSelectedRow(), 2).toString());
@@ -285,7 +290,7 @@ public class MantenedorParametro extends javax.swing.JFrame {
         bModificar.setEnabled(false);
         limpiarMsgs();
         tblParametro.clearSelection();
-        tfParametro.setText("");
+        taParametro.setText("");
         taDescripcion.setText("");
         cbTipoEval.setSelectedIndex(0);
     }//GEN-LAST:event_bLimpiarActionPerformed
@@ -323,13 +328,13 @@ public class MantenedorParametro extends javax.swing.JFrame {
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         pmbo = new SsfParametroBO();
         limpiarMsgs();
-        if (tfParametro.getText().trim().equals("")) {
+        if (taParametro.getText().trim().equals("")) {
             lError.setText("Ingrese un nombre para el Parámetro");
         } else if (cbTipoEval.getSelectedIndex() == 0) {
             lError.setText("Seleccione un tipo evaluación");
         } else {
             String nom, desc, idtipoeval;
-            nom = tfParametro.getText();
+            nom = taParametro.getText();
             desc = taDescripcion.getText();
             idtipoeval = mapte.get(cbTipoEval.getSelectedItem()).toString();
             SsfParametro pm = new SsfParametro();
@@ -337,7 +342,13 @@ public class MantenedorParametro extends javax.swing.JFrame {
             pm.setDescripcion(desc);
             pm.setIdEvaluaciontipo(new SsfEvaluaciontipo(BigDecimal.valueOf((long) Long.valueOf(idtipoeval))));
             if (pmbo.addSP(pm)) {
-                lExito.setText("Parámetro agregado exitosamente.");
+                if (!lExito.getText().isEmpty()) {
+                    contador++;
+                    lExito.setText("Parámetro agregado exitosamente. ("+contador+")");
+                }else{
+                    contador=0;
+                    lExito.setText("Parámetro agregado exitosamente.");
+                }
                 cargaTabla();
             } else {
                 lError.setText("No se pudo agregar");
@@ -357,14 +368,14 @@ public class MantenedorParametro extends javax.swing.JFrame {
                 lError.setText("No hay fila seleccionada");
             }
         } else {
-            if (tfParametro.getText().trim().equals("")) {
+            if (taParametro.getText().trim().equals("")) {
                 lError.setText("Nombre Parámetro no puede quedar en blanco");
             } else if (cbTipoEval.getSelectedIndex() == 0) {
                 lError.setText("Seleccione un tipo evaluación");
             } else {
                 String desc, nom, id, idtipoeval;
                 id = model.getValueAt(tblParametro.getSelectedRow(), 0).toString();
-                nom = tfParametro.getText().trim();
+                nom = taParametro.getText().trim();
                 desc = taDescripcion.getText().trim();
                 idtipoeval = mapte.get(cbTipoEval.getSelectedItem()).toString();
                 SsfParametro pm = new SsfParametro();
@@ -382,6 +393,10 @@ public class MantenedorParametro extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bModificarActionPerformed
+
+    private void taParametroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taParametroMousePressed
+        limpiarMsgs();
+    }//GEN-LAST:event_taParametroMousePressed
 
     /**
      * @param args the command line arguments
@@ -434,17 +449,19 @@ public class MantenedorParametro extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
     private javax.swing.JTextArea taDescripcion;
+    private javax.swing.JTextArea taParametro;
     private javax.swing.JToggleButton tbEstado;
     private javax.swing.JTable tblParametro;
-    private javax.swing.JTextField tfParametro;
     // End of variables declaration//GEN-END:variables
 
     private SsfParametroBO pmbo;
     private HashMap<String, Integer> mapte = new HashMap<>();
     private FormsController formsController;
+    private int contador = 1;
 
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;

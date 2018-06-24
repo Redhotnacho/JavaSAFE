@@ -43,6 +43,8 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         initComponents();
         PropertyConfigurator.configure("log4j.properties");
         resizeTabla();
+        pnlParam.setVisible(false);
+        lstParametro.setEnabled(false);
     }
 
     /**
@@ -75,22 +77,22 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         cbEmpresa = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        pnlListaParam = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         lstParametro = new javax.swing.JList<>();
-        lParametro = new javax.swing.JLabel();
+        pnlParam = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        lErrorParametro = new javax.swing.JLabel();
         rSi = new javax.swing.JRadioButton();
         rNo = new javax.swing.JRadioButton();
-        rPendiente = new javax.swing.JRadioButton();
-        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taObservacion = new javax.swing.JTextArea();
-        bModificarParametro = new javax.swing.JButton();
-        lErrorParametro = new javax.swing.JLabel();
         lExitoParametro = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblParametro = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
+        rPendiente = new javax.swing.JRadioButton();
+        bModificarParametro = new javax.swing.JButton();
+        lParametro = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -108,6 +110,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -148,9 +151,9 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblEvaluacion);
 
-        lExito.setForeground(new java.awt.Color(0, 204, 51));
+        lExito.setForeground(new java.awt.Color(0, 102, 0));
 
-        lError.setForeground(new java.awt.Color(255, 0, 0));
+        lError.setForeground(new java.awt.Color(204, 0, 0));
 
         tbEstado.setText("Activo");
         tbEstado.setEnabled(false);
@@ -201,6 +204,10 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
 
         jLabel5.setText("Empresa:");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel8.setText("Formulario Evaluación");
+
         jLabel6.setText("Parámetros Evaluación:");
 
         lstParametro.setModel(new javax.swing.AbstractListModel<String>() {
@@ -215,9 +222,29 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(lstParametro);
 
-        lParametro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lParametro.setText("[Parámetro]");
-        lParametro.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        javax.swing.GroupLayout pnlListaParamLayout = new javax.swing.GroupLayout(pnlListaParam);
+        pnlListaParam.setLayout(pnlListaParamLayout);
+        pnlListaParamLayout.setHorizontalGroup(
+            pnlListaParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(pnlListaParamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlListaParamLayout.setVerticalGroup(
+            pnlListaParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlListaParamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4)
+                .addContainerGap())
+        );
+
+        jLabel7.setText("Observación:");
+
+        lErrorParametro.setForeground(new java.awt.Color(255, 51, 0));
 
         bgParametro.add(rSi);
         rSi.setText("Sí");
@@ -225,15 +252,16 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         bgParametro.add(rNo);
         rNo.setText("No");
 
-        bgParametro.add(rPendiente);
-        rPendiente.setText("Pendiente");
-
-        jLabel7.setText("Observación:");
-
         taObservacion.setColumns(20);
         taObservacion.setLineWrap(true);
         taObservacion.setRows(5);
+        taObservacion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(taObservacion);
+
+        lExitoParametro.setForeground(new java.awt.Color(0, 204, 51));
+
+        bgParametro.add(rPendiente);
+        rPendiente.setText("Pendiente");
 
         bModificarParametro.setText("Modificar Parámetro");
         bModificarParametro.setEnabled(false);
@@ -243,43 +271,62 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             }
         });
 
-        lErrorParametro.setForeground(new java.awt.Color(255, 51, 0));
+        lParametro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lParametro.setText("[Parámetro]");
+        lParametro.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lParametro.setMaximumSize(new java.awt.Dimension(74, 50));
 
-        lExitoParametro.setForeground(new java.awt.Color(0, 204, 51));
-
-        tblParametro.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Parámetro"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblParametro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblParametroMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(tblParametro);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel8.setText("Formulario Evaluación");
+        javax.swing.GroupLayout pnlParamLayout = new javax.swing.GroupLayout(pnlParam);
+        pnlParam.setLayout(pnlParamLayout);
+        pnlParamLayout.setHorizontalGroup(
+            pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlParamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlParamLayout.createSequentialGroup()
+                            .addGroup(pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(rNo)
+                                .addComponent(rPendiente)
+                                .addComponent(rSi)
+                                .addComponent(bModificarParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel7)
+                            .addGap(344, 344, 344))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlParamLayout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(lExitoParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lErrorParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlParamLayout.setVerticalGroup(
+            pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlParamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlParamLayout.createSequentialGroup()
+                        .addComponent(rSi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rNo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rPendiente)
+                        .addGap(41, 41, 41)
+                        .addComponent(bModificarParametro))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlParamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lExitoParametro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lErrorParametro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
@@ -293,76 +340,55 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lExitoParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lErrorParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bModificarParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(rNo)
-                                    .addComponent(rPendiente)
-                                    .addComponent(rSi))
-                                .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbEstadoEval, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbTipoEval, 0, 208, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 80, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
+                                .addComponent(pnlParam, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbEstadoEval, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbTipoEval, 0, 208, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bAgregar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bModificar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bLimpiar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(lParametro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(pnlListaParam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,38 +417,15 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
                     .addComponent(tbEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lExito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(lParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rSi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rNo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rPendiente)
-                        .addGap(18, 18, 18)
-                        .addComponent(bModificarParametro)))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lErrorParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lExitoParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlListaParam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlParam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -481,10 +484,12 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             //cargaParametroTabla(cbTipoEval.getSelectedItem().toString());
             cargaParametroList(cbTipoEval.getSelectedItem().toString());
         }
-
+        lstParametro.setEnabled(true);
+        pnlListaParam.setVisible(true);
     }//GEN-LAST:event_tblEvaluacionMouseClicked
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
+        pnlListaParam.setVisible(false);
         tbEstado.setEnabled(false);
         bModificar.setEnabled(false);
         limpiarMsgs();
@@ -643,16 +648,14 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     }//GEN-LAST:event_cbTipoEvalActionPerformed
 
     private void lstParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstParametroMouseClicked
-        lstParametro.removeAll();
-        bModificarParametro.setEnabled(true);
-        limpiarMsgs();
-        cargaParametroEv();
+        if (lstParametro.isEnabled()) {
+            pnlParam.setVisible(true);
+            lstParametro.removeAll();
+            bModificarParametro.setEnabled(true);
+            limpiarMsgs();
+            cargaParametroEv();
+        }
     }//GEN-LAST:event_lstParametroMouseClicked
-
-    private void tblParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblParametroMouseClicked
-        limpiarMsgs();
-        cargaParametroEv();
-    }//GEN-LAST:event_tblParametroMouseClicked
 
     private void bModificarParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarParametroActionPerformed
         DefaultTableModel model = (DefaultTableModel) tblEvaluacion.getModel();
@@ -663,7 +666,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             lErrorParametro.setText("No hay fila evaluación seleccionada");
         } else if (tblEvaluacion.getRowCount() == 0) {
             lErrorParametro.setText("Tabla evaluación vacía");
-        } /*else if (tblParametro.getRowCount() == -1) {
+        } /*else if (tbtaParametro.getRowCount() == -1) {
             lErrorParametro.setText("Tabla parámetro vacía");
         } */ else if (lstParametro.getSelectedIndex() == -1) {
             lErrorParametro.setText("No hay lista seleccionada");
@@ -671,7 +674,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             SsfEvaluacionparametro ep = null;
             Short aprueba;
             for (Map.Entry<String, SsfEvaluacionparametro> entry : mapep.entrySet()) {
-                if (entry.getValue().getIdParametro().getParametro().equalsIgnoreCase(lstParametro.getSelectedValue())) {
+                if (entry.getValue().getIdParametro().getParametro().equalsIgnoreCase(lstParametro.getSelectedValue().substring(2, lstParametro.getSelectedValue().length()))) {
                     ep = entry.getValue();
                 }
             }
@@ -770,7 +773,6 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lErrorParametro;
@@ -778,13 +780,14 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     private javax.swing.JLabel lExitoParametro;
     private javax.swing.JLabel lParametro;
     private javax.swing.JList<String> lstParametro;
+    private javax.swing.JPanel pnlListaParam;
+    private javax.swing.JPanel pnlParam;
     private javax.swing.JRadioButton rNo;
     private javax.swing.JRadioButton rPendiente;
     private javax.swing.JRadioButton rSi;
     private javax.swing.JTextArea taObservacion;
     private javax.swing.JToggleButton tbEstado;
     private javax.swing.JTable tblEvaluacion;
-    private javax.swing.JTable tblParametro;
     private javax.swing.JTextField tfEvaluacion;
     private javax.swing.JTextField tfFecha;
     // End of variables declaration//GEN-END:variables
@@ -836,7 +839,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     }
 
     private void cargaTabla() {
-        
+
         DefaultTableModel model = (DefaultTableModel) tblEvaluacion.getModel();
         model.setRowCount(0);
         ebo = new SsfEvaluacionBO();
@@ -853,7 +856,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         }
         tblEvaluacion.setModel(model);
     }
-    
+
     private void desactivarEstado() {
         tbEstado.setText("Desactivado");
         tbEstado.setBackground(new java.awt.Color(255, 51, 51));
@@ -874,7 +877,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     /* alternativa a Lista parametros
     private void cargaParametroTabla(String tipoeval) {
         DefaultTableModel model = (DefaultTableModel) tblEvaluacion.getModel();
-        DefaultTableModel model2 = (DefaultTableModel) tblParametro.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) tbtaParametro.getModel();
         model2.setRowCount(0);
         SsfEvaluacionparametroBO epbo = new SsfEvaluacionparametroBO();
         if (lep == null) {
@@ -896,9 +899,8 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
                 model2.addRow(new Object[]{entry.getValue().getIdParametro().getParametro()});
             }
         }
-        tblParametro.setModel(model2);
+        tbtaParametro.setModel(model2);
     }*/
-    
     private void cargaParametroList(String tipoeval) {
         if (tblEvaluacion.getSelectedRow() == -1) {
             tbEstado.setEnabled(false);
@@ -917,7 +919,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             mapep = new HashMap<>();
             for (SsfEvaluacionparametro ep : lep) {
                 if (ep.getIdEvaluacion() != null) {
-                    if (ep.getIdEvaluacion().getId().intValue() == id) {
+                    if (ep.getIdEvaluacion().getId().intValue() == id && ep.getEstado() == 1) {
                         mapep.put(ep.getIdParametro().getParametro(), ep);
                     }
                 }
@@ -926,7 +928,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
             for (Map.Entry<String, SsfEvaluacionparametro> entry : mapep.entrySet()) {
                 if (entry.getValue().getIdParametro().getIdEvaluaciontipo().getTipo().equalsIgnoreCase(tipoeval)
                         && entry.getValue().getIdEvaluacion().getIdEvaluaciontipo().getTipo().equalsIgnoreCase(entry.getValue().getIdParametro().getIdEvaluaciontipo().getTipo())) {
-                    lmodel.addElement(entry.getValue().getIdParametro().getParametro());
+                    lmodel.addElement("- "+entry.getValue().getIdParametro().getParametro());
                 }
             }
             lstParametro.setModel(lmodel);
@@ -936,28 +938,28 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
 
     private void cargaParametroEv() {
         DefaultTableModel model = (DefaultTableModel) tblEvaluacion.getModel();
-        //DefaultTableModel model2 = (DefaultTableModel) tblParametro.getModel();
+        //DefaultTableModel model2 = (DefaultTableModel) tbtaParametro.getModel();
         String ideval = model.getValueAt(tblEvaluacion.getSelectedRow(), 0).toString();
         /*
         if (tblEvaluacion.getSelectedRow() == -1) {
             tbEstado.setEnabled(false);
         } else if(tblEvaluacion.getRowCount() == 0){
             lErrorParametro.setText("Tabla evaluación vacía");
-        }else  if (tblParametro.getRowCount() == 0) {
+        }else  if (tbtaParametro.getRowCount() == 0) {
             lErrorParametro.setText("Tabla parámetro vacía");
         } else */
         if (lstParametro.getSelectedIndex() == -1) {
             lErrorParametro.setText("No hay lista seleccionada");
         } else {
-            //String lparametro = model2.getValueAt(tblParametro.getSelectedRow(), 0).toString();
+            //String lparametro = model2.getValueAt(tbtaParametro.getSelectedRow(), 0).toString();
             String lstparametro = lstParametro.getSelectedValue();
-            System.out.println("Parámetro List: " + lstparametro);
+            //System.out.println("Parámetro List: " + lstparametro);
             //System.out.println("Parámetro tbl: "+lparametro);
             if (mapep != null) {
                 for (Map.Entry<String, SsfEvaluacionparametro> entry : mapep.entrySet()) {
                     if ((entry.getValue().getIdEvaluacion().getId().intValue() == Integer.parseInt(ideval)
                             || entry.getValue().getIdEvaluacion().getId().toString().equals(ideval))
-                            && entry.getValue().getIdParametro().getParametro().equalsIgnoreCase(lstparametro)) { //lparametro
+                            && entry.getValue().getIdParametro().getParametro().equalsIgnoreCase(lstparametro.subSequence(2, lstparametro.length()).toString())) { //lparametro
                         taObservacion.setText(entry.getValue().getObservacion());
                         switch (entry.getValue().getAprueba()) {
                             case 1:
@@ -969,7 +971,7 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
                             default:
                                 rPendiente.setSelected(true);
                         }
-                        lParametro.setText(entry.getValue().getIdParametro().getParametro());
+                        lParametro.setText("<html>"+entry.getValue().getIdParametro().getParametro()+"<html>");
                     }
                 }
             }
@@ -977,15 +979,15 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
     }
 
     private void limpiarParametro() {
+        pnlParam.setVisible(false);
         taObservacion.setText("");
         rPendiente.setSelected(true);
         lParametro.setText("[ Parámetro ]");
         lstParametro.clearSelection();
-        tblParametro.clearSelection();
         bModificarParametro.setEnabled(false);
     }
 
-    private void resizeTabla() { 
+    private void resizeTabla() {
         tblEvaluacion.getColumnModel().getColumn(0).setMaxWidth(40);
         tblEvaluacion.getColumnModel().getColumn(1).setMaxWidth(150);
         tblEvaluacion.getColumnModel().getColumn(2).setMaxWidth(80);
@@ -995,7 +997,5 @@ public class FormularioEvaluacion extends javax.swing.JFrame {
         tblEvaluacion.getColumnModel().getColumn(6).setMaxWidth(110);
         tblEvaluacion.getColumnModel().getColumn(7).setMaxWidth(50);
     }
-    
-    
-    
+
 }
