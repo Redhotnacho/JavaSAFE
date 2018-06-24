@@ -45,7 +45,7 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Bienvenido a SAFE, Prevención de riesgos");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(50, 70, 580, 50);
