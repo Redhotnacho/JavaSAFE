@@ -134,12 +134,12 @@ public class SsfUsuarioJpaController implements Serializable {
                 }
             }
             for (SsfFichamedica ssfFichamedicaListSsfFichamedica : ssfUsuario.getSsfFichamedicaList()) {
-                SsfUsuario oldIdUsuarioOfSsfFichamedicaListSsfFichamedica = ssfFichamedicaListSsfFichamedica.getIdUsuario();
-                ssfFichamedicaListSsfFichamedica.setIdUsuario(ssfUsuario);
+                SsfUsuario oldIdAtencionmedicaOfSsfFichamedicaListSsfFichamedica = ssfFichamedicaListSsfFichamedica.getIdAtencionmedica();
+                ssfFichamedicaListSsfFichamedica.setIdAtencionmedica(ssfUsuario);
                 ssfFichamedicaListSsfFichamedica = em.merge(ssfFichamedicaListSsfFichamedica);
-                if (oldIdUsuarioOfSsfFichamedicaListSsfFichamedica != null) {
-                    oldIdUsuarioOfSsfFichamedicaListSsfFichamedica.getSsfFichamedicaList().remove(ssfFichamedicaListSsfFichamedica);
-                    oldIdUsuarioOfSsfFichamedicaListSsfFichamedica = em.merge(oldIdUsuarioOfSsfFichamedicaListSsfFichamedica);
+                if (oldIdAtencionmedicaOfSsfFichamedicaListSsfFichamedica != null) {
+                    oldIdAtencionmedicaOfSsfFichamedicaListSsfFichamedica.getSsfFichamedicaList().remove(ssfFichamedicaListSsfFichamedica);
+                    oldIdAtencionmedicaOfSsfFichamedicaListSsfFichamedica = em.merge(oldIdAtencionmedicaOfSsfFichamedicaListSsfFichamedica);
                 }
             }
             em.getTransaction().commit();
@@ -280,18 +280,18 @@ public class SsfUsuarioJpaController implements Serializable {
             }
             for (SsfFichamedica ssfFichamedicaListOldSsfFichamedica : ssfFichamedicaListOld) {
                 if (!ssfFichamedicaListNew.contains(ssfFichamedicaListOldSsfFichamedica)) {
-                    ssfFichamedicaListOldSsfFichamedica.setIdUsuario(null);
+                    ssfFichamedicaListOldSsfFichamedica.setIdAtencionmedica(null);
                     ssfFichamedicaListOldSsfFichamedica = em.merge(ssfFichamedicaListOldSsfFichamedica);
                 }
             }
             for (SsfFichamedica ssfFichamedicaListNewSsfFichamedica : ssfFichamedicaListNew) {
                 if (!ssfFichamedicaListOld.contains(ssfFichamedicaListNewSsfFichamedica)) {
-                    SsfUsuario oldIdUsuarioOfSsfFichamedicaListNewSsfFichamedica = ssfFichamedicaListNewSsfFichamedica.getIdUsuario();
-                    ssfFichamedicaListNewSsfFichamedica.setIdUsuario(ssfUsuario);
+                    SsfUsuario oldIdAtencionmedicaOfSsfFichamedicaListNewSsfFichamedica = ssfFichamedicaListNewSsfFichamedica.getIdAtencionmedica();
+                    ssfFichamedicaListNewSsfFichamedica.setIdAtencionmedica(ssfUsuario);
                     ssfFichamedicaListNewSsfFichamedica = em.merge(ssfFichamedicaListNewSsfFichamedica);
-                    if (oldIdUsuarioOfSsfFichamedicaListNewSsfFichamedica != null && !oldIdUsuarioOfSsfFichamedicaListNewSsfFichamedica.equals(ssfUsuario)) {
-                        oldIdUsuarioOfSsfFichamedicaListNewSsfFichamedica.getSsfFichamedicaList().remove(ssfFichamedicaListNewSsfFichamedica);
-                        oldIdUsuarioOfSsfFichamedicaListNewSsfFichamedica = em.merge(oldIdUsuarioOfSsfFichamedicaListNewSsfFichamedica);
+                    if (oldIdAtencionmedicaOfSsfFichamedicaListNewSsfFichamedica != null && !oldIdAtencionmedicaOfSsfFichamedicaListNewSsfFichamedica.equals(ssfUsuario)) {
+                        oldIdAtencionmedicaOfSsfFichamedicaListNewSsfFichamedica.getSsfFichamedicaList().remove(ssfFichamedicaListNewSsfFichamedica);
+                        oldIdAtencionmedicaOfSsfFichamedicaListNewSsfFichamedica = em.merge(oldIdAtencionmedicaOfSsfFichamedicaListNewSsfFichamedica);
                     }
                 }
             }
@@ -351,7 +351,7 @@ public class SsfUsuarioJpaController implements Serializable {
             }
             List<SsfFichamedica> ssfFichamedicaList = ssfUsuario.getSsfFichamedicaList();
             for (SsfFichamedica ssfFichamedicaListSsfFichamedica : ssfFichamedicaList) {
-                ssfFichamedicaListSsfFichamedica.setIdUsuario(null);
+                ssfFichamedicaListSsfFichamedica.setIdAtencionmedica(null);
                 ssfFichamedicaListSsfFichamedica = em.merge(ssfFichamedicaListSsfFichamedica);
             }
             em.remove(ssfUsuario);
@@ -408,5 +408,5 @@ public class SsfUsuarioJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

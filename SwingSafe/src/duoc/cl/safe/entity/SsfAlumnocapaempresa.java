@@ -7,8 +7,8 @@ package duoc.cl.safe.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,7 +51,7 @@ public class SsfAlumnocapaempresa implements Serializable {
     @Column(name = "ESTADO")
     private Short estado;
     @Column(name = "APROBACION")
-    private BigInteger aprobacion;
+    private Short aprobacion;
     @JoinColumn(name = "ID_ALUMNO", referencedColumnName = "ID")
     @ManyToOne
     private SsfAlumno idAlumno;
@@ -59,6 +61,8 @@ public class SsfAlumnocapaempresa implements Serializable {
     @JoinColumn(name = "ID_CERTIFICADO", referencedColumnName = "ID")
     @ManyToOne
     private SsfCertificado idCertificado;
+    @OneToMany(mappedBy = "idAlumcapaempresa")
+    private List<SsfAsistencia> ssfAsistenciaList;
 
     public SsfAlumnocapaempresa() {
     }
@@ -91,11 +95,11 @@ public class SsfAlumnocapaempresa implements Serializable {
         this.estado = estado;
     }
 
-    public BigInteger getAprobacion() {
+    public Short getAprobacion() {
         return aprobacion;
     }
 
-    public void setAprobacion(BigInteger aprobacion) {
+    public void setAprobacion(Short aprobacion) {
         this.aprobacion = aprobacion;
     }
 
@@ -123,6 +127,15 @@ public class SsfAlumnocapaempresa implements Serializable {
         this.idCertificado = idCertificado;
     }
 
+    @XmlTransient
+    public List<SsfAsistencia> getSsfAsistenciaList() {
+        return ssfAsistenciaList;
+    }
+
+    public void setSsfAsistenciaList(List<SsfAsistencia> ssfAsistenciaList) {
+        this.ssfAsistenciaList = ssfAsistenciaList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -147,5 +160,5 @@ public class SsfAlumnocapaempresa implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfAlumnocapaempresa[ id=" + id + " ]";
     }
-
+    
 }

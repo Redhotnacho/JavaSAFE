@@ -10,6 +10,7 @@ import duoc.cl.safe.entity.SsfPerfil;
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.entity.SsfUsuario;
 import duoc.cl.safe.herramientas.FormsController;
+import duoc.cl.safe.herramientas.Utilidad;
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfPerfilBO;
 import duoc.cl.safe.negocio.SsfPersonaBO;
@@ -115,7 +116,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             }
         });
 
-        lExito.setForeground(new java.awt.Color(0, 204, 51));
+        lExito.setForeground(new java.awt.Color(0, 102, 0));
 
         cbPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccione Persona -" }));
         cbPersona.setEnabled(false);
@@ -205,9 +206,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(bRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pMantenedorUsuarioLayout.createSequentialGroup()
-                            .addGroup(pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lExito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(pMantenedorUsuarioLayout.createSequentialGroup()
                                     .addGroup(pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(pMantenedorUsuarioLayout.createSequentialGroup()
@@ -226,7 +225,9 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                                             .addComponent(jLabel3)
                                             .addGap(18, 18, 18)
                                             .addComponent(cbPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(0, 78, Short.MAX_VALUE)))
+                                    .addGap(88, 88, 88))
+                                .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pMantenedorUsuarioLayout.createSequentialGroup()
@@ -280,19 +281,19 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(bBuscarUsuario)
                     .addComponent(tfBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pMantenedorUsuarioLayout.createSequentialGroup()
-                        .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pMantenedorUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(bAgregar)
                         .addComponent(bLimpiar)
                         .addComponent(bModificar)
-                        .addComponent(tbEstado)))
+                        .addComponent(tbEstado))
+                    .addGroup(pMantenedorUsuarioLayout.createSequentialGroup()
+                        .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Cargando...");
@@ -309,7 +310,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 18, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE)
                 .addComponent(pMantenedorUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -334,7 +335,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             String[] palabras = busqueda.split("\\s+");
             String[] palabras2 = busqueda.split(Pattern.quote("."));
             List<SsfPersona> pp = new LinkedList<>();
-            if (ppall==null) {
+            if (ppall == null) {
                 SsfPersonaBO persBO = new SsfPersonaBO();
                 ppall = persBO.getAllSP();
             }
@@ -478,6 +479,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             cbPersona.setEnabled(true);
             cargaPersona();
             //cbPersona.setSelectedItem(model.getValueAt(tblUsuario.getSelectedRow(), 3).toString());
+            idPersonaModificar = mappers.get(cbPersona.getSelectedItem()).toString();
         } else {
             cbPersona.setSelectedIndex(0);
         }
@@ -513,6 +515,8 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             lError.setText("¡Las contraseñas no coinciden!");
         } else if (!cbPersona.isEnabled()) {
             lError.setText("¡Debe seleccionar una persona!");
+        } else if (cbPersona.isEnabled() && ExistePersona(mappers.get(cbPersona.getSelectedItem()).toString())) {
+            lError.setText("Persona ya está asociada a un usuario");
         } else {
             String username, password, idpersona, idperfil, idempresa;
             username = tfUsuario.getText();
@@ -562,6 +566,8 @@ public class MantenedorUsuario extends javax.swing.JFrame {
                 lError.setText("¡Las contraseñas no coinciden!");
             } else if (!cbPersona.isEnabled()) {
                 lError.setText("¡Debe seleccionar una persona!");
+            } else if (cbPersona.isEnabled() && ExistePersonaModificar(mappers.get(cbPersona.getSelectedItem()).toString())) {
+                lError.setText("Persona ya está asociada a un usuario");
             } else {
                 String id, username, password, idpersona, idperfil, idempresa;
                 id = model.getValueAt(tblUsuario.getSelectedRow(), 0).toString();
@@ -604,7 +610,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             String[] palabras = busqueda.split("\\s+");
             String[] palabras2 = busqueda.split(Pattern.quote("."));
             List<SsfUsuario> uu = new LinkedList<>();
-            if (lu==null) {
+            if (lu == null) {
                 ubo = new SsfUsuarioBO();
                 lu = ubo.getAllSP();
             }
@@ -796,11 +802,12 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     private HashMap<String, Integer> mapp = new HashMap<>();
     private HashMap<String, Integer> mappers = new HashMap<>();
     private FormsController formsController;
-    
+
     private List<SsfPersona> ppall;
     private DefaultTableModel model;
     private List<SsfUsuario> lu;
     private SsfUsuarioBO ubo;
+    private String idPersonaModificar;
 
     public void cargaEmpresa() {
         SsfEmpresaBO ebo = new SsfEmpresaBO();
@@ -830,7 +837,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         cbPersona.removeAllItems();
 
         pp.forEach((p) -> {
-            mappers.put("Rut: " + p.getRut() + " - Nombre: " + p.getNombre() + " " + p.getApPaterno() + " " + p.getApMaterno(), p.getId().intValue());
+            mappers.put("Rut: " + Utilidad.formatRutSalida(p.getRut()) + " - Nombre: " + p.getNombre() + " " + p.getApPaterno() + " " + p.getApMaterno(), p.getId().intValue());
         });
 
         mappers.forEach((s, i) -> {
@@ -851,7 +858,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
             }
         }
         if (u != null) {
-            mappers.put("Rut: " + u.getIdPersona().getRut() + " - Nombre: " + u.getIdPersona().getNombre()
+            mappers.put("Rut: " + Utilidad.formatRutSalida(u.getIdPersona().getRut()) + " - Nombre: " + u.getIdPersona().getNombre()
                     + " " + u.getIdPersona().getApPaterno() + " " + u.getIdPersona().getApMaterno(),
                     u.getIdPersona().getId().intValue());
         }
@@ -881,7 +888,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
 
         for (SsfUsuario u : lu) {
             model.addRow(new Object[]{u.getId(), u.getUsername(), u.getContrasena(),
-                u.getIdPersona().getRut() + " " + u.getIdPersona().getNombre() + " " + u.getIdPersona().getApPaterno(),
+                Utilidad.formatRutSalida(u.getIdPersona().getRut()) + " " + u.getIdPersona().getNombre() + " " + u.getIdPersona().getApPaterno(),
                 u.getIdPerfil().getPerfil(), u.getIdEmpresa().getNombre(), sdf.format(u.getFechCreacion()),
                 u.getEstado()});
         }
@@ -918,7 +925,7 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         for (SsfUsuario u : uu) {
 
             model.addRow(new Object[]{u.getId(), u.getUsername(), u.getContrasena(),
-                u.getIdPersona().getRut() + " " + u.getIdPersona().getNombre() + " " + u.getIdPersona().getApPaterno(),
+                Utilidad.formatRutSalida(u.getIdPersona().getRut()) + " " + u.getIdPersona().getNombre() + " " + u.getIdPersona().getApPaterno(),
                 u.getIdPerfil().getPerfil(), u.getIdEmpresa().getNombre(),
                 sdf.format(u.getFechCreacion()), u.getEstado()});
         }
@@ -928,8 +935,8 @@ public class MantenedorUsuario extends javax.swing.JFrame {
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
-    
-    private void resizeTabla() { 
+
+    private void resizeTabla() {
         tblUsuario.getColumnModel().getColumn(0).setMaxWidth(40);
         tblUsuario.getColumnModel().getColumn(1).setMaxWidth(110);
         tblUsuario.getColumnModel().getColumn(2).setMaxWidth(100);
@@ -939,7 +946,29 @@ public class MantenedorUsuario extends javax.swing.JFrame {
         tblUsuario.getColumnModel().getColumn(6).setMaxWidth(110);
         tblUsuario.getColumnModel().getColumn(7).setMaxWidth(50);
     }
-    
-    
+
+    private boolean ExistePersona(String idPersona) {
+        if (lu == null) {
+            lu = new SsfUsuarioBO().getAllSP();
+        }
+        for (SsfUsuario u : lu) {
+            if (u.getIdPersona().getId().intValue() == Integer.parseInt(idPersona)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean ExistePersonaModificar(String idPersona) {
+        if (lu == null) {
+            lu = new SsfUsuarioBO().getAllSP();
+        }
+        for (SsfUsuario u : lu) {
+            if (u.getIdPersona().getId().intValue() == Integer.parseInt(idPersona) && u.getIdPersona().getId().intValue() != Integer.parseInt(idPersonaModificar)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

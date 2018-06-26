@@ -64,6 +64,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -112,6 +113,10 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                 tbEstadoActionPerformed(evt);
             }
         });
+
+        lExito.setForeground(new java.awt.Color(0, 102, 0));
+
+        lError.setForeground(new java.awt.Color(204, 0, 0));
 
         tblEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,11 +169,11 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 56, Short.MAX_VALUE)
-                .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167))
+                .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -203,7 +208,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                             .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,9 +403,9 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
             lError.setText("Ingrese un nombre para Empresa");
         } else {
             String dir, tel, nom;
-            dir = tfDireccion.getText();
-            nom = tfEmpresa.getText();
-            tel = tfTelefono.getText();
+            dir = tfDireccion.getText().trim();
+            nom = tfEmpresa.getText().trim();
+            tel = tfTelefono.getText().trim();
             SsfEmpresa emp = new SsfEmpresa();
             try {
                 if (!tel.equals("")) {
@@ -440,7 +445,7 @@ public class MantenedorEmpresa extends javax.swing.JFrame {
                 String dir, nom, tel, id;
                 id = model.getValueAt(tblEmpresa.getSelectedRow(), 0).toString();
                 nom = tfEmpresa.getText().trim();
-                dir = tfEmpresa.getText();
+                dir = tfDireccion.getText().trim();
                 tel = tfTelefono.getText().trim();
                 SsfEmpresa emp = new SsfEmpresa();
 

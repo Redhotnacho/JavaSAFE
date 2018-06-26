@@ -201,5 +201,5 @@ public class SsfPersona implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfPersona[ id=" + id + " ]";
     }
-
+    
 }

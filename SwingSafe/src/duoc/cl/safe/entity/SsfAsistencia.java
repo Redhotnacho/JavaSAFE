@@ -7,7 +7,6 @@ package duoc.cl.safe.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "SsfAsistencia.findById", query = "SELECT s FROM SsfAsistencia s WHERE s.id = :id")
     , @NamedQuery(name = "SsfAsistencia.findByFechCreacion", query = "SELECT s FROM SsfAsistencia s WHERE s.fechCreacion = :fechCreacion")
     , @NamedQuery(name = "SsfAsistencia.findByEstado", query = "SELECT s FROM SsfAsistencia s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SsfAsistencia.findByIdAlumcapaempresa", query = "SELECT s FROM SsfAsistencia s WHERE s.idAlumcapaempresa = :idAlumcapaempresa")
     , @NamedQuery(name = "SsfAsistencia.findByAsiste", query = "SELECT s FROM SsfAsistencia s WHERE s.asiste = :asiste")})
 public class SsfAsistencia implements Serializable {
 
@@ -49,10 +47,11 @@ public class SsfAsistencia implements Serializable {
     private Date fechCreacion;
     @Column(name = "ESTADO")
     private Short estado;
-    @Column(name = "ID_ALUMCAPAEMPRESA")
-    private BigInteger idAlumcapaempresa;
     @Column(name = "ASISTE")
-    private BigInteger asiste;
+    private Short asiste;
+    @JoinColumn(name = "ID_ALUMCAPAEMPRESA", referencedColumnName = "ID")
+    @ManyToOne
+    private SsfAlumnocapaempresa idAlumcapaempresa;
     @JoinColumn(name = "ID_CAPACITACIONDIA", referencedColumnName = "ID")
     @ManyToOne
     private SsfCapacitaciondia idCapacitaciondia;
@@ -88,20 +87,20 @@ public class SsfAsistencia implements Serializable {
         this.estado = estado;
     }
 
-    public BigInteger getIdAlumcapaempresa() {
-        return idAlumcapaempresa;
-    }
-
-    public void setIdAlumcapaempresa(BigInteger idAlumcapaempresa) {
-        this.idAlumcapaempresa = idAlumcapaempresa;
-    }
-
-    public BigInteger getAsiste() {
+    public Short getAsiste() {
         return asiste;
     }
 
-    public void setAsiste(BigInteger asiste) {
+    public void setAsiste(Short asiste) {
         this.asiste = asiste;
+    }
+
+    public SsfAlumnocapaempresa getIdAlumcapaempresa() {
+        return idAlumcapaempresa;
+    }
+
+    public void setIdAlumcapaempresa(SsfAlumnocapaempresa idAlumcapaempresa) {
+        this.idAlumcapaempresa = idAlumcapaempresa;
     }
 
     public SsfCapacitaciondia getIdCapacitaciondia() {
@@ -136,5 +135,5 @@ public class SsfAsistencia implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfAsistencia[ id=" + id + " ]";
     }
-
+    
 }

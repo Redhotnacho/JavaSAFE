@@ -139,5 +139,5 @@ public class SsfAlumno implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfAlumno[ id=" + id + " ]";
     }
-
+    
 }

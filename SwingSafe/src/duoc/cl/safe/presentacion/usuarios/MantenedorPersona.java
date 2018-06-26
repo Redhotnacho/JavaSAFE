@@ -7,6 +7,7 @@ package duoc.cl.safe.presentacion.usuarios;
 
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.herramientas.FormsController;
+import duoc.cl.safe.herramientas.Utilidad;
 import duoc.cl.safe.negocio.SsfPersonaBO;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -185,51 +186,53 @@ public class MantenedorPersona extends javax.swing.JFrame {
         pMantenedorPersona.setLayout(pMantenedorPersonaLayout);
         pMantenedorPersonaLayout.setHorizontalGroup(
             pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMantenedorPersonaLayout.createSequentialGroup()
                 .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(28, 28, 28)
                         .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel7))
                         .addGap(4, 4, 4)
-                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfRut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
-                    .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfRut)
+                            .addComponent(tfNombre)
+                            .addComponent(tfFechaNac)
+                            .addComponent(bRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
                     .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
                         .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
-                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel3))
-                                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                        .addComponent(jLabel4)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfAp1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfAp2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfCorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3))
+                            .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfAp1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAp2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMantenedorPersonaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pMantenedorPersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMantenedorPersonaLayout.createSequentialGroup()
-                                .addGap(32, 32, 32)
                                 .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bLimpiar)
@@ -237,12 +240,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
                                 .addComponent(bModificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pMantenedorPersonaLayout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(106, 106, 106))))
+                            .addComponent(lError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(57, 57, 57))
             .addComponent(jScrollPane1)
         );
         pMantenedorPersonaLayout.setVerticalGroup(
@@ -290,8 +289,10 @@ public class MantenedorPersona extends javax.swing.JFrame {
                     .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
         );
+
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(600, 21));
 
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
@@ -302,13 +303,13 @@ public class MantenedorPersona extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pMantenedorPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pMantenedorPersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
-                .addComponent(pMantenedorPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(pMantenedorPersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -334,7 +335,8 @@ public class MantenedorPersona extends javax.swing.JFrame {
             desactivarEstado();
         }
         if (model.getValueAt(tblPersona.getSelectedRow(), 1) != null) {
-            tfRut.setText(model.getValueAt(tblPersona.getSelectedRow(), 1).toString());
+            tfRut.setText(Utilidad.formatRutSalida(model.getValueAt(tblPersona.getSelectedRow(), 1).toString()));
+            rutModificar = model.getValueAt(tblPersona.getSelectedRow(), 1).toString();
         } else {
             tfRut.setText("");
         }
@@ -420,16 +422,22 @@ public class MantenedorPersona extends javax.swing.JFrame {
         limpiarMsgs();
         if (tfNombre.getText().trim().equals("")) {
             lError.setText("Ingrese un nombre");
+        } else if (tfRut.getText().trim().isEmpty()) {
+            lError.setText("Rut no puede quedar en blanco");
+        } else if (!Utilidad.validaRut(tfRut.getText().trim())) {
+            lError.setText("Rut no válido");
+        } else if (ExisteRut(tfRut.getText().trim())) {
+            lError.setText("Rut ya está registrado");
         } else {
             String rut, nom, ap1, ap2, correo, tel, sfech;
             Date fecha = null;
-            rut = tfRut.getText();
-            nom = tfNombre.getText();
-            ap1 = tfAp1.getText();
-            ap2 = tfAp2.getText();
-            correo = tfCorreo.getText();
-            tel = tfTelefono.getText();
-            sfech = tfFechaNac.getText();
+            rut = Utilidad.formatRutIngreso(tfRut.getText());
+            nom = tfNombre.getText().trim();
+            ap1 = tfAp1.getText().trim();
+            ap2 = tfAp2.getText().trim();
+            correo = tfCorreo.getText().trim();
+            tel = tfTelefono.getText().trim();
+            sfech = tfFechaNac.getText().trim();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             SsfPersona p = new SsfPersona();
             try {
@@ -486,17 +494,23 @@ public class MantenedorPersona extends javax.swing.JFrame {
         } else {
             if (tfNombre.getText().trim().equals("")) {
                 lError.setText("Ingrese un nombre");
+            } else if (tfRut.getText().trim().isEmpty()) {
+                lError.setText("Rut no puede quedar en blanco");
+            } else if (!Utilidad.validaRut(tfRut.getText().trim())) {
+                lError.setText("Rut no válido");
+            } else if (ExisteRutModificar(tfRut.getText().trim())) {
+                lError.setText("Rut ya está registrado");
             } else {
                 String rut, nom, ap1, ap2, correo, tel, sfech, id;
                 id = model.getValueAt(tblPersona.getSelectedRow(), 0).toString();
                 Date fecha = null;
-                rut = tfRut.getText();
-                nom = tfNombre.getText();
-                ap1 = tfAp1.getText();
-                ap2 = tfAp2.getText();
-                correo = tfCorreo.getText();
-                tel = tfTelefono.getText();
-                sfech = tfFechaNac.getText();
+                rut = Utilidad.formatRutIngreso(tfRut.getText());
+                nom = tfNombre.getText().trim();
+                ap1 = tfAp1.getText().trim();
+                ap2 = tfAp2.getText().trim();
+                correo = tfCorreo.getText().trim();
+                tel = tfTelefono.getText().trim();
+                sfech = tfFechaNac.getText().trim();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 SsfPersona p = new SsfPersona();
                 try {
@@ -531,7 +545,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
                     p.setCorreo(correo);
                     if (pbo.updateSP(p)) {
                         lExito.setText("Persona modificada exitosamente.");
-                        model.setValueAt(rut, tblPersona.getSelectedRow(), 1);
+                        model.setValueAt(Utilidad.formatRutSalida(rut), tblPersona.getSelectedRow(), 1);
                         model.setValueAt(nom, tblPersona.getSelectedRow(), 2);
                         model.setValueAt(ap1, tblPersona.getSelectedRow(), 3);
                         model.setValueAt(ap2, tblPersona.getSelectedRow(), 4);
@@ -565,7 +579,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             String[] palabras = busqueda.split("\\s+");
             String[] palabras2 = busqueda.split(Pattern.quote("."));
             List<SsfPersona> pp = new LinkedList<>();
-            if (lp==null) {
+            if (lp == null) {
                 pbo = new SsfPersonaBO();
                 lp = pbo.getAllSP();
             }
@@ -745,6 +759,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
     private SsfPersonaBO pbo;
     private FormsController formsController;
     private List<SsfPersona> lp;
+    private String rutModificar;
 
     private void cargaTabla() {
         model.setRowCount(0);
@@ -759,7 +774,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             } else {
                 sfecha = "";
             }
-            model.addRow(new Object[]{p.getId(), p.getRut(), p.getNombre(), p.getApPaterno(), p.getApMaterno(), p.getCorreo(), p.getTelefono(), sfecha, sdf.format(p.getFechCreacion()), p.getEstado()});
+            model.addRow(new Object[]{p.getId(), Utilidad.formatRutSalida(p.getRut()), p.getNombre(), p.getApPaterno(), p.getApMaterno(), p.getCorreo(), p.getTelefono(), sfecha, sdf.format(p.getFechCreacion()), p.getEstado()});
         }
         tblPersona.setModel(model);
 
@@ -800,7 +815,7 @@ public class MantenedorPersona extends javax.swing.JFrame {
             } else {
                 sfecha = "";
             }
-            model.addRow(new Object[]{p.getId(), p.getRut(), p.getNombre(),
+            model.addRow(new Object[]{p.getId(), Utilidad.formatRutSalida(p.getRut()), p.getNombre(),
                 p.getApPaterno(), p.getApMaterno(), p.getCorreo(), p.getTelefono(),
                 sfecha, sdf.format(p.getFechCreacion()), p.getEstado()});
         }
@@ -822,5 +837,29 @@ public class MantenedorPersona extends javax.swing.JFrame {
         tblPersona.getColumnModel().getColumn(7).setMaxWidth(110);
         tblPersona.getColumnModel().getColumn(8).setMaxWidth(110);
         tblPersona.getColumnModel().getColumn(9).setMaxWidth(50);
+    }
+
+    private boolean ExisteRut(String rut) {
+        if (lp == null) {
+            lp = new SsfPersonaBO().getAllSP();
+        }
+        for (SsfPersona p : lp) {
+            if (Utilidad.formatRutIngreso(rut).equalsIgnoreCase(p.getRut())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean ExisteRutModificar(String rut) {
+        if (lp == null) {
+            lp = new SsfPersonaBO().getAllSP();
+        }
+        for (SsfPersona p : lp) {
+            if (Utilidad.formatRutIngreso(rut).equalsIgnoreCase(p.getRut()) && !p.getRut().equalsIgnoreCase(Utilidad.formatRutIngreso(rutModificar) )) {
+                return true;
+            }
+        }
+        return false;
     }
 }

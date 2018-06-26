@@ -7,18 +7,13 @@ package duoc.cl.safe.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,10 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SsfFichamedicaatencion.findAll", query = "SELECT s FROM SsfFichamedicaatencion s")
-    , @NamedQuery(name = "SsfFichamedicaatencion.findById", query = "SELECT s FROM SsfFichamedicaatencion s WHERE s.id = :id")
-    , @NamedQuery(name = "SsfFichamedicaatencion.findByFechCreacion", query = "SELECT s FROM SsfFichamedicaatencion s WHERE s.fechCreacion = :fechCreacion")
-    , @NamedQuery(name = "SsfFichamedicaatencion.findByEstado", query = "SELECT s FROM SsfFichamedicaatencion s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SsfFichamedicaatencion.findByFechaAtencion", query = "SELECT s FROM SsfFichamedicaatencion s WHERE s.fechaAtencion = :fechaAtencion")})
+    , @NamedQuery(name = "SsfFichamedicaatencion.findById", query = "SELECT s FROM SsfFichamedicaatencion s WHERE s.id = :id")})
 public class SsfFichamedicaatencion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,20 +34,6 @@ public class SsfFichamedicaatencion implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private BigDecimal id;
-    @Column(name = "FECH_CREACION")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechCreacion;
-    @Column(name = "ESTADO")
-    private Short estado;
-    @Column(name = "FECHA_ATENCION")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaAtencion;
-    @JoinColumn(name = "ID_ATENCIONMEDICA", referencedColumnName = "ID")
-    @ManyToOne
-    private SsfAtencionmedica idAtencionmedica;
-    @JoinColumn(name = "ID_FICHAMEDICA", referencedColumnName = "ID")
-    @ManyToOne
-    private SsfFichamedica idFichamedica;
 
     public SsfFichamedicaatencion() {
     }
@@ -70,46 +48,6 @@ public class SsfFichamedicaatencion implements Serializable {
 
     public void setId(BigDecimal id) {
         this.id = id;
-    }
-
-    public Date getFechCreacion() {
-        return fechCreacion;
-    }
-
-    public void setFechCreacion(Date fechCreacion) {
-        this.fechCreacion = fechCreacion;
-    }
-
-    public Short getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Short estado) {
-        this.estado = estado;
-    }
-
-    public Date getFechaAtencion() {
-        return fechaAtencion;
-    }
-
-    public void setFechaAtencion(Date fechaAtencion) {
-        this.fechaAtencion = fechaAtencion;
-    }
-
-    public SsfAtencionmedica getIdAtencionmedica() {
-        return idAtencionmedica;
-    }
-
-    public void setIdAtencionmedica(SsfAtencionmedica idAtencionmedica) {
-        this.idAtencionmedica = idAtencionmedica;
-    }
-
-    public SsfFichamedica getIdFichamedica() {
-        return idFichamedica;
-    }
-
-    public void setIdFichamedica(SsfFichamedica idFichamedica) {
-        this.idFichamedica = idFichamedica;
     }
 
     @Override
@@ -136,5 +74,5 @@ public class SsfFichamedicaatencion implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfFichamedicaatencion[ id=" + id + " ]";
     }
-
+    
 }

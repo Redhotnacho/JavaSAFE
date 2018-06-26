@@ -69,7 +69,7 @@ public class SsfUsuario implements Serializable {
     @JoinColumn(name = "ID_PERSONA", referencedColumnName = "ID")
     @OneToOne(optional = false)
     private SsfPersona idPersona;
-    @OneToMany(mappedBy = "idUsuario")
+    @OneToMany(mappedBy = "idAtencionmedica")
     private List<SsfFichamedica> ssfFichamedicaList;
 
     public SsfUsuario() {
@@ -194,5 +194,5 @@ public class SsfUsuario implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfUsuario[ id=" + id + " ]";
     }
-
+    
 }

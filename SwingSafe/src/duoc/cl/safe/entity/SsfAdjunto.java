@@ -135,5 +135,5 @@ public class SsfAdjunto implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfAdjunto[ id=" + id + " ]";
     }
-
+    
 }

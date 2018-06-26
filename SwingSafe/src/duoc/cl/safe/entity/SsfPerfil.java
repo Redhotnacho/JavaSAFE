@@ -148,5 +148,5 @@ public class SsfPerfil implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfPerfil[ id=" + id + " ]";
     }
-
+    
 }

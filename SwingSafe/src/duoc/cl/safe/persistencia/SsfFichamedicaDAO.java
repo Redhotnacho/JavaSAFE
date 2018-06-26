@@ -165,12 +165,12 @@ public class SsfFichamedicaDAO {
 
             StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("pkg_ssfFichamedica.sp_add", SsfFichamedica.class);
             storedProcedure.registerStoredProcedureParameter("p_examen", BigDecimal.class, ParameterMode.IN);
-            storedProcedure.registerStoredProcedureParameter("p_usuario", BigDecimal.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_atencionmedica", BigDecimal.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_examen", fichamedica.getIdExamen().getId());
-            storedProcedure.setParameter("p_usuario", fichamedica.getIdUsuario().getId());
+            storedProcedure.setParameter("p_atencionmedica", fichamedica.getIdAtencionmedica().getId());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");
@@ -197,12 +197,12 @@ public class SsfFichamedicaDAO {
             StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("pkg_ssfFichamedica.sp_update", SsfFichamedica.class);
             storedProcedure.registerStoredProcedureParameter("p_id", BigDecimal.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_examen", BigDecimal.class, ParameterMode.IN);
-            storedProcedure.registerStoredProcedureParameter("p_usuario", BigDecimal.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_atencionmedica", BigDecimal.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", fichamedica.getId());
             storedProcedure.setParameter("p_examen", fichamedica.getIdExamen().getId());
-            storedProcedure.setParameter("p_usuario", fichamedica.getIdUsuario().getId());
+            storedProcedure.setParameter("p_atencionmedica", fichamedica.getIdAtencionmedica().getId());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");
