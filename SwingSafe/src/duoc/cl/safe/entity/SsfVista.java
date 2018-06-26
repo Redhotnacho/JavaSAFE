@@ -149,5 +149,5 @@ public class SsfVista implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfVista[ id=" + id + " ]";
     }
-
+    
 }

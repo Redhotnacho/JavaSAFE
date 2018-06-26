@@ -17,7 +17,9 @@ import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfEstadocapaempresaBO;
 import duoc.cl.safe.negocio.SsfUsuarioBO;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTable;
@@ -51,7 +53,6 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tfCantAlumnos = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCapEmpresa = new javax.swing.JTable();
         lExito = new javax.swing.JLabel();
@@ -70,6 +71,11 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbCapacitacion = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        tfCantAlumnos = new javax.swing.JSpinner();
+        tfFechaTerm = new javax.swing.JTextField();
+        tfFechaIni = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -88,14 +94,14 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Usuario", "Empresa", "Capacitación", "Estado", "Cantidad Alumnos", "Fecha Creación", "Estado"
+                "ID", "Usuario", "Empresa", "Capacitación", "Estado Cap.", "N° Alumnos", "Fecha Inicio", "Fecha Término", "Fecha Creación", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Short.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Short.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -174,6 +180,14 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
 
         jLabel9.setText("Capacitación:");
 
+        tfFechaTerm.setText("dd-MM-aaaa");
+
+        tfFechaIni.setText("dd-MM-aaaa");
+
+        jLabel7.setText("Fecha inicio:");
+
+        jLabel2.setText("Fecha término:");
+
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
 
@@ -187,63 +201,65 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbCapacitacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbUsuario, 0, 256, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel9)))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfFechaIni, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cbCapacitacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbUsuario, 0, 256, Short.MAX_VALUE))
+                            .addComponent(tfFechaTerm, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbEstadoCap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbEstadoCap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(136, 136, 136))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lExito, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                                            .addComponent(lError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(3, 3, 3)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bAgregar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bModificar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bLimpiar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(bRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(tbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfCantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(180, 180, 180)))))
+                                        .addComponent(tfCantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(bAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bRefrescar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                    .addComponent(tbEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(33, 33, 33))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
@@ -255,23 +271,34 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(cbCapacitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bRefrescar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(tfCantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(4, 4, 4)
+                                .addComponent(bRefrescar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bAgregar)
+                                    .addComponent(bLimpiar)
+                                    .addComponent(bModificar)
+                                    .addComponent(tbEstado)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfFechaIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfFechaTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lExito, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bAgregar)
-                    .addComponent(bLimpiar)
-                    .addComponent(bModificar)
-                    .addComponent(tbEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -294,7 +321,7 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
         tbEstado.setEnabled(true);
         bModificar.setEnabled(true);
         DefaultTableModel model = (DefaultTableModel) tblCapEmpresa.getModel();
-        if (Integer.parseInt(model.getValueAt(tblCapEmpresa.getSelectedRow(), 7).toString()) == 1) {
+        if (Integer.parseInt(model.getValueAt(tblCapEmpresa.getSelectedRow(), 9).toString()) == 1) {
             tbEstado.setSelected(false);
             activarEstado();
         } else {
@@ -322,22 +349,36 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
             cbEstadoCap.setSelectedIndex(0);
         }
         if (model.getValueAt(tblCapEmpresa.getSelectedRow(), 5) != null) {
-            tfCantAlumnos.setText(model.getValueAt(tblCapEmpresa.getSelectedRow(), 5).toString());
+            tfCantAlumnos.setValue(Integer.parseInt(model.getValueAt(tblCapEmpresa.getSelectedRow(), 5).toString()));
         } else {
-            tfCantAlumnos.setText("");
+            tfCantAlumnos.setValue(0);
         }
+        if (model.getValueAt(tblCapEmpresa.getSelectedRow(), 6) != null) {
+            if (model.getValueAt(tblCapEmpresa.getSelectedRow(), 6).toString().trim().isEmpty()) {
+                tfFechaIni.setText("dd-MM-aaaa");
+            } else {
+                tfFechaIni.setText(model.getValueAt(tblCapEmpresa.getSelectedRow(), 6).toString());
+            }
+        } else {
+            tfFechaIni.setText("dd-MM-aaaa");
+        }
+        if (model.getValueAt(tblCapEmpresa.getSelectedRow(), 7) != null) {
+            if (model.getValueAt(tblCapEmpresa.getSelectedRow(), 7).toString().isEmpty()) {
+                tfFechaTerm.setText("dd-MM-aaaa");
+            } else {
+                tfFechaTerm.setText(model.getValueAt(tblCapEmpresa.getSelectedRow(), 7).toString());
+            }
+        } else {
+            tfFechaTerm.setText("dd-MM-aaaa");
+        }
+        
+        
+        
     }//GEN-LAST:event_tblCapEmpresaMouseClicked
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
-        tbEstado.setEnabled(false);
-        bModificar.setEnabled(false);
         limpiarMsgs();
-        tblCapEmpresa.clearSelection();
-        tfCantAlumnos.setText("");
-        cbUsuario.setSelectedIndex(0);
-        cbEmpresa.setSelectedIndex(0);
-        cbCapacitacion.setSelectedIndex(0);
-        cbEstadoCap.setSelectedIndex(0);
+        btnLimpiar();
     }//GEN-LAST:event_bLimpiarActionPerformed
 
     private void tbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbEstadoActionPerformed
@@ -357,12 +398,12 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
             if (!tbEstado.isSelected()) {
                 if (cebo.activarSP(id)) {
                     activarEstado();
-                    model.setValueAt("1", tblCapEmpresa.getSelectedRow(), 7);
+                    model.setValueAt("1", tblCapEmpresa.getSelectedRow(), 9);
                 }
             } else {
                 if (cebo.desactivarSP(id)) {
                     desactivarEstado();
-                    model.setValueAt("0", tblCapEmpresa.getSelectedRow(), 7);
+                    model.setValueAt("0", tblCapEmpresa.getSelectedRow(), 9);
                 }
             }
         }
@@ -380,8 +421,12 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
         } else if (cbEstadoCap.getSelectedIndex() == 0) {
             lError.setText("Seleccione un estado capacitación");
         } else {
-            String idusuario, idempresa, idcap, idestadocap, cantalum;
-            cantalum = tfCantAlumnos.getText();
+            String sfech, sfech2, idusuario, idempresa, idcap, idestadocap, cantalum;
+            Date fecha = null;
+            Date fecha2 = null;
+            sfech = tfFechaIni.getText();
+            sfech2 = tfFechaTerm.getText();
+            cantalum = tfCantAlumnos.getValue().toString();
             idusuario = mapu.get(cbUsuario.getSelectedItem()).toString();
             idempresa = mape.get(cbEmpresa.getSelectedItem()).toString();
             idcap = mapc.get(cbCapacitacion.getSelectedItem()).toString();
@@ -395,6 +440,31 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
             } catch (NumberFormatException e) {
                 log.log(Level.ERROR, "Error al ingresar cantidad alumnos", e);
                 lError.setText("Error al ingresar cantidad alumnos");
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                if (!sfech.isEmpty() && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
+                    if (sfech.length() < 10) {
+                        sdf = new SimpleDateFormat("dd-MM-yy");
+                    }
+                    fecha = sdf.parse(sfech);
+                    c.setFechaInicio(fecha);
+                }
+            } catch (ParseException ex) {
+                log.log(Level.ERROR, "Error en formato de fecha inicio", ex);
+                lError.setText("Error en formato de fecha inicio");
+            }
+            try {
+                if (!sfech2.isEmpty() && !sfech2.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
+                    if (sfech2.length() < 10) {
+                        sdf = new SimpleDateFormat("dd-MM-yy");
+                    }
+                    fecha2 = sdf.parse(sfech2);
+                    c.setFechaTermino(fecha2);
+                }
+            } catch (ParseException ex) {
+                log.log(Level.ERROR, "Error en formato de fecha término", ex);
+                lError.setText("Error en formato de fecha término");
             }
             c.setIdUsuario(new SsfUsuario(BigDecimal.valueOf((long) Long.valueOf(idusuario))));
             c.setIdEmpresa(new SsfEmpresa(BigDecimal.valueOf((long) Long.valueOf(idempresa))));
@@ -430,9 +500,13 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
             } else if (cbEstadoCap.getSelectedIndex() == 0) {
                 lError.setText("Seleccione un estado capacitación");
             } else {
-                String idusuario, idempresa, idcap, idestadocap, cantalum, id;
+                String sfech, sfech2, idusuario, idempresa, idcap, idestadocap, cantalum, id;
+                Date fecha = null;
+                Date fecha2 = null;
+                sfech = tfFechaIni.getText();
+                sfech2 = tfFechaTerm.getText();
                 id = model.getValueAt(tblCapEmpresa.getSelectedRow(), 0).toString();
-                cantalum = tfCantAlumnos.getText();
+                cantalum = tfCantAlumnos.getValue().toString();
                 idusuario = mapu.get(cbUsuario.getSelectedItem()).toString();
                 idempresa = mape.get(cbEmpresa.getSelectedItem()).toString();
                 idcap = mapc.get(cbCapacitacion.getSelectedItem()).toString();
@@ -448,6 +522,31 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
                     cantalum = "error";
                     lError.setText("Error al ingresar cantidad alumnos");
                 }
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                try {
+                    if (!sfech.isEmpty() && !sfech.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
+                        if (sfech.length() < 10) {
+                            sdf = new SimpleDateFormat("dd-MM-yy");
+                        }
+                        fecha = sdf.parse(sfech);
+                        c.setFechaInicio(fecha);
+                    }
+                } catch (ParseException ex) {
+                    log.log(Level.ERROR, "Error en formato de fecha inicio", ex);
+                    lError.setText("Error en formato de fecha inicio");
+                }
+                try {
+                    if (!sfech2.isEmpty() && !sfech2.toLowerCase().equals("dd-MM-aaaa".toLowerCase())) {
+                        if (sfech2.length() < 10) {
+                            sdf = new SimpleDateFormat("dd-MM-yy");
+                        }
+                        fecha2 = sdf.parse(sfech2);
+                        c.setFechaTermino(fecha2);
+                    }
+                } catch (ParseException ex) {
+                    log.log(Level.ERROR, "Error en formato de fecha término", ex);
+                    lError.setText("Error en formato de fecha término");
+                }
                 //c.setId(BigDecimal.valueOf(Long.valueOf(id)));
                 c.setIdUsuario(new SsfUsuario(BigDecimal.valueOf((long) Long.valueOf(idusuario))));
                 c.setIdEmpresa(new SsfEmpresa(BigDecimal.valueOf((long) Long.valueOf(idempresa))));
@@ -462,6 +561,14 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
                     if (!cantalum.equalsIgnoreCase("error")) {
                         model.setValueAt(cantalum, tblCapEmpresa.getSelectedRow(), 5);
                     }
+                    if (!sfech.equals("error") && !sfech.isEmpty() && fecha != null) {
+                        sdf = new SimpleDateFormat("dd-MM-yyyy");
+                        model.setValueAt(sdf.format(fecha), tblCapEmpresa.getSelectedRow(), 6);
+                    }
+                    if (!sfech2.equals("error") && !sfech2.isEmpty() && fecha2 != null) {
+                        sdf = new SimpleDateFormat("dd-MM-yyyy");
+                        model.setValueAt(sdf.format(fecha2), tblCapEmpresa.getSelectedRow(), 7);
+                    }
                 } else {
                     lError.setText("No se pudo modificar");
                 }
@@ -470,15 +577,8 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_bModificarActionPerformed
 
     private void bRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefrescarActionPerformed
-        tbEstado.setEnabled(false);
-        bModificar.setEnabled(false);
         limpiarMsgs();
-        tblCapEmpresa.clearSelection();
-        tfCantAlumnos.setText("");
-        cbUsuario.setSelectedIndex(0);
-        cbCapacitacion.setSelectedIndex(0);
-        cbEmpresa.setSelectedIndex(0);
-        cbEstadoCap.setSelectedIndex(0);
+        btnLimpiar();
         cargaTabla();
     }//GEN-LAST:event_bRefrescarActionPerformed
 
@@ -558,9 +658,11 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbEstadoCap;
     private javax.swing.JComboBox<String> cbUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -570,7 +672,9 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel lExito;
     private javax.swing.JToggleButton tbEstado;
     private javax.swing.JTable tblCapEmpresa;
-    private javax.swing.JTextField tfCantAlumnos;
+    private javax.swing.JSpinner tfCantAlumnos;
+    private javax.swing.JTextField tfFechaIni;
+    private javax.swing.JTextField tfFechaTerm;
     // End of variables declaration//GEN-END:variables
 
     private SsfCapacitacionempresaBO cebo;
@@ -580,7 +684,7 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
     private HashMap<String, Integer> mapece = new HashMap<>();
     private static Logger log = Logger.getLogger(MantenedorCapEmpresa.class.getName());
     private FormsController formsController;
-    
+
     public void cargaUsuario() {
         SsfUsuarioBO ubo = new SsfUsuarioBO();
         List<SsfUsuario> ulist = ubo.getAllSP();
@@ -631,11 +735,23 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
         cebo = new SsfCapacitacionempresaBO();
         List<SsfCapacitacionempresa> lc = cebo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        lc.forEach((c) -> {
+        String sfecha;
+        String sfecha2;
+        for (SsfCapacitacionempresa c : lc) {
+            if (c.getFechaInicio() != null) {
+                sfecha = sdf.format(c.getFechaInicio());
+            } else {
+                sfecha = "";
+            }
+            if (c.getFechaTermino() != null) {
+                sfecha2 = sdf.format(c.getFechaTermino());
+            } else {
+                sfecha2 = "";
+            }
             model.addRow(new Object[]{c.getId(), c.getIdUsuario().getUsername(), c.getIdEmpresa().getNombre(),
                 c.getIdCapacitacion().getNombre(), c.getIdEstadocapacitacion().getEstadocapaemp(), c.getCantidadAlumnos(),
-                sdf.format(c.getFechCreacion()), c.getEstado()});
-        });
+                sfecha, sfecha2, sdf.format(c.getFechCreacion()), c.getEstado()});
+        }
     }
 
     private void desactivarEstado() {
@@ -653,11 +769,10 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
         lError.setText("");
     }
 
-    
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
-    
+
     private void resizeTabla() {
         tblCapEmpresa.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblCapEmpresa.getColumnModel().getColumn(0).setMaxWidth(40);
@@ -666,7 +781,22 @@ public class MantenedorCapEmpresa extends javax.swing.JFrame {
         tblCapEmpresa.getColumnModel().getColumn(3).setMaxWidth(150);
         tblCapEmpresa.getColumnModel().getColumn(4).setMaxWidth(80);
         tblCapEmpresa.getColumnModel().getColumn(5).setMaxWidth(130);
-        tblCapEmpresa.getColumnModel().getColumn(6).setMaxWidth(120);
-        tblCapEmpresa.getColumnModel().getColumn(7).setMaxWidth(50);
+        tblCapEmpresa.getColumnModel().getColumn(6).setMaxWidth(100);
+        tblCapEmpresa.getColumnModel().getColumn(7).setMaxWidth(120);
+        tblCapEmpresa.getColumnModel().getColumn(8).setMaxWidth(80);
+        tblCapEmpresa.getColumnModel().getColumn(9).setMaxWidth(50);
+    }
+
+    private void btnLimpiar() {
+        tbEstado.setEnabled(false);
+        bModificar.setEnabled(false);
+        tblCapEmpresa.clearSelection();
+        tfCantAlumnos.setValue(0);
+        cbUsuario.setSelectedIndex(0);
+        cbCapacitacion.setSelectedIndex(0);
+        cbEmpresa.setSelectedIndex(0);
+        cbEstadoCap.setSelectedIndex(0);
+        tfFechaIni.setText("dd-MM-aaaa");
+        tfFechaTerm.setText("dd-MM-aaaa");
     }
 }

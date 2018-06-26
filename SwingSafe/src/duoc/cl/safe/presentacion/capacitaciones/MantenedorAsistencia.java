@@ -5,9 +5,14 @@
  */
 package duoc.cl.safe.presentacion.capacitaciones;
 
+import duoc.cl.safe.entity.SsfAlumnocapaempresa;
+import duoc.cl.safe.entity.SsfAsistencia;
 import duoc.cl.safe.entity.SsfCapacitacionempresa;
 import duoc.cl.safe.entity.SsfCapacitaciondia;
 import duoc.cl.safe.herramientas.FormsController;
+import duoc.cl.safe.herramientas.Utilidad;
+import duoc.cl.safe.negocio.SsfAlumnocapaempresaBO;
+import duoc.cl.safe.negocio.SsfAsistenciaBO;
 import duoc.cl.safe.negocio.SsfCapacitacionempresaBO;
 import duoc.cl.safe.negocio.SsfCapacitaciondiaBO;
 import java.math.BigDecimal;
@@ -35,6 +40,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         initComponents();
         PropertyConfigurator.configure("log4j.properties");
         resizeTabla();
+        resizeTablaAlum();
     }
 
     /**
@@ -46,6 +52,8 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCapacitacionDia = new javax.swing.JTable();
         lExito = new javax.swing.JLabel();
@@ -62,8 +70,26 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         tfDia = new javax.swing.JTextField();
         bRefrescar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblAlumnos = new javax.swing.JTable();
+        bGuardarAsistencia = new javax.swing.JButton();
+        cbBuscarID = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -137,7 +163,12 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
             }
         });
 
-        cbCapEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccione Capacitación -" }));
+        cbCapEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccione Capacitación Empresa -" }));
+        cbCapEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCapEmpresaMouseClicked(evt);
+            }
+        });
         cbCapEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCapEmpresaActionPerformed(evt);
@@ -158,6 +189,11 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         jLabel7.setText("Día:");
 
         tfDia.setText("dd-MM-aaaa");
+        tfDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tfDiaMousePressed(evt);
+            }
+        });
 
         bRefrescar.setText("Refrescar");
         bRefrescar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +201,49 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
                 bRefrescarActionPerformed(evt);
             }
         });
+
+        tblAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Asistencia", "RUT", "Nombre", "Apellidos", "Asiste"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlumnosMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblAlumnosMousePressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblAlumnos);
+
+        bGuardarAsistencia.setText("Guardar Asistencia");
+        bGuardarAsistencia.setEnabled(false);
+        bGuardarAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGuardarAsistenciaActionPerformed(evt);
+            }
+        });
+
+        cbBuscarID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- ID -" }));
+        cbBuscarID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBuscarIDActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Buscar Capacitación Empresa:");
 
         jMenu1.setText("Cargando...");
         jMenuBar1.add(jMenu1);
@@ -212,13 +291,23 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(bModificar)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bLimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
-                        .addGap(86, 86, 86))
-                    .addComponent(jScrollPane2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                                .addGap(86, 86, 86))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbBuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bGuardarAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -229,7 +318,9 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCapEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(cbBuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfEstadoCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,27 +345,37 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lError, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                .addGap(35, 35, 35))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(bGuardarAsistencia))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        this.setJMenuBar(formsController.getMenu().getMenuBar());
-        formsController.getMenu().setjFrame(this);
+
+        //this.setJMenuBar(formsController.getMenu().getMenuBar());
+        //formsController.getMenu().setjFrame(this);
         this.setLocationRelativeTo(null);
         cargaTabla();
         cargaCapEmpresa();
+        cargaBuscaID();
     }//GEN-LAST:event_formWindowOpened
 
     private void tblCapacitacionDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCapacitacionDiaMouseClicked
+
         limpiarMsgs();
         tbEstado.setEnabled(true);
         bModificar.setEnabled(true);
         DefaultTableModel model = (DefaultTableModel) tblCapacitacionDia.getModel();
+
         if (Integer.parseInt(model.getValueAt(tblCapacitacionDia.getSelectedRow(), 5).toString()) == 1) {
             tbEstado.setSelected(false);
             activarEstado();
@@ -301,15 +402,13 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         } else {
             tfEstadoCap.setText("");
         }
+        SsfCapacitacionempresa ce = (SsfCapacitacionempresa) mapce.get(cbCapEmpresa.getSelectedItem().toString());
+        cargaAlumnos(ce.getId().intValue());
     }//GEN-LAST:event_tblCapacitacionDiaMouseClicked
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
-        tbEstado.setEnabled(false);
-        bModificar.setEnabled(false);
         limpiarMsgs();
-        tblCapacitacionDia.clearSelection();
-        tfDia.setText("dd-MM-aaaa");
-        cbCapEmpresa.setSelectedIndex(0);
+        btnLimpiar();
     }//GEN-LAST:event_bLimpiarActionPerformed
 
     private void tbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbEstadoActionPerformed
@@ -432,12 +531,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
     }//GEN-LAST:event_bModificarActionPerformed
 
     private void bRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefrescarActionPerformed
-        tbEstado.setEnabled(false);
-        bModificar.setEnabled(false);
-        limpiarMsgs();
-        tblCapacitacionDia.clearSelection();
-        tfDia.setText("dd-MM-aaaa");
-        cbCapEmpresa.setSelectedIndex(0);
+        btnLimpiar();
         cargaTabla();
     }//GEN-LAST:event_bRefrescarActionPerformed
 
@@ -445,10 +539,108 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         if (cbCapEmpresa.getSelectedIndex() != 0) {
             SsfCapacitacionempresa ce = (SsfCapacitacionempresa) mapce.get(cbCapEmpresa.getSelectedItem().toString());
             tfEstadoCap.setText(ce.getIdEstadocapacitacion().getEstadocapaemp());
-        }else{
+        } else {
             tfEstadoCap.setText("");
         }
     }//GEN-LAST:event_cbCapEmpresaActionPerformed
+
+    private void tblAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlumnosMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tblAlumnos.getModel();
+        if (model.getValueAt(tblAlumnos.getSelectedRow(), 4).toString().equalsIgnoreCase("ASISTE")) {
+            model.setValueAt("AUSENTE", tblAlumnos.getSelectedRow(), 4);
+        } else {
+            model.setValueAt("ASISTE", tblAlumnos.getSelectedRow(), 4);
+        }
+    }//GEN-LAST:event_tblAlumnosMouseClicked
+
+    private void cbCapEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCapEmpresaMouseClicked
+        limpiarMsgs();
+    }//GEN-LAST:event_cbCapEmpresaMouseClicked
+
+    private void bGuardarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarAsistenciaActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tblAlumnos.getModel();
+        DefaultTableModel model1 = (DefaultTableModel) tblCapacitacionDia.getModel();
+        limpiarMsgs();
+        if (tblCapacitacionDia.getSelectedRow() == -1) {
+            tbEstado.setEnabled(false);
+            if (tblCapacitacionDia.getRowCount() == 0) {
+                lError.setText("Tabla vacía");
+            } else {
+                lError.setText("No hay fila seleccionada");
+            }
+        } else {
+            int contador = 1;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                int idasiste;
+                Short asiste;
+                idasiste = Integer.parseInt(model.getValueAt(i, 0).toString());
+                if (model.getValueAt(i, 4).toString().equalsIgnoreCase("ASISTE")) {
+                    asiste = 1;
+                } else {
+                    asiste = 0;
+                }
+                String idCapacitaciondia = model1.getValueAt(tblCapacitacionDia.getSelectedRow(), 0).toString();
+                SsfAsistencia as = existeAsiste(idasiste, Integer.parseInt(idCapacitaciondia));
+                if (as == null) {
+                    SsfCapacitaciondia capdia = new SsfCapacitaciondiaBO().findSP(Integer.parseInt(idCapacitaciondia));
+                    for (SsfAlumnocapaempresa alumce : capdia.getIdCapaempresa().getSsfAlumnocapaempresaList()) {
+                        as = new SsfAsistencia();
+                        as.setAsiste(asiste);
+                        as.setIdAlumcapaempresa(new SsfAlumnocapaempresa(alumce.getId()));
+                        as.setIdCapacitaciondia(new SsfCapacitaciondia(capdia.getId()));
+                        if (new SsfAsistenciaBO().addSP(as)) {
+                            lExito.setText("Agregadas asistencias para " + contador + " alumnos");
+                            contador++;
+                        } else {
+                            lError.setText("Error al registrar asistencias");
+                        }
+                    }
+                    break;
+                } else {
+                    if (las == null) {
+                        las = new SsfAsistenciaBO().getAllSP();
+                    }
+                    for (SsfAsistencia a : las) {
+                        if (Integer.parseInt(a.getId().toString()) == idasiste) {
+                            a.setAsiste(asiste);
+                            if (new SsfAsistenciaBO().updateSP(a)) {
+                                lExito.setText("Modificadas asistencias para " + contador + " alumnos");
+                                contador++;
+                            } else {
+                                lError.setText("Error al modificar asistencias");
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            /*
+            SsfCapacitacionempresa ce = (SsfCapacitacionempresa) mapce.get(cbCapEmpresa.getSelectedItem().toString());
+            ce.setCantidadAlumnos(new Long(contador - 1));
+            new SsfCapacitacionempresaBO().updateSP(ce);
+            System.out.println("update cap empresa cantidad alumnos");*/
+            cargaTabla();
+        }
+
+        //refresh
+        //new SsfAlumnocapaempresaBO().getAllSP();
+        las = new SsfAsistenciaBO().getAllSP();
+    }//GEN-LAST:event_bGuardarAsistenciaActionPerformed
+
+    private void tblAlumnosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlumnosMousePressed
+        limpiarMsgs();
+    }//GEN-LAST:event_tblAlumnosMousePressed
+
+    private void tfDiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfDiaMousePressed
+        limpiarMsgs();
+    }//GEN-LAST:event_tfDiaMousePressed
+
+    private void cbBuscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBuscarIDActionPerformed
+        if (cbBuscarID.getSelectedIndex() != 0) {
+            cargaTablaBuscaID(mapce2.get(cbBuscarID.getSelectedItem().toString()));
+        }
+        btnLimpiar();
+    }//GEN-LAST:event_cbBuscarIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -550,20 +742,27 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAgregar;
+    private javax.swing.JButton bGuardarAsistencia;
     private javax.swing.JButton bLimpiar;
     private javax.swing.JButton bModificar;
     private javax.swing.JButton bRefrescar;
+    private javax.swing.JComboBox<String> cbBuscarID;
     private javax.swing.JComboBox<String> cbCapEmpresa;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lError;
     private javax.swing.JLabel lExito;
     private javax.swing.JToggleButton tbEstado;
+    private javax.swing.JTable tblAlumnos;
     private javax.swing.JTable tblCapacitacionDia;
     private javax.swing.JTextField tfDia;
     private javax.swing.JTextField tfEstadoCap;
@@ -571,21 +770,52 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
 
     private SsfCapacitaciondiaBO cdbo;
     private HashMap<String, SsfCapacitacionempresa> mapce = new HashMap<>();
+    private HashMap<String, Integer> mapce2 = new HashMap<>();
     private static Logger log = Logger.getLogger(MantenedorAsistencia.class.getName());
     private FormsController formsController;
-    
+    private List<SsfAsistencia> las;
+    private List<SsfCapacitaciondia> lcd;
+
     public void cargaCapEmpresa() {
+        mapce = null;
+        mapce = new HashMap<>();
+        cbCapEmpresa.removeAll();
+
         SsfCapacitacionempresaBO cebo = new SsfCapacitacionempresaBO();
-        List<SsfCapacitacionempresa> ctlist = cebo.getAllSP();
-        ctlist.forEach((c) -> {
-            mapce.put("ID: " + c.getId()
-                    + ". " + c.getIdCapacitacion().getNombre()
-                    + ". " + c.getIdEmpresa().getNombre(), c);
+        List<SsfCapacitacionempresa> celist = null;
+        celist = cebo.getAllSP();
+        celist.forEach((ce) -> {
+            mapce.put("ID: " + ce.getId()
+                    + ". " + ce.getIdCapacitacion().getNombre()
+                    + ". " + ce.getIdEmpresa().getNombre(), ce);
         });
-        ctlist.forEach((c) -> {
-            cbCapEmpresa.addItem("ID: " + c.getId()
-                    + ". " + c.getIdCapacitacion().getNombre()
-                    + ". " + c.getIdEmpresa().getNombre());
+        celist.forEach((ce) -> {
+            cbCapEmpresa.setSelectedIndex(0);
+            cbCapEmpresa.setSelectedItem("ID: " + ce.getId()
+                    + ". " + ce.getIdCapacitacion().getNombre()
+                    + ". " + ce.getIdEmpresa().getNombre());
+            if (cbCapEmpresa.getSelectedIndex() == 0) {
+                cbCapEmpresa.addItem("ID: " + ce.getId()
+                        + ". " + ce.getIdCapacitacion().getNombre()
+                        + ". " + ce.getIdEmpresa().getNombre());
+            }
+        });
+        cbCapEmpresa.setSelectedIndex(0);
+        //System.out.println("tblCapacitacionDia.getSelectedRow(): "+tblCapacitacionDia.getSelectedRow());
+        DefaultTableModel model = (DefaultTableModel) tblCapacitacionDia.getModel();
+        if (tblCapacitacionDia.getSelectedRow() != -1) {
+            cbCapEmpresa.setSelectedItem(model.getValueAt(tblCapacitacionDia.getSelectedRow(), 2));
+        }
+
+    }
+
+    public void cargaBuscaID() {
+        List<SsfCapacitacionempresa> celist = new SsfCapacitacionempresaBO().getAllSP();
+        celist.forEach((ce) -> {
+            mapce2.put("ID: " + ce.getId(), ce.getId().intValue());
+        });
+        celist.forEach((ce) -> {
+            cbBuscarID.addItem("ID: " + ce.getId());
         });
     }
 
@@ -593,10 +823,10 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblCapacitacionDia.getModel();
         model.setRowCount(0);
         cdbo = new SsfCapacitaciondiaBO();
-        List<SsfCapacitaciondia> lc = cdbo.getAllSP();
+        lcd = cdbo.getAllSP();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String sfecha = null;
-        for (SsfCapacitaciondia c : lc) {
+        for (SsfCapacitaciondia c : lcd) {
             if (c.getDia() != null) {
                 sfecha = sdf.format(c.getDia());
             } else {
@@ -608,6 +838,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
                 c.getIdCapaempresa().getIdEstadocapacitacion().getEstadocapaemp(),
                 sdf.format(c.getFechCreacion()), c.getEstado()});
         }
+        btnLimpiar();
     }
 
     private void desactivarEstado() {
@@ -625,11 +856,10 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         lError.setText("");
     }
 
-    
     public void setFormsController(FormsController formsController) {
         this.formsController = formsController;
     }
-    
+
     private void resizeTabla() {
         tblCapacitacionDia.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblCapacitacionDia.getColumnModel().getColumn(0).setMaxWidth(40);
@@ -639,5 +869,156 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         tblCapacitacionDia.getColumnModel().getColumn(4).setMaxWidth(120);
         tblCapacitacionDia.getColumnModel().getColumn(5).setMaxWidth(50);
     }
-    
+
+    private void resizeTablaAlum() {
+        tblAlumnos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblAlumnos.getColumnModel().getColumn(0).setMaxWidth(40);
+        tblAlumnos.getColumnModel().getColumn(1).setMaxWidth(110);
+        tblAlumnos.getColumnModel().getColumn(2).setMaxWidth(120);
+        tblAlumnos.getColumnModel().getColumn(3).setMaxWidth(150);
+        tblAlumnos.getColumnModel().getColumn(4).setMaxWidth(250);
+    }
+
+    private void cargaAlumnos(int idcapemp) {
+        DefaultTableModel model = (DefaultTableModel) tblAlumnos.getModel();
+        DefaultTableModel model1 = (DefaultTableModel) tblCapacitacionDia.getModel();
+        model.setRowCount(0);
+        bGuardarAsistencia.setEnabled(false);
+        SsfCapacitaciondia cdselected = null;
+        String asistencia = "PULSE PARA MODIFICAR";
+        if (las == null) {
+            las = new SsfAsistenciaBO().getAllSP();
+        }
+        SsfAsistencia as = null;
+        for (SsfAsistencia a : las) {
+            if (Integer.parseInt(a.getIdAlumcapaempresa().getIdCapaempresa().getId().toString()) == idcapemp) {
+                as = a;
+            }
+        }
+        if (tblCapacitacionDia.getSelectedRow() == -1) {
+            tbEstado.setEnabled(false);
+            lError.setText("No hay fila seleccionada");
+        } else {
+            if (as != null) {
+                try {
+                    if (as.getIdAlumcapaempresa().getIdCapaempresa().getSsfAlumnocapaempresaList() != null) {
+                        if (!as.getIdAlumcapaempresa().getIdCapaempresa().getSsfCapacitaciondiaList().isEmpty()) {
+                            for (SsfCapacitaciondia cd : as.getIdAlumcapaempresa().getIdCapaempresa().getSsfCapacitaciondiaList()) {
+                                if (Integer.parseInt(cd.getId().toString()) == Integer.parseInt(model1.getValueAt(tblCapacitacionDia.getSelectedRow(), 0).toString())) {
+                                    cdselected = cd;
+                                }
+                            }
+                        }
+                        for (SsfAlumnocapaempresa ace : as.getIdAlumcapaempresa().getIdCapaempresa().getSsfAlumnocapaempresaList()) {
+                            if (cdselected != null) {
+                                if (cdselected.getSsfAsistenciaList() != null) {
+                                    if (!cdselected.getSsfAsistenciaList().isEmpty()) {
+                                        for (SsfAsistencia a : cdselected.getSsfAsistenciaList()) {
+                                            if (a.getIdAlumcapaempresa().getId() == ace.getId()) {
+                                                if (a.getAsiste() == 1) {
+                                                    asistencia = "ASISTE";
+                                                } else {
+                                                    asistencia = "AUSENTE";
+                                                }
+                                                model.addRow(new Object[]{a.getId(), Utilidad.formatRutSalida(a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getRut()),
+                                                    a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getNombre(), a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getApPaterno() + " " + a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getApMaterno(),
+                                                    asistencia});
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    log.log(Level.ERROR, "Error al cargar alumnos", e);
+                }
+            }else{
+                lError.setText("No hay lista de asistencia");
+            }
+        }
+        if (model.getRowCount() > 0) {
+            bGuardarAsistencia.setEnabled(true);
+        }
+    }
+
+    /*
+    private void cargaDias(SsfCapacitacionempresa ce) {
+        DefaultTableModel model = (DefaultTableModel) tblCapacitacionDia.getModel();
+        model.setRowCount(0);
+        cdbo = new SsfCapacitaciondiaBO();
+        if (ce.getSsfCapacitaciondiaList() != null) {
+            if (!ce.getSsfCapacitaciondiaList().isEmpty()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String sfecha = null;
+                for (SsfCapacitaciondia c : ce.getSsfCapacitaciondiaList()) {
+                    if (c.getDia() != null) {
+                        sfecha = sdf.format(c.getDia());
+                    } else {
+                        sfecha = "";
+                    }
+                    model.addRow(new Object[]{c.getId(), sfecha, "ID: " + c.getIdCapaempresa().getId()
+                        + ". " + c.getIdCapaempresa().getIdCapacitacion().getNombre()
+                        + ". " + c.getIdCapaempresa().getIdEmpresa().getNombre(),
+                        c.getIdCapaempresa().getIdEstadocapacitacion().getEstadocapaemp(),
+                        sdf.format(c.getFechCreacion()), c.getEstado()});
+                }
+            } else {
+                lError.setText("Capacitación no tiene días asignados");
+            }
+        } else {
+            lError.setText("Capacitación no tiene días asignados");
+        }
+    }*/
+    private SsfAsistencia existeAsiste(int idasistencia, int idcapdia) {
+        if (las == null) {
+            las = new SsfAsistenciaBO().getAllSP();
+        }
+        for (SsfAsistencia as : las) {
+            if (Integer.parseInt(as.getId().toString()) == idasistencia
+                    && Integer.parseInt(as.getIdCapacitaciondia().getId().toString()) == idcapdia) {
+                return as;
+            }
+        }
+        return null;
+    }
+
+    private void btnLimpiar() {
+        tbEstado.setEnabled(false);
+        bModificar.setEnabled(false);
+
+        tblCapacitacionDia.clearSelection();
+        tblAlumnos.clearSelection();
+        DefaultTableModel model = (DefaultTableModel) tblAlumnos.getModel();
+        model.setRowCount(0);
+        tfDia.setText("dd-MM-aaaa");
+        cbCapEmpresa.setSelectedIndex(0);
+        bGuardarAsistencia.setEnabled(false);
+    }
+
+    private void cargaTablaBuscaID(Integer idcapemp) {
+        if (lcd == null) {
+            lcd = new SsfCapacitaciondiaBO().getAllSP();
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblCapacitacionDia.getModel();
+        model.setRowCount(0);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String sfecha;
+        for (SsfCapacitaciondia c : lcd) {
+            if (c.getIdCapaempresa().getId().intValue() == idcapemp) {
+                if (c.getDia() != null) {
+                    sfecha = sdf.format(c.getDia());
+                } else {
+                    sfecha = "";
+                }
+                model.addRow(new Object[]{c.getId(), sfecha, "ID: " + c.getIdCapaempresa().getId()
+                    + ". " + c.getIdCapaempresa().getIdCapacitacion().getNombre()
+                    + ". " + c.getIdCapaempresa().getIdEmpresa().getNombre(),
+                    c.getIdCapaempresa().getIdEstadocapacitacion().getEstadocapaemp(),
+                    sdf.format(c.getFechCreacion()), c.getEstado()});
+            }
+        }
+    }
+
 }

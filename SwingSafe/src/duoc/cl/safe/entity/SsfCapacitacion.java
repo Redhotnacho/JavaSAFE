@@ -37,9 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SsfCapacitacion.findByFechCreacion", query = "SELECT s FROM SsfCapacitacion s WHERE s.fechCreacion = :fechCreacion")
     , @NamedQuery(name = "SsfCapacitacion.findByEstado", query = "SELECT s FROM SsfCapacitacion s WHERE s.estado = :estado")
     , @NamedQuery(name = "SsfCapacitacion.findByNombre", query = "SELECT s FROM SsfCapacitacion s WHERE s.nombre = :nombre")
-    , @NamedQuery(name = "SsfCapacitacion.findByHoras", query = "SELECT s FROM SsfCapacitacion s WHERE s.horas = :horas")
-    , @NamedQuery(name = "SsfCapacitacion.findByFechaInicio", query = "SELECT s FROM SsfCapacitacion s WHERE s.fechaInicio = :fechaInicio")
-    , @NamedQuery(name = "SsfCapacitacion.findByFechaTermino", query = "SELECT s FROM SsfCapacitacion s WHERE s.fechaTermino = :fechaTermino")})
+    , @NamedQuery(name = "SsfCapacitacion.findByHoras", query = "SELECT s FROM SsfCapacitacion s WHERE s.horas = :horas")})
 public class SsfCapacitacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,12 +55,6 @@ public class SsfCapacitacion implements Serializable {
     private String nombre;
     @Column(name = "HORAS")
     private Long horas;
-    @Column(name = "FECHA_INICIO")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicio;
-    @Column(name = "FECHA_TERMINO")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaTermino;
     @OneToMany(mappedBy = "idCapacitacion")
     private List<SsfCertificado> ssfCertificadoList;
     @OneToMany(mappedBy = "idCapacitacion")
@@ -118,22 +110,6 @@ public class SsfCapacitacion implements Serializable {
         this.horas = horas;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public Date getFechaTermino() {
-        return fechaTermino;
-    }
-
-    public void setFechaTermino(Date fechaTermino) {
-        this.fechaTermino = fechaTermino;
-    }
-
     @XmlTransient
     public List<SsfCertificado> getSsfCertificadoList() {
         return ssfCertificadoList;
@@ -184,5 +160,5 @@ public class SsfCapacitacion implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfCapacitacion[ id=" + id + " ]";
     }
-
+    
 }

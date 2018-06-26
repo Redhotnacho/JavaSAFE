@@ -172,7 +172,7 @@ public class SsfAsistenciaDAO {
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_capadia", asistencia.getIdCapacitaciondia().getId());
-            storedProcedure.setParameter("p_alumcapaempresa", asistencia.getIdAlumcapaempresa());
+            storedProcedure.setParameter("p_alumcapaempresa", asistencia.getIdAlumcapaempresa().getId());
             storedProcedure.setParameter("p_asiste", asistencia.getAsiste());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
@@ -207,7 +207,7 @@ public class SsfAsistenciaDAO {
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", asistencia.getId());
             storedProcedure.setParameter("p_capadia", asistencia.getIdCapacitaciondia().getId());
-            storedProcedure.setParameter("p_alumcapaempresa", asistencia.getIdAlumcapaempresa());
+            storedProcedure.setParameter("p_alumcapaempresa", asistencia.getIdAlumcapaempresa().getId());
             storedProcedure.setParameter("p_asiste", asistencia.getAsiste());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");

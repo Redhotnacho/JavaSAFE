@@ -168,16 +168,13 @@ public class SsfCapacitacionDAO {
             storedProcedure.registerStoredProcedureParameter("p_nombre", String.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_horas", Long.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_capatipo", BigDecimal.class, ParameterMode.IN);
-            storedProcedure.registerStoredProcedureParameter("p_fechainicio", Date.class, ParameterMode.IN);
-            storedProcedure.registerStoredProcedureParameter("p_fechatermino", Date.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_nombre", capacitacion.getNombre());
             storedProcedure.setParameter("p_horas", capacitacion.getHoras());
             storedProcedure.setParameter("p_capatipo", capacitacion.getIdCapacitaciontipo().getId());
-            storedProcedure.setParameter("p_fechainicio", capacitacion.getFechaInicio());
-            storedProcedure.setParameter("p_fechatermino", capacitacion.getFechaTermino());
+            
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");
@@ -207,16 +204,12 @@ public class SsfCapacitacionDAO {
             storedProcedure.registerStoredProcedureParameter("p_nombre", String.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_horas", Long.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_capatipo", BigDecimal.class, ParameterMode.IN);
-            storedProcedure.registerStoredProcedureParameter("p_fechainicio", Date.class, ParameterMode.IN);
-            storedProcedure.registerStoredProcedureParameter("p_fechatermino", Date.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", capacitacion.getId());
             storedProcedure.setParameter("p_nombre", capacitacion.getNombre());
             storedProcedure.setParameter("p_horas", capacitacion.getHoras());
             storedProcedure.setParameter("p_capatipo", capacitacion.getIdCapacitaciontipo().getId());
-            storedProcedure.setParameter("p_fechainicio", capacitacion.getFechaInicio());
-            storedProcedure.setParameter("p_fechatermino", capacitacion.getFechaTermino());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");

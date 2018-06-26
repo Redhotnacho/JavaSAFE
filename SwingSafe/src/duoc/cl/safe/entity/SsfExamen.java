@@ -149,5 +149,5 @@ public class SsfExamen implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfExamen[ id=" + id + " ]";
     }
-
+    
 }

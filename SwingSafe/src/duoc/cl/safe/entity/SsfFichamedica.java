@@ -8,7 +8,6 @@ package duoc.cl.safe.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SsfFichamedica.findAll", query = "SELECT s FROM SsfFichamedica s")
     , @NamedQuery(name = "SsfFichamedica.findById", query = "SELECT s FROM SsfFichamedica s WHERE s.id = :id")
     , @NamedQuery(name = "SsfFichamedica.findByFechCreacion", query = "SELECT s FROM SsfFichamedica s WHERE s.fechCreacion = :fechCreacion")
-    , @NamedQuery(name = "SsfFichamedica.findByEstado", query = "SELECT s FROM SsfFichamedica s WHERE s.estado = :estado")})
+    , @NamedQuery(name = "SsfFichamedica.findByEstado", query = "SELECT s FROM SsfFichamedica s WHERE s.estado = :estado")
+    , @NamedQuery(name = "SsfFichamedica.findByResultado", query = "SELECT s FROM SsfFichamedica s WHERE s.resultado = :resultado")})
 public class SsfFichamedica implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,14 +47,14 @@ public class SsfFichamedica implements Serializable {
     private Date fechCreacion;
     @Column(name = "ESTADO")
     private Short estado;
-    @OneToMany(mappedBy = "idFichamedica")
-    private List<SsfFichamedicaatencion> ssfFichamedicaatencionList;
+    @Column(name = "RESULTADO")
+    private String resultado;
     @JoinColumn(name = "ID_EXAMEN", referencedColumnName = "ID")
     @ManyToOne
     private SsfExamen idExamen;
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_ATENCIONMEDICA", referencedColumnName = "ID")
     @ManyToOne
-    private SsfUsuario idUsuario;
+    private SsfUsuario idAtencionmedica;
 
     public SsfFichamedica() {
     }
@@ -89,13 +87,12 @@ public class SsfFichamedica implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public List<SsfFichamedicaatencion> getSsfFichamedicaatencionList() {
-        return ssfFichamedicaatencionList;
+    public String getResultado() {
+        return resultado;
     }
 
-    public void setSsfFichamedicaatencionList(List<SsfFichamedicaatencion> ssfFichamedicaatencionList) {
-        this.ssfFichamedicaatencionList = ssfFichamedicaatencionList;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
     public SsfExamen getIdExamen() {
@@ -106,12 +103,12 @@ public class SsfFichamedica implements Serializable {
         this.idExamen = idExamen;
     }
 
-    public SsfUsuario getIdUsuario() {
-        return idUsuario;
+    public SsfUsuario getIdAtencionmedica() {
+        return idAtencionmedica;
     }
 
-    public void setIdUsuario(SsfUsuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdAtencionmedica(SsfUsuario idAtencionmedica) {
+        this.idAtencionmedica = idAtencionmedica;
     }
 
     @Override
@@ -138,5 +135,5 @@ public class SsfFichamedica implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfFichamedica[ id=" + id + " ]";
     }
-
+    
 }

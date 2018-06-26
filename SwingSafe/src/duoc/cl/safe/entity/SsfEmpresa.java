@@ -180,5 +180,5 @@ public class SsfEmpresa implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfEmpresa[ id=" + id + " ]";
     }
-
+    
 }

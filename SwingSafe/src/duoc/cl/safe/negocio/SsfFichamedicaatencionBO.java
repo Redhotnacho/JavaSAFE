@@ -14,7 +14,7 @@ import java.util.List;
  * @author Nacho
  */
 public class SsfFichamedicaatencionBO {
-
+/*
     private SsfFichamedicaatencionDAO fichamedicaatencionDAO;
 
     public SsfFichamedicaatencionBO() {
@@ -68,5 +68,5 @@ public class SsfFichamedicaatencionBO {
     public boolean activarSP(int id) {
         return this.fichamedicaatencionDAO.activarSP(id);
     }
-
+    */
 }
