@@ -7,6 +7,7 @@ package duoc.cl.safe.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -37,7 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SsfAtencionmedica.findByFechCreacion", query = "SELECT s FROM SsfAtencionmedica s WHERE s.fechCreacion = :fechCreacion")
     , @NamedQuery(name = "SsfAtencionmedica.findByEstado", query = "SELECT s FROM SsfAtencionmedica s WHERE s.estado = :estado")
     , @NamedQuery(name = "SsfAtencionmedica.findByDiagnostico", query = "SELECT s FROM SsfAtencionmedica s WHERE s.diagnostico = :diagnostico")
-    , @NamedQuery(name = "SsfAtencionmedica.findByDescripcion", query = "SELECT s FROM SsfAtencionmedica s WHERE s.descripcion = :descripcion")})
+    , @NamedQuery(name = "SsfAtencionmedica.findByDescripcion", query = "SELECT s FROM SsfAtencionmedica s WHERE s.descripcion = :descripcion")
+    , @NamedQuery(name = "SsfAtencionmedica.findByFecha", query = "SELECT s FROM SsfAtencionmedica s WHERE s.fecha = :fecha")
+    , @NamedQuery(name = "SsfAtencionmedica.findByHora", query = "SELECT s FROM SsfAtencionmedica s WHERE s.hora = :hora")
+    , @NamedQuery(name = "SsfAtencionmedica.findByIdCentromedico", query = "SELECT s FROM SsfAtencionmedica s WHERE s.idCentromedico = :idCentromedico")})
 public class SsfAtencionmedica implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,8 +59,14 @@ public class SsfAtencionmedica implements Serializable {
     private String diagnostico;
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @OneToMany(mappedBy = "idAtencionmedica")
-    private List<SsfFichamedicaatencion> ssfFichamedicaatencionList;
+    @Column(name = "FECHA")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    @Column(name = "HORA")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date hora;
+    @Column(name = "ID_CENTROMEDICO")
+    private BigInteger idCentromedico;
     @JoinColumn(name = "ID_MEDICO", referencedColumnName = "ID")
     @ManyToOne
     private SsfMedico idMedico;
@@ -113,13 +123,28 @@ public class SsfAtencionmedica implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public List<SsfFichamedicaatencion> getSsfFichamedicaatencionList() {
-        return ssfFichamedicaatencionList;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setSsfFichamedicaatencionList(List<SsfFichamedicaatencion> ssfFichamedicaatencionList) {
-        this.ssfFichamedicaatencionList = ssfFichamedicaatencionList;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Date getHora() {
+        return hora;
+    }
+
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
+
+    public BigInteger getIdCentromedico() {
+        return idCentromedico;
+    }
+
+    public void setIdCentromedico(BigInteger idCentromedico) {
+        this.idCentromedico = idCentromedico;
     }
 
     public SsfMedico getIdMedico() {
@@ -171,5 +196,5 @@ public class SsfAtencionmedica implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfAtencionmedica[ id=" + id + " ]";
     }
-
+    
 }

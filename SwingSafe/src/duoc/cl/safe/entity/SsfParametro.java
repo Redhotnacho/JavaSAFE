@@ -149,5 +149,5 @@ public class SsfParametro implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfParametro[ id=" + id + " ]";
     }
-
+    
 }

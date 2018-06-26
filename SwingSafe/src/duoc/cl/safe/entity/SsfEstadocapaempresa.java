@@ -136,5 +136,5 @@ public class SsfEstadocapaempresa implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfEstadocapaempresa[ id=" + id + " ]";
     }
-
+    
 }

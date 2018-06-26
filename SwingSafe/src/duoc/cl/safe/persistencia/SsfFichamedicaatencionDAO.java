@@ -23,7 +23,7 @@ import javax.persistence.StoredProcedureQuery;
  * @author Nacho
  */
 public class SsfFichamedicaatencionDAO {
-
+/*
     private static Logger log = Logger.getLogger(SsfFichamedicaatencionDAO.class.getName());
 
     public boolean add(SsfFichamedicaatencion fichamedicaatencion) {
@@ -303,5 +303,5 @@ public class SsfFichamedicaatencionDAO {
             return false;
         }
     }
-
+    */
 }

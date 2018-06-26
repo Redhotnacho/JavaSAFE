@@ -14,9 +14,11 @@ import duoc.cl.safe.entity.SsfAlumno;
 import duoc.cl.safe.entity.SsfAlumnocapaempresa;
 import duoc.cl.safe.entity.SsfCapacitacionempresa;
 import duoc.cl.safe.entity.SsfCertificado;
+import duoc.cl.safe.entity.SsfAsistencia;
 import duoc.cl.safe.jpa.exceptions.NonexistentEntityException;
 import duoc.cl.safe.jpa.exceptions.PreexistingEntityException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,6 +39,9 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
     }
 
     public void create(SsfAlumnocapaempresa ssfAlumnocapaempresa) throws PreexistingEntityException, Exception {
+        if (ssfAlumnocapaempresa.getSsfAsistenciaList() == null) {
+            ssfAlumnocapaempresa.setSsfAsistenciaList(new ArrayList<SsfAsistencia>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -56,6 +61,12 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
                 idCertificado = em.getReference(idCertificado.getClass(), idCertificado.getId());
                 ssfAlumnocapaempresa.setIdCertificado(idCertificado);
             }
+            List<SsfAsistencia> attachedSsfAsistenciaList = new ArrayList<SsfAsistencia>();
+            for (SsfAsistencia ssfAsistenciaListSsfAsistenciaToAttach : ssfAlumnocapaempresa.getSsfAsistenciaList()) {
+                ssfAsistenciaListSsfAsistenciaToAttach = em.getReference(ssfAsistenciaListSsfAsistenciaToAttach.getClass(), ssfAsistenciaListSsfAsistenciaToAttach.getId());
+                attachedSsfAsistenciaList.add(ssfAsistenciaListSsfAsistenciaToAttach);
+            }
+            ssfAlumnocapaempresa.setSsfAsistenciaList(attachedSsfAsistenciaList);
             em.persist(ssfAlumnocapaempresa);
             if (idAlumno != null) {
                 idAlumno.getSsfAlumnocapaempresaList().add(ssfAlumnocapaempresa);
@@ -68,6 +79,15 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
             if (idCertificado != null) {
                 idCertificado.getSsfAlumnocapaempresaList().add(ssfAlumnocapaempresa);
                 idCertificado = em.merge(idCertificado);
+            }
+            for (SsfAsistencia ssfAsistenciaListSsfAsistencia : ssfAlumnocapaempresa.getSsfAsistenciaList()) {
+                SsfAlumnocapaempresa oldIdAlumcapaempresaOfSsfAsistenciaListSsfAsistencia = ssfAsistenciaListSsfAsistencia.getIdAlumcapaempresa();
+                ssfAsistenciaListSsfAsistencia.setIdAlumcapaempresa(ssfAlumnocapaempresa);
+                ssfAsistenciaListSsfAsistencia = em.merge(ssfAsistenciaListSsfAsistencia);
+                if (oldIdAlumcapaempresaOfSsfAsistenciaListSsfAsistencia != null) {
+                    oldIdAlumcapaempresaOfSsfAsistenciaListSsfAsistencia.getSsfAsistenciaList().remove(ssfAsistenciaListSsfAsistencia);
+                    oldIdAlumcapaempresaOfSsfAsistenciaListSsfAsistencia = em.merge(oldIdAlumcapaempresaOfSsfAsistenciaListSsfAsistencia);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -94,6 +114,8 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
             SsfCapacitacionempresa idCapaempresaNew = ssfAlumnocapaempresa.getIdCapaempresa();
             SsfCertificado idCertificadoOld = persistentSsfAlumnocapaempresa.getIdCertificado();
             SsfCertificado idCertificadoNew = ssfAlumnocapaempresa.getIdCertificado();
+            List<SsfAsistencia> ssfAsistenciaListOld = persistentSsfAlumnocapaempresa.getSsfAsistenciaList();
+            List<SsfAsistencia> ssfAsistenciaListNew = ssfAlumnocapaempresa.getSsfAsistenciaList();
             if (idAlumnoNew != null) {
                 idAlumnoNew = em.getReference(idAlumnoNew.getClass(), idAlumnoNew.getId());
                 ssfAlumnocapaempresa.setIdAlumno(idAlumnoNew);
@@ -106,6 +128,13 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
                 idCertificadoNew = em.getReference(idCertificadoNew.getClass(), idCertificadoNew.getId());
                 ssfAlumnocapaempresa.setIdCertificado(idCertificadoNew);
             }
+            List<SsfAsistencia> attachedSsfAsistenciaListNew = new ArrayList<SsfAsistencia>();
+            for (SsfAsistencia ssfAsistenciaListNewSsfAsistenciaToAttach : ssfAsistenciaListNew) {
+                ssfAsistenciaListNewSsfAsistenciaToAttach = em.getReference(ssfAsistenciaListNewSsfAsistenciaToAttach.getClass(), ssfAsistenciaListNewSsfAsistenciaToAttach.getId());
+                attachedSsfAsistenciaListNew.add(ssfAsistenciaListNewSsfAsistenciaToAttach);
+            }
+            ssfAsistenciaListNew = attachedSsfAsistenciaListNew;
+            ssfAlumnocapaempresa.setSsfAsistenciaList(ssfAsistenciaListNew);
             ssfAlumnocapaempresa = em.merge(ssfAlumnocapaempresa);
             if (idAlumnoOld != null && !idAlumnoOld.equals(idAlumnoNew)) {
                 idAlumnoOld.getSsfAlumnocapaempresaList().remove(ssfAlumnocapaempresa);
@@ -130,6 +159,23 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
             if (idCertificadoNew != null && !idCertificadoNew.equals(idCertificadoOld)) {
                 idCertificadoNew.getSsfAlumnocapaempresaList().add(ssfAlumnocapaempresa);
                 idCertificadoNew = em.merge(idCertificadoNew);
+            }
+            for (SsfAsistencia ssfAsistenciaListOldSsfAsistencia : ssfAsistenciaListOld) {
+                if (!ssfAsistenciaListNew.contains(ssfAsistenciaListOldSsfAsistencia)) {
+                    ssfAsistenciaListOldSsfAsistencia.setIdAlumcapaempresa(null);
+                    ssfAsistenciaListOldSsfAsistencia = em.merge(ssfAsistenciaListOldSsfAsistencia);
+                }
+            }
+            for (SsfAsistencia ssfAsistenciaListNewSsfAsistencia : ssfAsistenciaListNew) {
+                if (!ssfAsistenciaListOld.contains(ssfAsistenciaListNewSsfAsistencia)) {
+                    SsfAlumnocapaempresa oldIdAlumcapaempresaOfSsfAsistenciaListNewSsfAsistencia = ssfAsistenciaListNewSsfAsistencia.getIdAlumcapaempresa();
+                    ssfAsistenciaListNewSsfAsistencia.setIdAlumcapaempresa(ssfAlumnocapaempresa);
+                    ssfAsistenciaListNewSsfAsistencia = em.merge(ssfAsistenciaListNewSsfAsistencia);
+                    if (oldIdAlumcapaempresaOfSsfAsistenciaListNewSsfAsistencia != null && !oldIdAlumcapaempresaOfSsfAsistenciaListNewSsfAsistencia.equals(ssfAlumnocapaempresa)) {
+                        oldIdAlumcapaempresaOfSsfAsistenciaListNewSsfAsistencia.getSsfAsistenciaList().remove(ssfAsistenciaListNewSsfAsistencia);
+                        oldIdAlumcapaempresaOfSsfAsistenciaListNewSsfAsistencia = em.merge(oldIdAlumcapaempresaOfSsfAsistenciaListNewSsfAsistencia);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -174,6 +220,11 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
             if (idCertificado != null) {
                 idCertificado.getSsfAlumnocapaempresaList().remove(ssfAlumnocapaempresa);
                 idCertificado = em.merge(idCertificado);
+            }
+            List<SsfAsistencia> ssfAsistenciaList = ssfAlumnocapaempresa.getSsfAsistenciaList();
+            for (SsfAsistencia ssfAsistenciaListSsfAsistencia : ssfAsistenciaList) {
+                ssfAsistenciaListSsfAsistencia.setIdAlumcapaempresa(null);
+                ssfAsistenciaListSsfAsistencia = em.merge(ssfAsistenciaListSsfAsistencia);
             }
             em.remove(ssfAlumnocapaempresa);
             em.getTransaction().commit();
@@ -229,5 +280,5 @@ public class SsfAlumnocapaempresaJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

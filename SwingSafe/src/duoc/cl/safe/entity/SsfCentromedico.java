@@ -137,5 +137,5 @@ public class SsfCentromedico implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfCentromedico[ id=" + id + " ]";
     }
-
+    
 }

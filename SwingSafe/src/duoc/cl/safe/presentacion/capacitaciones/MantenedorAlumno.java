@@ -8,6 +8,7 @@ package duoc.cl.safe.presentacion.capacitaciones;
 import duoc.cl.safe.entity.SsfEmpresa;
 import duoc.cl.safe.entity.SsfPersona;
 import duoc.cl.safe.entity.SsfAlumno;
+import duoc.cl.safe.herramientas.Utilidad;
 import duoc.cl.safe.negocio.SsfEmpresaBO;
 import duoc.cl.safe.negocio.SsfPersonaBO;
 import duoc.cl.safe.negocio.SsfAlumnoBO;
@@ -415,8 +416,8 @@ public class MantenedorAlumno extends javax.swing.JFrame {
         } else {
             cbPersona.setSelectedIndex(0);
         }
-        if (model.getValueAt(tblAlumno.getSelectedRow(), 2) != null) {
-            cbEmpresa.setSelectedItem(model.getValueAt(tblAlumno.getSelectedRow(), 2).toString());
+        if (model.getValueAt(tblAlumno.getSelectedRow(), 4) != null) {
+            cbEmpresa.setSelectedItem(model.getValueAt(tblAlumno.getSelectedRow(), 4).toString());
         } else {
             cbEmpresa.setSelectedIndex(0);
         }
@@ -681,7 +682,7 @@ public class MantenedorAlumno extends javax.swing.JFrame {
         cbPersona.removeAllItems();
 
         pp.forEach((p) -> {
-            mappers.put("Rut: " + p.getRut() + " - Nombre: " + p.getNombre() + " " + p.getApPaterno() + " " + p.getApMaterno(), p.getId().intValue());
+            mappers.put("Rut: " + Utilidad.formatRutSalida(p.getRut()) + " - Nombre: " + p.getNombre() + " " + p.getApPaterno() + " " + p.getApMaterno(), p.getId().intValue());
         });
 
         mappers.forEach((s, i) -> {
@@ -702,7 +703,7 @@ public class MantenedorAlumno extends javax.swing.JFrame {
             }
         }
         if (a != null) {
-            mappers.put("Rut: " + a.getIdPersona().getRut() + " - Nombre: " + a.getIdPersona().getNombre()
+            mappers.put("Rut: " + Utilidad.formatRutSalida(a.getIdPersona().getRut()) + " - Nombre: " + a.getIdPersona().getNombre()
                     + " " + a.getIdPersona().getApPaterno() + " " + a.getIdPersona().getApMaterno(),
                     a.getIdPersona().getId().intValue());
         }
@@ -731,7 +732,7 @@ public class MantenedorAlumno extends javax.swing.JFrame {
         
         la.forEach((a) -> {
             model.addRow(new Object[]{a.getId(),
-                a.getIdPersona().getRut(), a.getIdPersona().getNombre(), a.getIdPersona().getApPaterno()+" "+a.getIdPersona().getApMaterno(),
+                Utilidad.formatRutSalida(a.getIdPersona().getRut()), a.getIdPersona().getNombre(), a.getIdPersona().getApPaterno()+" "+a.getIdPersona().getApMaterno(),
                 a.getIdEmpresa().getNombre(),
                 sdf.format(a.getFechCreacion()), a.getEstado()});
         });

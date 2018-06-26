@@ -139,5 +139,5 @@ public class SsfCapacitaciondia implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfCapacitaciondia[ id=" + id + " ]";
     }
-
+    
 }

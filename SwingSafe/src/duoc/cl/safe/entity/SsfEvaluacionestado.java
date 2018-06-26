@@ -136,5 +136,5 @@ public class SsfEvaluacionestado implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfEvaluacionestado[ id=" + id + " ]";
     }
-
+    
 }

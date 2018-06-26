@@ -124,5 +124,5 @@ public class SsfPerfilvista implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfPerfilvista[ id=" + id + " ]";
     }
-
+    
 }

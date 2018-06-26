@@ -137,5 +137,5 @@ public class SsfMedicoespecialidad implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfMedicoespecialidad[ id=" + id + " ]";
     }
-
+    
 }

@@ -5,12 +5,13 @@
  */
 package duoc.cl.safe.jpa;
 
-import duoc.cl.safe.entity.SsfAsistencia;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import duoc.cl.safe.entity.SsfAlumnocapaempresa;
+import duoc.cl.safe.entity.SsfAsistencia;
 import duoc.cl.safe.entity.SsfCapacitaciondia;
 import duoc.cl.safe.jpa.exceptions.NonexistentEntityException;
 import duoc.cl.safe.jpa.exceptions.PreexistingEntityException;
@@ -39,12 +40,21 @@ public class SsfAsistenciaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            SsfAlumnocapaempresa idAlumcapaempresa = ssfAsistencia.getIdAlumcapaempresa();
+            if (idAlumcapaempresa != null) {
+                idAlumcapaempresa = em.getReference(idAlumcapaempresa.getClass(), idAlumcapaempresa.getId());
+                ssfAsistencia.setIdAlumcapaempresa(idAlumcapaempresa);
+            }
             SsfCapacitaciondia idCapacitaciondia = ssfAsistencia.getIdCapacitaciondia();
             if (idCapacitaciondia != null) {
                 idCapacitaciondia = em.getReference(idCapacitaciondia.getClass(), idCapacitaciondia.getId());
                 ssfAsistencia.setIdCapacitaciondia(idCapacitaciondia);
             }
             em.persist(ssfAsistencia);
+            if (idAlumcapaempresa != null) {
+                idAlumcapaempresa.getSsfAsistenciaList().add(ssfAsistencia);
+                idAlumcapaempresa = em.merge(idAlumcapaempresa);
+            }
             if (idCapacitaciondia != null) {
                 idCapacitaciondia.getSsfAsistenciaList().add(ssfAsistencia);
                 idCapacitaciondia = em.merge(idCapacitaciondia);
@@ -68,13 +78,27 @@ public class SsfAsistenciaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             SsfAsistencia persistentSsfAsistencia = em.find(SsfAsistencia.class, ssfAsistencia.getId());
+            SsfAlumnocapaempresa idAlumcapaempresaOld = persistentSsfAsistencia.getIdAlumcapaempresa();
+            SsfAlumnocapaempresa idAlumcapaempresaNew = ssfAsistencia.getIdAlumcapaempresa();
             SsfCapacitaciondia idCapacitaciondiaOld = persistentSsfAsistencia.getIdCapacitaciondia();
             SsfCapacitaciondia idCapacitaciondiaNew = ssfAsistencia.getIdCapacitaciondia();
+            if (idAlumcapaempresaNew != null) {
+                idAlumcapaempresaNew = em.getReference(idAlumcapaempresaNew.getClass(), idAlumcapaempresaNew.getId());
+                ssfAsistencia.setIdAlumcapaempresa(idAlumcapaempresaNew);
+            }
             if (idCapacitaciondiaNew != null) {
                 idCapacitaciondiaNew = em.getReference(idCapacitaciondiaNew.getClass(), idCapacitaciondiaNew.getId());
                 ssfAsistencia.setIdCapacitaciondia(idCapacitaciondiaNew);
             }
             ssfAsistencia = em.merge(ssfAsistencia);
+            if (idAlumcapaempresaOld != null && !idAlumcapaempresaOld.equals(idAlumcapaempresaNew)) {
+                idAlumcapaempresaOld.getSsfAsistenciaList().remove(ssfAsistencia);
+                idAlumcapaempresaOld = em.merge(idAlumcapaempresaOld);
+            }
+            if (idAlumcapaempresaNew != null && !idAlumcapaempresaNew.equals(idAlumcapaempresaOld)) {
+                idAlumcapaempresaNew.getSsfAsistenciaList().add(ssfAsistencia);
+                idAlumcapaempresaNew = em.merge(idAlumcapaempresaNew);
+            }
             if (idCapacitaciondiaOld != null && !idCapacitaciondiaOld.equals(idCapacitaciondiaNew)) {
                 idCapacitaciondiaOld.getSsfAsistenciaList().remove(ssfAsistencia);
                 idCapacitaciondiaOld = em.merge(idCapacitaciondiaOld);
@@ -111,6 +135,11 @@ public class SsfAsistenciaJpaController implements Serializable {
                 ssfAsistencia.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The ssfAsistencia with id " + id + " no longer exists.", enfe);
+            }
+            SsfAlumnocapaempresa idAlumcapaempresa = ssfAsistencia.getIdAlumcapaempresa();
+            if (idAlumcapaempresa != null) {
+                idAlumcapaempresa.getSsfAsistenciaList().remove(ssfAsistencia);
+                idAlumcapaempresa = em.merge(idAlumcapaempresa);
             }
             SsfCapacitaciondia idCapacitaciondia = ssfAsistencia.getIdCapacitaciondia();
             if (idCapacitaciondia != null) {
@@ -171,5 +200,5 @@ public class SsfAsistenciaJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

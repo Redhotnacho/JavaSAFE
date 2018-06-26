@@ -8,6 +8,7 @@ package duoc.cl.safe.persistencia;
 import duoc.cl.safe.entity.SsfCapacitacionempresa;
 import duoc.cl.safe.jpa.SsfCapacitacionempresaJpaController;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -167,6 +168,8 @@ public class SsfCapacitacionempresaDAO {
             storedProcedure.registerStoredProcedureParameter("p_estadocapa", BigDecimal.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_usuario", BigDecimal.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_cantalumnos", Long.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_fechainicio", Date.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_fechatermino", Date.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_id", BigDecimal.class, ParameterMode.OUT);
@@ -175,6 +178,8 @@ public class SsfCapacitacionempresaDAO {
             storedProcedure.setParameter("p_estadocapa", capacitacionempresa.getIdEstadocapacitacion().getId());
             storedProcedure.setParameter("p_usuario", capacitacionempresa.getIdUsuario().getId());
             storedProcedure.setParameter("p_cantalumnos", capacitacionempresa.getCantidadAlumnos());
+            storedProcedure.setParameter("p_fechainicio", capacitacionempresa.getFechaInicio());
+            storedProcedure.setParameter("p_fechatermino", capacitacionempresa.getFechaTermino());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");
@@ -205,6 +210,8 @@ public class SsfCapacitacionempresaDAO {
             storedProcedure.registerStoredProcedureParameter("p_estadocapa", BigDecimal.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_usuario", BigDecimal.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("p_cantalumnos", Long.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_fechainicio", Date.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter("p_fechatermino", Date.class, ParameterMode.IN);
             storedProcedure.registerStoredProcedureParameter("o_glosa", String.class, ParameterMode.OUT);
             storedProcedure.registerStoredProcedureParameter("o_estado", Short.class, ParameterMode.OUT);
             storedProcedure.setParameter("p_id", capacitacionempresa.getId());
@@ -213,6 +220,8 @@ public class SsfCapacitacionempresaDAO {
             storedProcedure.setParameter("p_estadocapa", capacitacionempresa.getIdEstadocapacitacion().getId());
             storedProcedure.setParameter("p_usuario", capacitacionempresa.getIdUsuario().getId());
             storedProcedure.setParameter("p_cantalumnos", capacitacionempresa.getCantidadAlumnos());
+            storedProcedure.setParameter("p_fechainicio", capacitacionempresa.getFechaInicio());
+            storedProcedure.setParameter("p_fechatermino", capacitacionempresa.getFechaTermino());
             storedProcedure.execute();
             String o_glosa = (String) storedProcedure.getOutputParameterValue("o_glosa");
             Short o_estado = (Short) storedProcedure.getOutputParameterValue("o_estado");

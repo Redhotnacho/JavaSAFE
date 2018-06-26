@@ -136,5 +136,5 @@ public class SsfCapacitaciontipo implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfCapacitaciontipo[ id=" + id + " ]";
     }
-
+    
 }

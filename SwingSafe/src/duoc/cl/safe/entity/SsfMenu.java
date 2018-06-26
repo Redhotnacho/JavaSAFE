@@ -125,5 +125,5 @@ public class SsfMenu implements Serializable {
     public String toString() {
         return "duoc.cl.safe.entity.SsfMenu[ id=" + id + " ]";
     }
-
+    
 }
