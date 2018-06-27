@@ -11,7 +11,6 @@ import duoc.cl.safe.entity.SsfCapacitacionempresa;
 import duoc.cl.safe.entity.SsfCapacitaciondia;
 import duoc.cl.safe.herramientas.FormsController;
 import duoc.cl.safe.herramientas.Utilidad;
-import duoc.cl.safe.negocio.SsfAlumnocapaempresaBO;
 import duoc.cl.safe.negocio.SsfAsistenciaBO;
 import duoc.cl.safe.negocio.SsfCapacitacionempresaBO;
 import duoc.cl.safe.negocio.SsfCapacitaciondiaBO;
@@ -207,7 +206,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Asistencia", "RUT", "Nombre", "Apellidos", "Asiste"
+                "ID", "RUT", "Nombre", "Apellidos", "Asiste"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -367,6 +366,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         cargaTabla();
         cargaCapEmpresa();
         cargaBuscaID();
+        Inicializar();
     }//GEN-LAST:event_formWindowOpened
 
     private void tblCapacitacionDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCapacitacionDiaMouseClicked
@@ -402,8 +402,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         } else {
             tfEstadoCap.setText("");
         }
-        SsfCapacitacionempresa ce = (SsfCapacitacionempresa) mapce.get(cbCapEmpresa.getSelectedItem().toString());
-        cargaAlumnos(ce.getId().intValue());
+        cargaAlumnos(Integer.parseInt(model.getValueAt(tblCapacitacionDia.getSelectedRow(), 0).toString()));
     }//GEN-LAST:event_tblCapacitacionDiaMouseClicked
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
@@ -442,7 +441,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         cdbo = new SsfCapacitaciondiaBO();
         limpiarMsgs();
-        if (tfDia.getText().trim().equals("")) {
+        if (tfDia.getText().trim().isEmpty()) {
             lError.setText("Día capacitación no puede quedar en blanco");
         } else if (cbCapEmpresa.getSelectedIndex() == 0) {
             lError.setText("Seleccione una capacitación empresa");
@@ -546,10 +545,10 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
 
     private void tblAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlumnosMouseClicked
         DefaultTableModel model = (DefaultTableModel) tblAlumnos.getModel();
-        if (model.getValueAt(tblAlumnos.getSelectedRow(), 4).toString().equalsIgnoreCase("ASISTE")) {
-            model.setValueAt("AUSENTE", tblAlumnos.getSelectedRow(), 4);
+        if (model.getValueAt(tblAlumnos.getSelectedRow(), 4).toString().contains("ASISTE")) {
+            model.setValueAt("<html><font color='red'><b>AUSENTE</b></font></html>", tblAlumnos.getSelectedRow(), 4);
         } else {
-            model.setValueAt("ASISTE", tblAlumnos.getSelectedRow(), 4);
+            model.setValueAt("<html><font color='green'><b>ASISTE</b></font></html>", tblAlumnos.getSelectedRow(), 4);
         }
     }//GEN-LAST:event_tblAlumnosMouseClicked
 
@@ -570,61 +569,52 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
             }
         } else {
             int contador = 1;
+            String idCapacitaciondia = model1.getValueAt(tblCapacitacionDia.getSelectedRow(), 0).toString();
             for (int i = 0; i < model.getRowCount(); i++) {
-                int idasiste;
+                int idace;
                 Short asiste;
-                idasiste = Integer.parseInt(model.getValueAt(i, 0).toString());
-                if (model.getValueAt(i, 4).toString().equalsIgnoreCase("ASISTE")) {
+                idace = Integer.parseInt(model.getValueAt(i, 0).toString());
+                if (model.getValueAt(i, 4).toString().contains("ASISTE")) {
                     asiste = 1;
                 } else {
                     asiste = 0;
                 }
-                String idCapacitaciondia = model1.getValueAt(tblCapacitacionDia.getSelectedRow(), 0).toString();
-                SsfAsistencia as = existeAsiste(idasiste, Integer.parseInt(idCapacitaciondia));
+                SsfAsistencia as = existeAsiste(idace, Integer.parseInt(idCapacitaciondia));
                 if (as == null) {
-                    SsfCapacitaciondia capdia = new SsfCapacitaciondiaBO().findSP(Integer.parseInt(idCapacitaciondia));
-                    for (SsfAlumnocapaempresa alumce : capdia.getIdCapaempresa().getSsfAlumnocapaempresaList()) {
-                        as = new SsfAsistencia();
-                        as.setAsiste(asiste);
-                        as.setIdAlumcapaempresa(new SsfAlumnocapaempresa(alumce.getId()));
-                        as.setIdCapacitaciondia(new SsfCapacitaciondia(capdia.getId()));
-                        if (new SsfAsistenciaBO().addSP(as)) {
-                            lExito.setText("Agregadas asistencias para " + contador + " alumnos");
-                            contador++;
-                        } else {
-                            lError.setText("Error al registrar asistencias");
-                        }
+                    as = new SsfAsistencia();
+                    as.setAsiste(asiste);
+                    as.setIdAlumcapaempresa(new SsfAlumnocapaempresa(BigDecimal.valueOf((long) Long.valueOf(idace))));
+                    as.setIdCapacitaciondia(new SsfCapacitaciondia(BigDecimal.valueOf((long) Long.valueOf(idCapacitaciondia))));
+                    if (new SsfAsistenciaBO().addSP(as)) {
+                        lExito.setText("Agregadas asistencias para " + contador + " alumnos");
+                        contador++;
+                    } else {
+                        lError.setText("Error al registrar asistencias");
                     }
-                    break;
                 } else {
-                    if (las == null) {
-                        las = new SsfAsistenciaBO().getAllSP();
-                    }
-                    for (SsfAsistencia a : las) {
-                        if (Integer.parseInt(a.getId().toString()) == idasiste) {
-                            a.setAsiste(asiste);
-                            if (new SsfAsistenciaBO().updateSP(a)) {
-                                lExito.setText("Modificadas asistencias para " + contador + " alumnos");
-                                contador++;
-                            } else {
-                                lError.setText("Error al modificar asistencias");
-                            }
-                            break;
-                        }
+                    as.setAsiste(asiste);
+                    if (new SsfAsistenciaBO().updateSP(as)) {
+                        lExito.setText("Modificadas asistencias para " + contador + " alumnos");
+                        contador++;
+                    } else {
+                        lError.setText("Error al modificar asistencias");
                     }
                 }
             }
             /*
             SsfCapacitacionempresa ce = (SsfCapacitacionempresa) mapce.get(cbCapEmpresa.getSelectedItem().toString());
-            ce.setCantidadAlumnos(new Long(contador - 1));
+            contador--;
+            ce.setCantidadAlumnos(new Long(contador));
             new SsfCapacitacionempresaBO().updateSP(ce);
             System.out.println("update cap empresa cantidad alumnos");*/
-            cargaTabla();
+            
+            //refresh
+            Inicializar();
+            
         }
-
-        //refresh
-        //new SsfAlumnocapaempresaBO().getAllSP();
-        las = new SsfAsistenciaBO().getAllSP();
+        
+        cargaTabla();
+        cargaTablaBuscaID(mapce2.get(cbBuscarID.getSelectedItem().toString()));
     }//GEN-LAST:event_bGuardarAsistenciaActionPerformed
 
     private void tblAlumnosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlumnosMousePressed
@@ -775,6 +765,7 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
     private FormsController formsController;
     private List<SsfAsistencia> las;
     private List<SsfCapacitaciondia> lcd;
+    private List<SsfCapacitacionempresa> lce;
 
     public void cargaCapEmpresa() {
         mapce = null;
@@ -879,103 +870,57 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
         tblAlumnos.getColumnModel().getColumn(4).setMaxWidth(250);
     }
 
-    private void cargaAlumnos(int idcapemp) {
+    private void cargaAlumnos(int idcd) {
         DefaultTableModel model = (DefaultTableModel) tblAlumnos.getModel();
-        DefaultTableModel model1 = (DefaultTableModel) tblCapacitacionDia.getModel();
         model.setRowCount(0);
         bGuardarAsistencia.setEnabled(false);
-        SsfCapacitaciondia cdselected = null;
-        String asistencia = "PULSE PARA MODIFICAR";
-        if (las == null) {
-            las = new SsfAsistenciaBO().getAllSP();
-        }
-        SsfAsistencia as = null;
-        for (SsfAsistencia a : las) {
-            if (Integer.parseInt(a.getIdAlumcapaempresa().getIdCapaempresa().getId().toString()) == idcapemp) {
-                as = a;
+        String asistencia = "<html><font color='blue'><b>PULSE PARA MODIFICAR</b></font></html>";
+
+        SsfCapacitaciondia capdia = null;
+        for (SsfCapacitaciondia cd : lcd) {
+            if (Integer.parseInt(cd.getId().toString()) == idcd) {
+                capdia = cd;
             }
         }
-        if (tblCapacitacionDia.getSelectedRow() == -1) {
-            tbEstado.setEnabled(false);
-            lError.setText("No hay fila seleccionada");
-        } else {
-            if (as != null) {
-                try {
-                    if (as.getIdAlumcapaempresa().getIdCapaempresa().getSsfAlumnocapaempresaList() != null) {
-                        if (!as.getIdAlumcapaempresa().getIdCapaempresa().getSsfCapacitaciondiaList().isEmpty()) {
-                            for (SsfCapacitaciondia cd : as.getIdAlumcapaempresa().getIdCapaempresa().getSsfCapacitaciondiaList()) {
-                                if (Integer.parseInt(cd.getId().toString()) == Integer.parseInt(model1.getValueAt(tblCapacitacionDia.getSelectedRow(), 0).toString())) {
-                                    cdselected = cd;
-                                }
+        // Si tiene alumnos asociados
+        if (capdia.getIdCapaempresa().getSsfAlumnocapaempresaList() != null && !capdia.getIdCapaempresa().getSsfAlumnocapaempresaList().isEmpty()) {
+            for (SsfAlumnocapaempresa ace : capdia.getIdCapaempresa().getSsfAlumnocapaempresaList()) {
+                //Si tiene lista de asistencia ingresada
+                if (capdia.getSsfAsistenciaList() != null && !capdia.getSsfAsistenciaList().isEmpty()) {
+                    for (SsfAsistencia a : capdia.getSsfAsistenciaList()) {
+                        if (a.getIdAlumcapaempresa().getId() == ace.getId()) {
+                            if (a.getAsiste() == 1) {
+                                asistencia = "<html><font color='green'><b>ASISTE</b></font></html>";
+                            } else {
+                                asistencia = "<html><font color='red'><b>AUSENTE</b></font></html>";
                             }
-                        }
-                        for (SsfAlumnocapaempresa ace : as.getIdAlumcapaempresa().getIdCapaempresa().getSsfAlumnocapaempresaList()) {
-                            if (cdselected != null) {
-                                if (cdselected.getSsfAsistenciaList() != null) {
-                                    if (!cdselected.getSsfAsistenciaList().isEmpty()) {
-                                        for (SsfAsistencia a : cdselected.getSsfAsistenciaList()) {
-                                            if (a.getIdAlumcapaempresa().getId() == ace.getId()) {
-                                                if (a.getAsiste() == 1) {
-                                                    asistencia = "ASISTE";
-                                                } else {
-                                                    asistencia = "AUSENTE";
-                                                }
-                                                model.addRow(new Object[]{a.getId(), Utilidad.formatRutSalida(a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getRut()),
-                                                    a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getNombre(), a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getApPaterno() + " " + a.getIdAlumcapaempresa().getIdAlumno().getIdPersona().getApMaterno(),
-                                                    asistencia});
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            model.addRow(new Object[]{ace.getId(), Utilidad.formatRutSalida(ace.getIdAlumno().getIdPersona().getRut()),
+                                ace.getIdAlumno().getIdPersona().getNombre(), ace.getIdAlumno().getIdPersona().getApPaterno() + " " + ace.getIdAlumno().getIdPersona().getApMaterno(),
+                                asistencia});
                         }
                     }
-                } catch (Exception e) {
-                    log.log(Level.ERROR, "Error al cargar alumnos", e);
+                } else {
+                    //Si NO tiene lista de asistencia ingresada
+                    model.addRow(new Object[]{ace.getId(), Utilidad.formatRutSalida(ace.getIdAlumno().getIdPersona().getRut()),
+                        ace.getIdAlumno().getIdPersona().getNombre(), ace.getIdAlumno().getIdPersona().getApPaterno() + " " + ace.getIdAlumno().getIdPersona().getApMaterno(),
+                        asistencia});
                 }
-            }else{
-                lError.setText("No hay lista de asistencia");
             }
+        } else {
+            //Si no hay alumnos asociados
+            lError.setText("No hay lista de alumnos");
         }
         if (model.getRowCount() > 0) {
             bGuardarAsistencia.setEnabled(true);
         }
     }
 
-    /*
-    private void cargaDias(SsfCapacitacionempresa ce) {
-        DefaultTableModel model = (DefaultTableModel) tblCapacitacionDia.getModel();
-        model.setRowCount(0);
-        cdbo = new SsfCapacitaciondiaBO();
-        if (ce.getSsfCapacitaciondiaList() != null) {
-            if (!ce.getSsfCapacitaciondiaList().isEmpty()) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                String sfecha = null;
-                for (SsfCapacitaciondia c : ce.getSsfCapacitaciondiaList()) {
-                    if (c.getDia() != null) {
-                        sfecha = sdf.format(c.getDia());
-                    } else {
-                        sfecha = "";
-                    }
-                    model.addRow(new Object[]{c.getId(), sfecha, "ID: " + c.getIdCapaempresa().getId()
-                        + ". " + c.getIdCapaempresa().getIdCapacitacion().getNombre()
-                        + ". " + c.getIdCapaempresa().getIdEmpresa().getNombre(),
-                        c.getIdCapaempresa().getIdEstadocapacitacion().getEstadocapaemp(),
-                        sdf.format(c.getFechCreacion()), c.getEstado()});
-                }
-            } else {
-                lError.setText("Capacitación no tiene días asignados");
-            }
-        } else {
-            lError.setText("Capacitación no tiene días asignados");
-        }
-    }*/
-    private SsfAsistencia existeAsiste(int idasistencia, int idcapdia) {
+    private SsfAsistencia existeAsiste(int idace, int idcapdia) {
         if (las == null) {
             las = new SsfAsistenciaBO().getAllSP();
         }
         for (SsfAsistencia as : las) {
-            if (Integer.parseInt(as.getId().toString()) == idasistencia
+            if (Integer.parseInt(as.getIdAlumcapaempresa().getId().toString()) == idace
                     && Integer.parseInt(as.getIdCapacitaciondia().getId().toString()) == idcapdia) {
                 return as;
             }
@@ -1019,6 +964,12 @@ public class MantenedorAsistencia extends javax.swing.JFrame {
                     sdf.format(c.getFechCreacion()), c.getEstado()});
             }
         }
+    }
+
+    private void Inicializar() {
+        las = new SsfAsistenciaBO().getAllSP();
+        lcd = new SsfCapacitaciondiaBO().getAllSP();
+        lce = new SsfCapacitacionempresaBO().getAllSP();
     }
 
 }
